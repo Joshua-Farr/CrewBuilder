@@ -1,0 +1,70 @@
+{
+  "deckName": "Pirate King Ambition",
+  "leader": {
+    "name": "Monkey D. Luffy",
+    "cardCode": "OP01-001",
+    "type": "Leader"
+  },
+  "cards": [
+    {
+      "name": "Roronoa Zoro",
+      "cardCode": "OP01-002",
+      "type": "Character",
+      "quantity": 4
+    },
+    {
+      "name": "Nami",
+      "cardCode": "OP01-003",
+      "type": "Character",
+      "quantity": 4
+    },
+    {
+      "name": "Sanji",
+      "cardCode": "OP01-004",
+      "type": "Character",
+      "quantity": 4
+    },
+    {
+      "name": "Gum-Gum Pistol",
+      "cardCode": "OP01-005",
+      "type": "Event",
+      "quantity": 4
+    },
+    {
+      "name": "Thousand Sunny",
+      "cardCode": "OP01-006",
+      "type": "Stage",
+      "quantity": 1
+    },
+    {
+      "name": "Jinbe",
+      "cardCode": "OP01-007",
+      "type": "Character",
+      "quantity": 3
+    },
+    {
+      "name": "Franky",
+      "cardCode": "OP01-008",
+      "type": "Character",
+      "quantity": 2
+    },
+    {
+      "name": "Brook",
+      "cardCode": "OP01-009",
+      "type": "Character",
+      "quantity": 2
+    },
+    {
+      "name": "Robin",
+      "cardCode": "OP01-010",
+      "type": "Character",
+      "quantity": 4
+    },
+    {
+      "name": "Usopp",
+      "cardCode": "OP01-011",
+      "type": "Character",
+      "quantity": 1
+    }
+  ]
+}
