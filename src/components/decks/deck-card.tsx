@@ -35,7 +35,7 @@ export function DeckCard({ deck }: { deck: Deck }) {
           <Badge variant="outline">{deck.opSet}</Badge>
         </div>
         <div className="grid grid-cols-3 gap-3 text-center">
-          <DeckStat label="Win rate" value={`${getWinRate(deck.wins, deck.losses, deck.draws).toFixed(1)}%`} />
+          <DeckStat label="Win rate" value={`${getWinRate(deck.wins, deck.losses).toFixed(1)}%`} />
           <DeckStat label="Record" value={`${deck.wins}-${deck.losses}`} />
           <DeckStat label="Cost" value={formatCurrency(deck.estimatedCost)} />
         </div>

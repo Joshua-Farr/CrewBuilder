@@ -45,7 +45,6 @@ function getRecord(deck: ScrapedDeck) {
   return {
     wins: deck.record?.wins ?? 0,
     losses: deck.record?.losses ?? 0,
-    draws: deck.record?.draws ?? 0,
   };
 }
 
@@ -82,9 +81,7 @@ function toDeck(deck: ScrapedDeck): Deck {
     placement: deck.placementRank ?? 999,
     wins: record.wins,
     losses: record.losses,
-    draws: record.draws,
     cards: getDeckCards(deck),
-    sideboard: [],
     matchups: [],
     notes: [
       `Imported from ${scrapedOp15Data.source.name}'s ${scrapedOp15Data.source.title}.`,
@@ -121,7 +118,7 @@ function toTournament([id, eventDecks]: [string, Deck[]]): Tournament {
     distribution.set(deck.leaderId, row);
   }
 
-  const totalMatches = eventDecks.reduce((total, deck) => total + deck.wins + deck.losses + deck.draws, 0);
+  const totalMatches = eventDecks.reduce((total, deck) => total + deck.wins + deck.losses, 0);
   const reportedPlayers = sourceDeck?.reportedPlayers ?? null;
   const players = reportedPlayers ?? Math.max(eventDecks.length, 1);
   const tournamentName = sourceDeck ? eventName(sourceDeck) : firstDeck.tournamentName;

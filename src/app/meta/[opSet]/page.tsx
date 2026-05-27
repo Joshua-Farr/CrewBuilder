@@ -115,9 +115,9 @@ export default async function MetaDecksPage({ params }: { params: Promise<{ opSe
                     </TableCell>
                     <TableCell>
                       <p className="font-medium">
-                        {deck.wins}-{deck.losses}-{deck.draws}
+                        {deck.wins}-{deck.losses}
                       </p>
-                      <p className="text-xs text-muted-foreground">{getWinRate(deck.wins, deck.losses, deck.draws).toFixed(1)}% WR</p>
+                      <p className="text-xs text-muted-foreground">{getWinRate(deck.wins, deck.losses).toFixed(1)}% WR</p>
                     </TableCell>
                     <TableCell className="min-w-64">
                       <p className="font-medium">{deck.tournamentName}</p>
@@ -170,7 +170,7 @@ export default async function MetaDecksPage({ params }: { params: Promise<{ opSe
           <Card>
             <CardHeader>
               <CardTitle>Popular cards in {opSet}</CardTitle>
-              <CardDescription>Aggregated across main decks and sideboards.</CardDescription>
+              <CardDescription>Aggregated across main decks.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               {popularCards.map((entry) => (

@@ -50,9 +50,9 @@ export function TournamentDecklists({ event, decklists }: { event: Tournament; d
                   </TableCell>
                   <TableCell>
                     <p className="font-medium">
-                      {deck.wins}-{deck.losses}-{deck.draws}
+                      {deck.wins}-{deck.losses}
                     </p>
-                    <p className="text-xs text-muted-foreground">{getWinRate(deck.wins, deck.losses, deck.draws).toFixed(1)}% WR</p>
+                    <p className="text-xs text-muted-foreground">{getWinRate(deck.wins, deck.losses).toFixed(1)}% WR</p>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2 text-muted-foreground">

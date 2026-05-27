@@ -24,7 +24,7 @@ export interface PopularMetaCard {
   card?: TcgCard;
   quantity: number;
   deckCount: number;
-  categories: Array<CardType | "Sideboard">;
+  categories: CardType[];
 }
 
 export interface EventWinnerBreakdownRow {
@@ -52,7 +52,7 @@ export function sortToppingDecks(decks: Deck[]) {
     if (placement !== 0) return placement;
     const date = new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime();
     if (date !== 0) return date;
-    return getWinRate(b.wins, b.losses, b.draws) - getWinRate(a.wins, a.losses, a.draws);
+    return getWinRate(b.wins, b.losses) - getWinRate(a.wins, a.losses);
   });
 }
 
@@ -90,7 +90,7 @@ export function getLeaderBreakdown(decks: Deck[]): LeaderBreakdownRow[] {
   return [...groups.entries()]
     .map(([leaderId, leaderDecks]) => {
       const [firstDeck] = leaderDecks;
-      const totalWinRate = leaderDecks.reduce((total, deck) => total + getWinRate(deck.wins, deck.losses, deck.draws), 0);
+      const totalWinRate = leaderDecks.reduce((total, deck) => total + getWinRate(deck.wins, deck.losses), 0);
       return {
         leaderId,
         leaderName: firstDeck.leaderName,
@@ -132,11 +132,11 @@ export function getEventWinnerBreakdown(decks: Deck[], tournaments: Tournament[]
 
 export function getPopularMetaCards(decks: Deck[], cards: TcgCard[], limit = 8): PopularMetaCard[] {
   const cardLookup = new Map(cards.map((card) => [card.id, card]));
-  const counts = new Map<string, { quantity: number; deckIds: Set<string>; categories: Set<CardType | "Sideboard"> }>();
+  const counts = new Map<string, { quantity: number; deckIds: Set<string>; categories: Set<CardType> }>();
 
   for (const deck of decks) {
-    for (const entry of [...deck.cards, ...deck.sideboard]) {
-      const existing = counts.get(entry.cardId) ?? { quantity: 0, deckIds: new Set<string>(), categories: new Set<CardType | "Sideboard">() };
+    for (const entry of deck.cards) {
+      const existing = counts.get(entry.cardId) ?? { quantity: 0, deckIds: new Set<string>(), categories: new Set<CardType>() };
       existing.quantity += entry.quantity;
       existing.deckIds.add(deck.id);
       existing.categories.add(entry.category);

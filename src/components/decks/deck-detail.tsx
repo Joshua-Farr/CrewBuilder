@@ -14,9 +14,7 @@ import { cn, formatCurrency, getWinRate } from "@/lib/utils";
 export function DeckDetail({ deck }: { deck: Deck }) {
   const leader = cards.find((card) => card.id === deck.leaderId);
   const resolvedCards = resolveDeckCards(deck.cards, cards);
-  const resolvedSideboard = resolveDeckCards(deck.sideboard, cards);
   const mainDeckTotal = deck.cards.reduce((total, entry) => total + entry.quantity, 0);
-  const sideboardTotal = deck.sideboard.reduce((total, entry) => total + entry.quantity, 0);
   const exportText = formatDecklistText(deck, cards);
   const simExportText = formatDecklistForSim(deck, cards);
 
@@ -49,8 +47,8 @@ export function DeckDetail({ deck }: { deck: Deck }) {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid gap-3 sm:grid-cols-4">
-              <Stat label="Record" value={`${deck.wins}-${deck.losses}-${deck.draws}`} />
-              <Stat label="Win rate" value={`${getWinRate(deck.wins, deck.losses, deck.draws).toFixed(1)}%`} />
+              <Stat label="Record" value={`${deck.wins}-${deck.losses}`} />
+              <Stat label="Win rate" value={`${getWinRate(deck.wins, deck.losses).toFixed(1)}%`} />
               <Stat label="Region" value={deck.region} />
               <Stat label="Cost" value={formatCurrency(deck.estimatedCost)} />
             </div>
@@ -87,24 +85,6 @@ export function DeckDetail({ deck }: { deck: Deck }) {
               </div>
             </CardContent>
           </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Sideboard ({sideboardTotal})</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {resolvedSideboard.length ? (
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
-                  {resolvedSideboard.map((entry) => (
-                    <CardTile key={entry.cardId} entry={entry} />
-                  ))}
-                </div>
-              ) : (
-                <div className="rounded-2xl border border-dashed border-border bg-neutral-50 p-6 text-sm leading-6 text-muted-foreground">
-                  No sideboard cards were reported for this topping list.
-                </div>
-              )}
-            </CardContent>
-          </Card>
         </div>
         <div className="space-y-6">
           <Card>
@@ -127,9 +107,9 @@ export function DeckDetail({ deck }: { deck: Deck }) {
                       <TableRow key={matchup.opponentLeaderId}>
                         <TableCell>{matchup.opponentLeaderName}</TableCell>
                         <TableCell>
-                          {matchup.wins}-{matchup.losses}-{matchup.draws}
+                          {matchup.wins}-{matchup.losses}
                         </TableCell>
-                        <TableCell>{getWinRate(matchup.wins, matchup.losses, matchup.draws).toFixed(0)}%</TableCell>
+                        <TableCell>{getWinRate(matchup.wins, matchup.losses).toFixed(0)}%</TableCell>
                         <TableCell className="min-w-48 text-muted-foreground">{matchup.notes ?? "No notes reported."}</TableCell>
                       </TableRow>
                     ))}

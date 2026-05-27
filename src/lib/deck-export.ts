@@ -16,22 +16,17 @@ export function resolveDeckCards(entries: DeckCard[], cardPool: TcgCard[]): Reso
 
 export function formatDecklistText(deck: Deck, cardPool: TcgCard[]) {
   const resolvedCards = resolveDeckCards(deck.cards, cardPool);
-  const resolvedSideboard = resolveDeckCards(deck.sideboard, cardPool);
   const mainDeckTotal = deck.cards.reduce((total, entry) => total + entry.quantity, 0);
-  const sideboardTotal = deck.sideboard.reduce((total, entry) => total + entry.quantity, 0);
 
   return [
     `${deck.player} - ${deck.tournamentName}`,
     `Placement: #${deck.placement}`,
-    `Record: ${deck.wins}-${deck.losses}-${deck.draws}`,
+    `Record: ${deck.wins}-${deck.losses}`,
     "",
     `Leader: ${deck.leaderName}`,
     "",
     `Main deck (${mainDeckTotal})`,
     ...resolvedCards.map((entry) => `${entry.quantity}x ${getCardName(entry)} (${getCardCode(entry)})`),
-    sideboardTotal ? "" : null,
-    sideboardTotal ? `Sideboard (${sideboardTotal})` : null,
-    ...resolvedSideboard.map((entry) => `${entry.quantity}x ${getCardName(entry)} (${getCardCode(entry)})`),
   ]
     .filter(Boolean)
     .join("\n");
