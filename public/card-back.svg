@@ -1,0 +1,9 @@
+<svg width="480" height="672" viewBox="0 0 480 672" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="480" height="672" rx="32" fill="#07111F"/>
+  <rect x="18" y="18" width="444" height="636" rx="26" stroke="#38BDF8" stroke-width="4" stroke-opacity="0.55"/>
+  <circle cx="240" cy="336" r="122" fill="url(#g)" fill-opacity="0.75"/>
+  <path d="M152 347C195 252 285 252 328 347C279 322 201 322 152 347Z" fill="#FACC15"/>
+  <path d="M172 388C211 414 269 414 308 388" stroke="#E0F2FE" stroke-width="18" stroke-linecap="round"/>
+  <text x="240" y="530" text-anchor="middle" fill="#E0F2FE" font-family="Arial, sans-serif" font-size="34" font-weight="800">META LOG</text>
+  <defs><radialGradient id="g" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(240 336) rotate(90) scale(140)"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#7C3AED" stop-opacity="0.3"/></radialGradient></defs>
+</svg>
