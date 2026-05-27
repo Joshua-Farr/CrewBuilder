@@ -7,11 +7,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TournamentList } from "@/components/tournaments/tournament-list";
+import { getEventWinnerBreakdown } from "@/lib/meta-decks";
 import { jsonLd, siteConfig } from "@/lib/seo";
 import { decks, metaSnapshot, tournaments } from "@/lib/mock-data";
 export const revalidate = 3600;
 
 export default function Home() {
+  const eventWinnerBreakdown = getEventWinnerBreakdown(decks, tournaments, metaSnapshot.opSet);
+
   return (
     <div className="space-y-12">
       <script
@@ -59,7 +62,7 @@ export default function Home() {
             <CardTitle>Meta snapshot chart</CardTitle>
           </CardHeader>
           <CardContent>
-            <MetaSnapshotChart points={metaSnapshot.trendPoints} />
+            <MetaSnapshotChart leaders={eventWinnerBreakdown} opSet={metaSnapshot.opSet} />
           </CardContent>
         </Card>
       </section>
