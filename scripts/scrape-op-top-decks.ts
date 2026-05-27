@@ -26,7 +26,6 @@ interface ScrapedOpTopDeck {
   record: {
     wins: number;
     losses: number;
-    draws: number;
   } | null;
   host: string;
   hostName: string;
@@ -115,13 +114,12 @@ function parsePlacementRank(value: string) {
 }
 
 function parseRecord(value: string) {
-  const match = value.match(/\((\d+)-(\d+)(?:-(\d+))?\)/);
+  const match = value.match(/\((\d+)-(\d+)(?:-\d+)?\)/);
   if (!match) return null;
 
   return {
     wins: Number(match[1]),
     losses: Number(match[2]),
-    draws: Number(match[3] ?? 0),
   };
 }
 

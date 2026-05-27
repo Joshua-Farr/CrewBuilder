@@ -49,7 +49,7 @@ export function MetaDeckSection({ decks }: { decks: Deck[] }) {
                 <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">Top result</p>
                 <p className="mt-2 font-semibold">{summary.topDeck.name}</p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  #{summary.topDeck.placement} by {summary.topDeck.player} - {getWinRate(summary.topDeck.wins, summary.topDeck.losses, summary.topDeck.draws).toFixed(1)}% WR
+                  #{summary.topDeck.placement} by {summary.topDeck.player} - {getWinRate(summary.topDeck.wins, summary.topDeck.losses).toFixed(1)}% WR
                 </p>
               </div>
               <Button asChild className="w-full">

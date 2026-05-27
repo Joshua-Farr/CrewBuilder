@@ -27,8 +27,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Nexus",
       "hostName": "Nexus",
@@ -307,8 +306,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -411,8 +409,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Davao Magic Shop",
       "hostName": "Davao Magic Shop",
@@ -519,8 +516,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tsutaya",
       "hostName": "Tsutaya",
@@ -611,8 +607,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -1391,8 +1386,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -1495,8 +1489,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -1587,8 +1580,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Kichijoji",
       "hostName": "Kichijoji",
@@ -1687,8 +1679,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -1783,8 +1774,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -1871,8 +1861,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -2059,8 +2048,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -2151,8 +2139,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Tsutaya",
       "hostName": "Tsutaya",
@@ -2243,8 +2230,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Narita",
       "hostName": "Narita",
@@ -2343,8 +2329,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Dekusuta",
       "hostName": "Dekusuta",
@@ -2443,8 +2428,7 @@
       "tournamentType": "ExGrand",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Seagull",
       "hostName": "Seagull",
@@ -2547,8 +2531,7 @@
       "tournamentType": "GAOTaiwan",
       "record": {
         "wins": 6,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Bandai",
       "hostName": "Bandai",
@@ -2647,8 +2630,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "GAP8",
       "hostName": "GAP8",
@@ -2747,8 +2729,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "PSZ Cup",
       "hostName": "PSZ Cup",
@@ -2943,8 +2924,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Corgi",
       "hostName": "Corgi",
@@ -3039,8 +3019,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Bandaishop",
       "hostName": "Bandaishop",
@@ -3135,8 +3114,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -3239,8 +3217,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -3423,8 +3400,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -3619,8 +3595,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "AsuCS",
       "hostName": "AsuCS",
@@ -3815,8 +3790,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Hground Hobby Shop",
       "hostName": "Hground Hobby Shop",
@@ -3915,8 +3889,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "XiaoKen Shop",
       "hostName": "XiaoKen Shop",
@@ -4015,8 +3988,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Bookoff",
       "hostName": "Bookoff",
@@ -4119,8 +4091,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -4395,8 +4366,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Unbox Promenade",
       "hostName": "Unbox Promenade",
@@ -4495,8 +4465,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "DragonStar",
       "hostName": "DragonStar",
@@ -4783,8 +4752,7 @@
       "tournamentType": "OffmetaLeader",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "EndoCup",
       "hostName": "EndoCup",
@@ -4879,8 +4847,7 @@
       "tournamentType": "OffmetaLeader",
       "record": {
         "wins": 7,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -5159,8 +5126,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Corgi",
       "hostName": "Corgi",
@@ -5255,8 +5221,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "New World CS",
       "hostName": "New World CS",
@@ -5547,8 +5512,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -5651,8 +5615,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -5931,8 +5894,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Batoloco",
       "hostName": "Batoloco",
@@ -6231,8 +6193,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -6335,8 +6296,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -6427,8 +6387,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -6519,8 +6478,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -6615,8 +6573,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tomaloco",
       "hostName": "Tomaloco",
@@ -6715,8 +6672,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tsutaya",
       "hostName": "Tsutaya",
@@ -6811,8 +6767,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -6919,8 +6874,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 6,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "NxGallery",
       "hostName": "NxGallery",
@@ -7107,8 +7061,7 @@
       "tournamentType": "5v5",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "torecard_CS",
       "hostName": "torecard_CS",
@@ -7207,8 +7160,7 @@
       "tournamentType": "5v5",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "torecard_CS",
       "hostName": "torecard_CS",
@@ -7307,8 +7259,7 @@
       "tournamentType": "5v5",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "torecard_CS",
       "hostName": "torecard_CS",
@@ -7411,8 +7362,7 @@
       "tournamentType": "5v5",
       "record": {
         "wins": 6,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -7507,8 +7457,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Oretan",
       "hostName": "Oretan",
@@ -7599,8 +7548,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Card Affinity",
       "hostName": "Card Affinity",
@@ -7783,8 +7731,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Corgi",
       "hostName": "Corgi",
@@ -7879,8 +7826,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Corgi",
       "hostName": "Corgi",
@@ -7971,8 +7917,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -8071,8 +8016,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -8167,8 +8111,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -8359,8 +8302,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -8471,8 +8413,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -8659,8 +8600,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "GProject",
       "hostName": "GProject",
@@ -8751,8 +8691,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tsutaya",
       "hostName": "Tsutaya",
@@ -8955,8 +8894,7 @@
       "tournamentType": "SBPostban",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -9043,8 +8981,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -9139,8 +9076,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 8,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "UnigunCS",
       "hostName": "UnigunCS",
@@ -9235,8 +9171,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Markas",
       "hostName": "Markas",
@@ -9335,8 +9270,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Batoloco",
       "hostName": "Batoloco",
@@ -9435,8 +9369,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "YellowSubmarine(32)",
       "hostName": "YellowSubmarine",
@@ -9531,8 +9464,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -9791,8 +9723,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "TorekaFANG",
       "hostName": "TorekaFANG",
@@ -9883,8 +9814,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -9979,8 +9909,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "STAX Tabletop Games",
       "hostName": "STAX Tabletop Games",
@@ -10075,8 +10004,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 5,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "ShumaiCup",
       "hostName": "ShumaiCup",
@@ -10167,8 +10095,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "CardMountain",
       "hostName": "CardMountain",
@@ -10287,8 +10214,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -10383,8 +10309,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -10475,8 +10400,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "DavaoMagicShop",
       "hostName": "DavaoMagicShop",
@@ -10759,8 +10683,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Fullcomp",
       "hostName": "Fullcomp",
@@ -10859,8 +10782,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -10959,8 +10881,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "DeckOutDen(32)",
       "hostName": "DeckOutDen",
@@ -11051,8 +10972,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "PopCulture",
       "hostName": "PopCulture",
@@ -11455,8 +11375,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 7,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "AsuCS",
       "hostName": "AsuCS",
@@ -11547,8 +11466,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "OneHappy",
       "hostName": "OneHappy",
@@ -11639,8 +11557,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -11735,8 +11652,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "CardLabo",
       "hostName": "CardLabo",
@@ -11827,8 +11743,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "AGC",
       "hostName": "AGC",
@@ -11919,8 +11834,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 8,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "AsuCS",
       "hostName": "AsuCS",
@@ -12019,8 +11933,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -12115,8 +12028,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 8,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "KTBCS",
       "hostName": "KTBCS",
@@ -12215,8 +12127,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Atlas Gamers(32)",
       "hostName": "Atlas Gamers",
@@ -12307,8 +12218,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Batoloco",
       "hostName": "Batoloco",
@@ -12499,8 +12409,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -12599,8 +12508,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 6,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Nx gallery",
       "hostName": "Nx gallery",
@@ -12695,8 +12603,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "MANAPro",
       "hostName": "MANAPro",
@@ -12883,8 +12790,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Sanyodo",
       "hostName": "Sanyodo",
@@ -12979,8 +12885,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "GameSpace",
       "hostName": "GameSpace",
@@ -13075,8 +12980,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tomakomai",
       "hostName": "Tomakomai",
@@ -13267,8 +13171,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BandaiShop",
       "hostName": "BandaiShop",
@@ -13367,8 +13270,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -13543,8 +13445,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "GroundBattle",
       "hostName": "GroundBattle",
@@ -13635,8 +13536,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -13723,8 +13623,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Corgi(30)",
       "hostName": "Corgi",
@@ -13815,8 +13714,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Bookoff",
       "hostName": "Bookoff",
@@ -14019,8 +13917,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "DragonStar",
       "hostName": "DragonStar",
@@ -14115,8 +14012,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Bookoff",
       "hostName": "Bookoff",
@@ -14215,8 +14111,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "PAO",
       "hostName": "PAO",
@@ -14307,8 +14202,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Takarajima",
       "hostName": "Takarajima",
@@ -14399,8 +14293,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "New Century",
       "hostName": "New Century",
@@ -14499,8 +14392,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -14595,8 +14487,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BandaiShop",
       "hostName": "BandaiShop",
@@ -14695,8 +14586,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "OneTies",
       "hostName": "OneTies",
@@ -14891,8 +14781,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 6,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "AlpacaCS",
       "hostName": "AlpacaCS",
@@ -14987,8 +14876,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Preyz",
       "hostName": "Preyz",
@@ -15263,8 +15151,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -15447,8 +15334,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -15539,8 +15425,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 3,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BINKS",
       "hostName": "BINKS",
@@ -15727,8 +15612,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "DragonStar",
       "hostName": "DragonStar",
@@ -15827,8 +15711,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Kitami",
       "hostName": "Kitami",
@@ -16011,8 +15894,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -16099,8 +15981,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Youing",
       "hostName": "Youing",
@@ -16287,8 +16168,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tsutaya",
       "hostName": "Tsutaya",
@@ -16383,8 +16263,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -16479,8 +16358,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TCG Center(64)",
       "hostName": "TCG Center",
@@ -16575,8 +16453,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TCG Center(64)",
       "hostName": "TCG Center",
@@ -16759,8 +16636,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop(32)",
       "hostName": "Cardshop",
@@ -17059,8 +16935,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "S Card Oasis(32)",
       "hostName": "S Card Oasis",
@@ -17163,8 +17038,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Unbox",
       "hostName": "Unbox",
@@ -17263,8 +17137,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "G-Project",
       "hostName": "G-Project",
@@ -17355,8 +17228,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -17451,8 +17323,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Kanuma",
       "hostName": "Kanuma",
@@ -17715,8 +17586,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "DragonStar",
       "hostName": "DragonStar",
@@ -17815,8 +17685,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Batoloco",
       "hostName": "Batoloco",
@@ -17915,8 +17784,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "PAO",
       "hostName": "PAO",
@@ -18015,8 +17883,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "CardshopSakura",
       "hostName": "CardshopSakura",
@@ -18115,8 +17982,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TorecaParadise",
       "hostName": "TorecaParadise",
@@ -18207,8 +18073,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Ahodo",
       "hostName": "Ahodo",
@@ -18383,8 +18248,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -18475,8 +18339,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TOP CARD",
       "hostName": "TOP CARD",
@@ -18679,8 +18542,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Ahodo",
       "hostName": "Ahodo",
@@ -18771,8 +18633,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "101 Hobbies Store",
       "hostName": "101 Hobbies Store",
@@ -18887,8 +18748,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tsutaya",
       "hostName": "Tsutaya",
@@ -18995,8 +18855,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -19087,8 +18946,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Seagull",
       "hostName": "Seagull",
@@ -19359,8 +19217,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Hobby Stadium(64)",
       "hostName": "Hobby Stadium",
@@ -19459,8 +19316,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "EDION",
       "hostName": "EDION",
@@ -19811,8 +19667,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -19903,8 +19758,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -19999,8 +19853,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "LawTVCup",
       "hostName": "LawTVCup",
@@ -20095,8 +19948,7 @@
       "tournamentType": "FS+EX",
       "record": {
         "wins": 10,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -20191,8 +20043,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -20287,8 +20138,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -20391,8 +20241,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -20491,8 +20340,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -20583,8 +20431,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardbox",
       "hostName": "Cardbox",
@@ -20679,8 +20526,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -20875,8 +20721,7 @@
       "tournamentType": "EX+SB",
       "record": {
         "wins": 10,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshops",
       "hostName": "Cardshops",
@@ -20971,8 +20816,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BEE(64)",
       "hostName": "BEE",
@@ -21063,8 +20907,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Infinity Hobbies",
       "hostName": "Infinity Hobbies",
@@ -21163,8 +21006,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -21263,8 +21105,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -21439,8 +21280,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -21611,8 +21451,7 @@
       "tournamentType": "StorePrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -21711,8 +21550,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Corgi",
       "hostName": "Corgi",
@@ -21987,8 +21825,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -22079,8 +21916,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Treasure Island",
       "hostName": "Treasure Island",
@@ -22175,8 +22011,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -22279,8 +22114,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TCG Center",
       "hostName": "TCG Center",
@@ -22379,8 +22213,7 @@
       "tournamentType": "EXGrand",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -22475,8 +22308,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -22563,8 +22395,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TorekaCROWN",
       "hostName": "TorekaCROWN",
@@ -22659,8 +22490,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "GakariCards",
       "hostName": "GakariCards",
@@ -22835,8 +22665,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -22931,8 +22760,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -23027,8 +22855,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -23127,8 +22954,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -23235,8 +23061,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Ranowa",
       "hostName": "Ranowa",
@@ -23331,8 +23156,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -23515,8 +23339,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardlab",
       "hostName": "Cardlab",
@@ -23603,8 +23426,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "YellowSubMarine",
       "hostName": "YellowSubMarine",
@@ -23783,8 +23605,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Corgi(64)",
       "hostName": "Corgi",
@@ -23875,8 +23696,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "WaiwaiCS",
       "hostName": "WaiwaiCS",
@@ -23967,8 +23787,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "PAO(64)",
       "hostName": "PAO",
@@ -24063,8 +23882,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "PAO(64)",
       "hostName": "PAO",
@@ -24247,8 +24065,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TCG Center",
       "hostName": "TCG Center",
@@ -24343,8 +24160,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -24435,8 +24251,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Dominariya",
       "hostName": "Dominariya",
@@ -24527,8 +24342,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TCGShop193",
       "hostName": "TCGShop193",
@@ -24627,8 +24441,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Overseas",
       "hostName": "Overseas",
@@ -24723,8 +24536,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -24895,8 +24707,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Madcap",
       "hostName": "Madcap",
@@ -25079,8 +24890,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -25175,8 +24985,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tsutaya",
       "hostName": "Tsutaya",
@@ -25271,8 +25080,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 8,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "SodaCup",
       "hostName": "SodaCup",
@@ -25371,8 +25179,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 7,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "SodaCup",
       "hostName": "SodaCup",
@@ -25555,8 +25362,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TorekaKirin",
       "hostName": "TorekaKirin",
@@ -25647,8 +25453,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -25743,8 +25548,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BandaiShop",
       "hostName": "BandaiShop",
@@ -25919,8 +25723,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 8,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "OninninCS",
       "hostName": "OninninCS",
@@ -26103,8 +25906,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Ogre Neverland",
       "hostName": "Ogre Neverland",
@@ -26203,8 +26005,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Pichubros",
       "hostName": "Pichubros",
@@ -26299,8 +26100,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 8,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "ShumaiCup",
       "hostName": "ShumaiCup",
@@ -26391,8 +26191,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 8,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "FukuouCS",
       "hostName": "FukuouCS",
@@ -26483,8 +26282,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Preyz",
       "hostName": "Preyz",
@@ -26575,8 +26373,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -26667,8 +26464,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -26759,8 +26555,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "E Forum",
       "hostName": "E Forum",
@@ -26855,8 +26650,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardbox",
       "hostName": "Cardbox",
@@ -26947,8 +26741,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BAZ",
       "hostName": "BAZ",
@@ -27035,8 +26828,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Hype n Play",
       "hostName": "Hype n Play",
@@ -27135,8 +26927,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -27231,8 +27022,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "JIN Studio",
       "hostName": "JIN Studio",
@@ -27327,8 +27117,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tsutaya",
       "hostName": "Tsutaya",
@@ -27627,8 +27416,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cherumo(63)",
       "hostName": "Cherumo",
@@ -27719,8 +27507,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -27811,8 +27598,7 @@
       "tournamentType": "GAOPrelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -27911,8 +27697,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Hobby Stadium",
       "hostName": "Hobby Stadium",
@@ -28011,8 +27796,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "GamesOnBoard",
       "hostName": "GamesOnBoard",
@@ -28107,8 +27891,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "AceCup",
       "hostName": "AceCup",
@@ -28735,8 +28518,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 9,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BCGFest",
       "hostName": "BCGFest",
@@ -28827,8 +28609,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tsutaya",
       "hostName": "Tsutaya",
@@ -28915,8 +28696,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "GGs gaming",
       "hostName": "GGs gaming",
@@ -29567,8 +29347,7 @@
       "tournamentType": "Qualifier",
       "record": {
         "wins": 10,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -29835,8 +29614,7 @@
       "tournamentType": "Qualifier",
       "record": {
         "wins": 9,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "BCGFest",
       "hostName": "BCGFest",
@@ -29931,8 +29709,7 @@
       "tournamentType": "Qualifier",
       "record": {
         "wins": 9,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -30019,8 +29796,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 6,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Turbo on board",
       "hostName": "Turbo on board",
@@ -30107,8 +29883,7 @@
       "tournamentType": "FS EX",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BandaiCardfest",
       "hostName": "BandaiCardfest",
@@ -30471,8 +30246,7 @@
       "tournamentType": "3v3CS",
       "record": {
         "wins": 10,
-        "losses": 3,
-        "draws": 0
+        "losses": 3
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -30751,8 +30525,7 @@
       "tournamentType": "3v3CS",
       "record": {
         "wins": 9,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -30839,8 +30612,7 @@
       "tournamentType": "3v3CS",
       "record": {
         "wins": 8,
-        "losses": 3,
-        "draws": 0
+        "losses": 3
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -30931,8 +30703,7 @@
       "tournamentType": "3v3CS",
       "record": {
         "wins": 9,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -31031,8 +30802,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 9,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -31123,8 +30893,7 @@
       "tournamentType": "3v3CS",
       "record": {
         "wins": 7,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -31211,8 +30980,7 @@
       "tournamentType": "3v3CS",
       "record": {
         "wins": 7,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -31307,8 +31075,7 @@
       "tournamentType": "3v3CS",
       "record": {
         "wins": 7,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -31407,8 +31174,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -31503,8 +31269,7 @@
       "tournamentType": "FS EX",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "VIA_amagasaki",
       "hostName": "VIA_amagasaki",
@@ -31599,8 +31364,7 @@
       "tournamentType": "FS EX",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BandaiCardFest",
       "hostName": "BandaiCardFest",
@@ -31687,8 +31451,7 @@
       "tournamentType": "FS EX",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BCGFest",
       "hostName": "BCGFest",
@@ -31779,8 +31542,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Uniaqua",
       "hostName": "Uniaqua",
@@ -31879,8 +31641,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -31979,8 +31740,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Girafull(56)",
       "hostName": "Girafull",
@@ -32083,8 +31843,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Girafull(56)",
       "hostName": "Girafull",
@@ -32271,8 +32030,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "PopCom",
       "hostName": "PopCom",
@@ -32463,8 +32221,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 7,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -32563,8 +32320,7 @@
       "tournamentType": "GAO Prelims",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Agora",
       "hostName": "Agora",
@@ -32663,8 +32419,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Block101",
       "hostName": "Block101",
@@ -32755,8 +32510,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 6,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Games Haven",
       "hostName": "Games Haven",
@@ -32855,8 +32609,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "DragonStar",
       "hostName": "DragonStar",
@@ -32947,8 +32700,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Sakata",
       "hostName": "Sakata",
@@ -33043,8 +32795,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "TatejimaCup",
       "hostName": "TatejimaCup",
@@ -33139,8 +32890,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 6,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TatejimaCup",
       "hostName": "TatejimaCup",
@@ -33231,8 +32981,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "WonderGOO",
       "hostName": "WonderGOO",
@@ -33331,8 +33080,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Oretan(32)",
       "hostName": "Oretan",
@@ -33427,8 +33175,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Little Akiba",
       "hostName": "Little Akiba",
@@ -33523,8 +33270,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Kabe",
       "hostName": "Kabe",
@@ -33623,8 +33369,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Chachatan",
       "hostName": "Chachatan",
@@ -33715,8 +33460,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -33807,8 +33551,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 8,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "PomeranianCS",
       "hostName": "PomeranianCS",
@@ -33987,8 +33730,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "War Games",
       "hostName": "War Games",
@@ -34079,8 +33821,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Preyz(64)",
       "hostName": "Preyz",
@@ -34363,8 +34104,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -34451,8 +34191,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "SakeCup",
       "hostName": "SakeCup",
@@ -34547,8 +34286,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Kadobou",
       "hostName": "Kadobou",
@@ -34647,8 +34385,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 6,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "UnigunCS",
       "hostName": "UnigunCS",
@@ -34827,8 +34564,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 8,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BraloCS",
       "hostName": "BraloCS",
@@ -34927,8 +34663,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardlab",
       "hostName": "Cardlab",
@@ -35023,8 +34758,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Ogre Lair Palem",
       "hostName": "Ogre Lair Palem",
@@ -35375,8 +35109,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -35567,8 +35300,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Bee(64)",
       "hostName": "Bee",
@@ -35671,8 +35403,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -35759,8 +35490,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Girafull(59)",
       "hostName": "Girafull",
@@ -35855,8 +35585,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Girafull(59)",
       "hostName": "Girafull",
@@ -35963,8 +35692,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Hashimoto",
       "hostName": "Hashimoto",
@@ -36247,8 +35975,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 9,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "SodaCup",
       "hostName": "SodaCup",
@@ -36419,8 +36146,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -36595,8 +36321,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Bookoff",
       "hostName": "Bookoff",
@@ -36691,8 +36416,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "KCC",
       "hostName": "KCC",
@@ -36787,8 +36511,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -37251,8 +36974,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -37347,8 +37069,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -37519,8 +37240,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -37615,8 +37335,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -37703,8 +37422,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "ForgeHobbyPlace",
       "hostName": "ForgeHobbyPlace",
@@ -37803,8 +37521,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 9,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "HachinosuCup",
       "hostName": "HachinosuCup",
@@ -37891,8 +37608,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 7,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "HachinoseCup",
       "hostName": "HachinoseCup",
@@ -37979,8 +37695,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 6,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "HachinosuCup",
       "hostName": "HachinosuCup",
@@ -38175,8 +37890,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -38267,8 +37981,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "First_TCG(32)",
       "hostName": "First_TCG",
@@ -38359,8 +38072,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Nagaoka",
       "hostName": "Nagaoka",
@@ -38535,8 +38247,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tsutaya(31)",
       "hostName": "Tsutaya",
@@ -38627,8 +38338,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -38727,8 +38437,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TSUTAYA",
       "hostName": "TSUTAYA",
@@ -38827,8 +38536,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "TorekaACE(32)",
       "hostName": "TorekaACE",
@@ -39023,8 +38731,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -39119,8 +38826,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Vanguard Clinic",
       "hostName": "Vanguard Clinic",
@@ -39387,8 +39093,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Dragons Playhouse",
       "hostName": "Dragons Playhouse",
@@ -39483,8 +39188,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "GIRAFULL(57)",
       "hostName": "GIRAFULL",
@@ -39575,8 +39279,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "GIRAFULL(57)",
       "hostName": "GIRAFULL",
@@ -39683,8 +39386,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 6,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "SixColorsCS",
       "hostName": "SixColorsCS",
@@ -39783,8 +39485,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Sasebo",
       "hostName": "Sasebo",
@@ -39871,8 +39572,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Rokushiki",
       "hostName": "Rokushiki",
@@ -39967,8 +39667,7 @@
       "tournamentType": "5v5",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "BraloCS",
       "hostName": "BraloCS",
@@ -40055,8 +39754,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -40235,8 +39933,7 @@
       "tournamentType": "5v5",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "TorekaX",
       "hostName": "TorekaX",
@@ -40331,8 +40028,7 @@
       "tournamentType": "5v5+Side",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "TorekaX",
       "hostName": "TorekaX",
@@ -40427,8 +40123,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "First_TCG",
       "hostName": "First_TCG",
@@ -40615,8 +40310,7 @@
       "tournamentType": "5v5",
       "record": {
         "wins": 6,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "BlackArmCup",
       "hostName": "BlackArmCup",
@@ -40723,8 +40417,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Tsutaya",
       "hostName": "Tsutaya",
@@ -40827,8 +40520,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -40919,8 +40611,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardbox",
       "hostName": "Cardbox",
@@ -41019,8 +40710,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Bookoff",
       "hostName": "Bookoff",
@@ -41111,8 +40801,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -41203,8 +40892,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 6,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "ShumaiCup",
       "hostName": "ShumaiCup",
@@ -41295,8 +40983,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 3,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -41383,8 +41070,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 3,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -41475,8 +41161,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Discover Collectibles",
       "hostName": "Discover Collectibles",
@@ -41579,8 +41264,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -41679,8 +41363,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -41787,8 +41470,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "AkanashiCup",
       "hostName": "AkanashiCup",
@@ -41875,8 +41557,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 6,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "AkanashiCup",
       "hostName": "AkanashiCup",
@@ -41963,8 +41644,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Dragos Playhouse",
       "hostName": "Dragos Playhouse",
@@ -42051,8 +41731,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -42143,8 +41822,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Dorama(16)",
       "hostName": "Dorama",
@@ -42231,8 +41909,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "SodaCup(35)",
       "hostName": "SodaCup",
@@ -42411,8 +42088,7 @@
       "tournamentType": "Shopevent",
       "record": {
         "wins": 5,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "SodaCup(35)",
       "hostName": "SodaCup",
@@ -42507,8 +42183,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "WaiwaiCS",
       "hostName": "WaiwaiCS",
@@ -42699,8 +42374,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Corgi(32)",
       "hostName": "Corgi",
@@ -42791,8 +42465,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Kichijoji(64)",
       "hostName": "Kichijoji",
@@ -42979,8 +42652,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -43075,8 +42747,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -43171,8 +42842,7 @@
       "tournamentType": "FS",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "DragonStar",
       "hostName": "DragonStar",
@@ -43639,8 +43309,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 8,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "AsuCS",
       "hostName": "AsuCS",
@@ -43831,8 +43500,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 7,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "OneHappy",
       "hostName": "OneHappy",
@@ -43923,8 +43591,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 5,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "ShumaiCup",
       "hostName": "ShumaiCup",
@@ -44011,8 +43678,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 6,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Overseas",
       "hostName": "Overseas",
@@ -44103,8 +43769,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 6,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Overseas",
       "hostName": "Overseas",
@@ -44471,8 +44136,7 @@
       "tournamentType": "BandaiEvt",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Bandai",
       "hostName": "Bandai",
@@ -44739,8 +44403,7 @@
       "tournamentType": "SubEvt",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "AsuCS",
       "hostName": "AsuCS",
@@ -44827,8 +44490,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 6,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "OneHappy",
       "hostName": "OneHappy",
@@ -44923,8 +44585,7 @@
       "tournamentType": "5v5",
       "record": {
         "wins": 6,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "SeiCup",
       "hostName": "SeiCup",
@@ -45023,8 +44684,7 @@
       "tournamentType": "5v5",
       "record": {
         "wins": 6,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "SeiCup",
       "hostName": "SeiCup",
@@ -45119,8 +44779,7 @@
       "tournamentType": "3v3",
       "record": {
         "wins": 7,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "ObajiCup",
       "hostName": "ObajiCup",
@@ -45207,8 +44866,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 5,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Batoloco",
       "hostName": "Batoloco",
@@ -45403,8 +45061,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Babaroca",
       "hostName": "Babaroca",
@@ -45579,8 +45236,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 9,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "ShumaiCup",
       "hostName": "ShumaiCup",
@@ -45767,8 +45423,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 6,
-        "losses": 2,
-        "draws": 0
+        "losses": 2
       },
       "host": "ShumaiCUp",
       "hostName": "ShumaiCUp",
@@ -45855,8 +45510,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 4,
-        "losses": 0,
-        "draws": 0
+        "losses": 0
       },
       "host": "Cardshop",
       "hostName": "Cardshop",
@@ -45943,8 +45597,7 @@
       "tournamentType": "ShopEvent",
       "record": {
         "wins": 7,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Overseas",
       "hostName": "Overseas",
@@ -46031,8 +45684,7 @@
       "tournamentType": "SB",
       "record": {
         "wins": 4,
-        "losses": 1,
-        "draws": 0
+        "losses": 1
       },
       "host": "Cardshop",
       "hostName": "Cardshop",

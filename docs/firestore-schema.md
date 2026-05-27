@@ -60,10 +60,8 @@
   placement: number;
   wins: number;
   losses: number;
-  draws: number;
   cards: Array<{ cardId: string; quantity: number; category: string }>;
-  sideboard: Array<{ cardId: string; quantity: number; note?: string }>;
-  matchups: Array<{ opponentLeaderId: string; wins: number; losses: number; draws: number; notes?: string }>;
+  matchups: Array<{ opponentLeaderId: string; wins: number; losses: number; notes?: string }>;
   notes: string;
   techChoices: string[];
   estimatedCost: number;
@@ -132,7 +130,6 @@
   leaderBId: string;
   leaderAWins: number;
   leaderBWins: number;
-  draws: number;
   format: string;
   opSet: string;
   updatedAt: Timestamp;
