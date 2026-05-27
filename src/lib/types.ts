@@ -11,5 +11,5 @@ export interface MetaLeaderStat { leaderId: string; name: string; colors: CardCo
 export interface TrendPoint { date: string; leader: string; playRate: number; winRate: number; }
 export interface RegionStat { region: Region; topLeader: string; winRate: number; decks: number; }
 export interface MetaSnapshot { id: string; weekStart: string; format: TournamentFormat; opSet: string; topLeaders: MetaLeaderStat[]; matchupMatrix: Record<string, Record<string, number>>; regionStats: RegionStat[]; trendPoints: TrendPoint[]; bestDeckId: string; mostImprovedLeaderId: string; generatedAt: string; }
-export interface Player { id: string; name: string; region: Region; elo: number; wins: number; losses: number; topCuts: number; }
+export interface Player { id: string; name: string; rank: number; points: number; profileUrl?: string; source: "Limitless"; rankingPeriod: string; }
 export interface UserProfile { uid: string; displayName: string; email: string; photoURL?: string; roles: Array<"user" | "moderator" | "admin">; favoriteDeckIds: string[]; bookmarkedLeaderIds: string[]; followedPlayerIds: string[]; }

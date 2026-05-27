@@ -1,5 +1,45 @@
-import { decks, metaSnapshot, players, tournaments } from "@/lib/mock-data";
+import { decks, metaSnapshot, players as fallbackPlayers, tournaments } from "@/lib/mock-data";
 import { getTournamentTopDecklists } from "@/lib/tournament-decklists";
+import type { Player } from "@/lib/types";
+
+const LIMITLESS_BASE_URL = "https://onepiece.limitlesstcg.com";
+const LIMITLESS_PLAYER_RANKINGS_URL = `${LIMITLESS_BASE_URL}/players?rank=points&time=12months&show=100`;
+const LIMITLESS_RANKING_PERIOD = "Past 12 months";
+
+function decodeHtml(value: string) {
+  return value
+    .replace(/&#(\d+);/g, (_, code: string) => String.fromCharCode(Number(code)))
+    .replace(/&#x([\da-f]+);/gi, (_, code: string) => String.fromCharCode(Number.parseInt(code, 16)))
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
+
+function textFromHtml(value: string) {
+  return decodeHtml(value.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim());
+}
+
+function parseLimitlessPlayerRankings(html: string): Player[] {
+  const rowPattern = /<tr>\s*<td>(\d+)<\/td>\s*<td><a href="([^"]+)">([\s\S]*?)<\/a><\/td>[\s\S]*?<td>(\d+)<\/td>\s*<\/tr>/g;
+  return Array.from(html.matchAll(rowPattern), (match) => {
+    const [, rank, href, nameHtml, points] = match;
+    const playerId = href.split("/").filter(Boolean).at(-1) ?? textFromHtml(nameHtml).toLowerCase().replace(/\s+/g, "-");
+
+    return {
+      id: `limitless-${playerId}`,
+      name: textFromHtml(nameHtml),
+      rank: Number(rank),
+      points: Number(points),
+      profileUrl: new URL(href, LIMITLESS_BASE_URL).toString(),
+      source: "Limitless" as const,
+      rankingPeriod: LIMITLESS_RANKING_PERIOD,
+    };
+  }).filter((player) => player.name && Number.isFinite(player.rank) && Number.isFinite(player.points));
+}
 
 export async function getServerDecks(filters?: { opSet?: string }) {
   return decks
@@ -34,5 +74,17 @@ export async function getServerMetaSnapshot() {
 }
 
 export async function getServerPlayers() {
-  return players;
+  try {
+    const response = await fetch(LIMITLESS_PLAYER_RANKINGS_URL, {
+      headers: { "User-Agent": "Grand Line Meta player rankings (https://onepiece.limitlesstcg.com/players)" },
+      next: { revalidate: 60 * 60 },
+    });
+
+    if (!response.ok) return fallbackPlayers;
+
+    const rankings = parseLimitlessPlayerRankings(await response.text());
+    return rankings.length ? rankings : fallbackPlayers;
+  } catch {
+    return fallbackPlayers;
+  }
 }

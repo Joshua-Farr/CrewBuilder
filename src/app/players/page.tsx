@@ -3,16 +3,19 @@ import { PageHeader } from "@/components/ui/page-header";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { createMetadata } from "@/lib/seo";
 import { getServerPlayers } from "@/lib/services/server-data";
-export const metadata = createMetadata({ title: "Player Rankings", description: "Elo rankings and player performance for One Piece TCG events.", path: "/players" });
+export const metadata = createMetadata({ title: "Player Rankings", description: "Limitless player rankings for One Piece TCG events.", path: "/players" });
+export const revalidate = 3600;
 
 export default async function PlayersPage() {
   const players = await getServerPlayers();
+  const rankingPeriod = players[0]?.rankingPeriod ?? "Past 12 months";
+
   return (
     <div className="space-y-8">
       <PageHeader
         eyebrow="Player rankings"
-        title="Player Elo rankings"
-        description="Track consistent performers across regions, records, and top cut conversion."
+        title="Limitless player rankings"
+        description={`Ranked by Limitless points for ${rankingPeriod.toLowerCase()}.`}
       />
       <Card>
         <CardHeader>
@@ -22,23 +25,29 @@ export default async function PlayersPage() {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead>#</TableHead>
                 <TableHead>Player</TableHead>
-                <TableHead>Region</TableHead>
-                <TableHead>Elo</TableHead>
-                <TableHead>Record</TableHead>
-                <TableHead>Top cuts</TableHead>
+                <TableHead>Points</TableHead>
+                <TableHead>Source</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {players.map((player) => (
                 <TableRow key={player.id}>
-                  <TableCell className="font-semibold">{player.name}</TableCell>
-                  <TableCell>{player.region}</TableCell>
-                  <TableCell>{player.elo}</TableCell>
                   <TableCell>
-                    {player.wins}-{player.losses}
+                    <span className="tabular-nums">{player.rank}</span>
                   </TableCell>
-                  <TableCell>{player.topCuts}</TableCell>
+                  <TableCell className="font-semibold">
+                    {player.profileUrl ? (
+                      <a className="transition hover:text-primary" href={player.profileUrl} rel="noreferrer" target="_blank">
+                        {player.name}
+                      </a>
+                    ) : (
+                      player.name
+                    )}
+                  </TableCell>
+                  <TableCell className="tabular-nums">{player.points}</TableCell>
+                  <TableCell>{player.source}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

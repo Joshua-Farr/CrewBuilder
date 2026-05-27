@@ -116,12 +116,11 @@
 ```ts
 {
   name: string;
-  region: string;
-  elo: number;
-  wins: number;
-  losses: number;
-  topCuts: number;
+  rank: number;
+  points: number;
   profileUrl?: string;
+  source: 'Limitless';
+  rankingPeriod: string;
 }
 ```
 
