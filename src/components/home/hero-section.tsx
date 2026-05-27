@@ -24,10 +24,10 @@ export function HeroSection() {
             transition={{ duration: 0.45 }}
             className="max-w-4xl text-5xl font-semibold tracking-[-0.055em] text-foreground sm:text-6xl lg:text-7xl"
           >
-            The competitive One Piece TCG platform built for winning players.
+            The competitive One Piece TCG platform for serious players.
           </motion.h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            Browse winning lists, compare leaders, track matchup spreads, submit tournament reports, and build decks with
+            Discover winning decklists, analyze matchups, track the evolving meta, and build better decks with
             community-tested tech.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
