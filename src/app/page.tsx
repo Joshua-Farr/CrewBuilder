@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { DeckCard } from "@/components/decks/deck-card";
 import { HeroSection } from "@/components/home/hero-section";
 import { MetaSnapshotChart } from "@/components/home/meta-snapshot-chart";
@@ -9,11 +10,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TournamentList } from "@/components/tournaments/tournament-list";
 import { getEventWinnerBreakdown } from "@/lib/meta-decks";
 import { jsonLd, siteConfig } from "@/lib/seo";
-import { decks, metaSnapshot, tournaments } from "@/lib/mock-data";
+import { cards, decks, metaSnapshot, tournaments } from "@/lib/mock-data";
 export const revalidate = 3600;
 
 export default function Home() {
   const eventWinnerBreakdown = getEventWinnerBreakdown(decks, tournaments, metaSnapshot.opSet);
+  const leaderCardsById = new Map(cards.filter((card) => card.isLeader).map((card) => [card.id, card]));
 
   return (
     <div className="space-y-12">
@@ -39,22 +41,31 @@ export default function Home() {
             <CardTitle>Current top meta leaders</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {metaSnapshot.topLeaders.slice(0, 5).map((leader, index) => (
-              <div key={leader.leaderId} className="flex items-center justify-between rounded-2xl border border-border bg-neutral-50/70 p-4">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-full bg-white text-sm font-semibold text-foreground shadow-sm">
-                    {index + 1}
-                  </span>
-                  <div>
-                    <p className="font-semibold">{leader.name}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {leader.playRate}% play rate - {leader.games} games
-                    </p>
+            {metaSnapshot.topLeaders.slice(0, 5).map((leader, index) => {
+              const leaderCard = leaderCardsById.get(leader.leaderId);
+
+              return (
+                <div key={leader.leaderId} className="flex items-center justify-between gap-4 rounded-2xl border border-border bg-neutral-50/70 p-4">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-sm font-semibold text-foreground shadow-sm">
+                      {index + 1}
+                    </span>
+                    <div className="relative h-16 w-11 shrink-0 overflow-hidden rounded-lg border border-border bg-neutral-100 shadow-sm">
+                      <Image src={leaderCard?.imageUrl ?? "/card-back.svg"} alt={`${leader.name} leader card`} fill sizes="44px" className="object-cover" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate font-semibold">{leader.name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {leader.playRate}% play rate - {leader.games} games
+                      </p>
+                    </div>
                   </div>
+                  <Badge className="shrink-0" variant={leader.tier === "S" ? "accent" : "default"}>
+                    {leader.winRate}% WR
+                  </Badge>
                 </div>
-                <Badge variant={leader.tier === "S" ? "accent" : "default"}>{leader.winRate}% WR</Badge>
-              </div>
-            ))}
+              );
+            })}
           </CardContent>
         </Card>
         <Card>
