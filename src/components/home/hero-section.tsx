@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { ArrowRight, BarChart3, CheckCircle2, Trophy } from "lucide-react";
+import { ArrowRight, CheckCircle2, Trophy } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -71,16 +71,6 @@ export function HeroSection() {
                 <p className="text-lg font-semibold text-primary">{stat}</p>
               </div>
             ))}
-          </div>
-          <div className="mt-5 rounded-2xl border border-border bg-white p-4">
-            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              <BarChart3 className="size-4 text-primary" />
-              Confidence index
-            </div>
-            <div className="mt-4 h-2 overflow-hidden rounded-full bg-neutral-100">
-              <div className="h-full w-[78%] rounded-full bg-primary" />
-            </div>
-            <p className="mt-3 text-sm text-muted-foreground">Aggregated from recent regional tournament submissions.</p>
           </div>
         </Card>
       </div>
