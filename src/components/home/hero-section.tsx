@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { ArrowRight, BarChart3, CheckCircle2, Trophy } from "lucide-react";
+import { ArrowRight, BarChart3, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,9 +18,6 @@ export function HeroSection() {
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-blue-50/80 to-transparent" />
       <div className="relative grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700">
-            <Trophy className="size-4" /> OP08 competitive data live
-          </div>
           <motion.h1
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
