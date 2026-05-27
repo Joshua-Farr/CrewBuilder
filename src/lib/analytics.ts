@@ -1,0 +1,8 @@
+import { decks, metaSnapshot } from "@/lib/mock-data";
+import type { Deck, MetaLeaderStat, MetaSnapshot } from "@/lib/types";
+import { getWinRate } from "@/lib/utils";
+export function generateTierList(stats: MetaLeaderStat[]): MetaLeaderStat[] { return stats.map((leader) => { const tier: MetaLeaderStat["tier"] = leader.winRate >= 55 && leader.playRate >= 12 ? "S" : leader.winRate >= 51 ? "A" : leader.winRate >= 48 ? "B" : "C"; return { ...leader, tier }; }).sort((a, b) => b.winRate + b.playRate * 0.35 - (a.winRate + a.playRate * 0.35)); }
+export function getBestDeckThisWeek(allDecks: Deck[] = decks) { return [...allDecks].sort((a, b) => { const scoreA = getWinRate(a.wins, a.losses, a.draws) + Math.max(0, 16 - a.placement) + a.wins; const scoreB = getWinRate(b.wins, b.losses, b.draws) + Math.max(0, 16 - b.placement) + b.wins; return scoreB - scoreA; })[0]; }
+export function getMostImprovedLeader(snapshot: MetaSnapshot = metaSnapshot) { return [...snapshot.topLeaders].sort((a, b) => b.delta - a.delta)[0]; }
+export function getTechCardUsage(allDecks: Deck[] = decks) { const counts = new Map<string, number>(); for (const deck of allDecks) { for (const card of deck.cards) counts.set(card.cardId, (counts.get(card.cardId) ?? 0) + card.quantity); for (const card of deck.sideboard) counts.set(card.cardId, (counts.get(card.cardId) ?? 0) + card.quantity); } return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8); }
+export function predictMetaTrend(leader: MetaLeaderStat) { const momentum = leader.delta * 0.7 + (leader.winRate - 50) * 0.25; if (momentum > 4) return "Rising fast"; if (momentum > 1.5) return "Gaining share"; if (momentum < -2) return "Cooling off"; return "Stable"; }

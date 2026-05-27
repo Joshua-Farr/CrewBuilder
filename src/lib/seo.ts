@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+export const siteConfig = { name: "Grand Line Meta", description: "Competitive One Piece Card Game decklists, tournament results, matchup stats, and meta analytics.", url: appUrl };
+export function createMetadata({ title, description, path = "/" }: { title?: string; description?: string; path?: string }): Metadata { const fullTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name; const pageDescription = description ?? siteConfig.description; const url = new URL(path, siteConfig.url).toString(); return { title: fullTitle, description: pageDescription, metadataBase: new URL(siteConfig.url), openGraph: { title: fullTitle, description: pageDescription, url, siteName: siteConfig.name, type: "website" }, twitter: { card: "summary_large_image", title: fullTitle, description: pageDescription }, alternates: { canonical: url } }; }
+export function jsonLd(data: Record<string, unknown>) { return { __html: JSON.stringify(data) }; }

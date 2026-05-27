@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function userDoc() { return get(/databases/$(database)/documents/users/$(request.auth.uid)); }
+    function hasRole(role) { return signedIn() && userDoc().data.roles.hasAny([role, 'admin']); }
+
+    match /users/{userId} {
+      allow read: if signedIn() && (request.auth.uid == userId || hasRole('moderator'));
+      allow create: if signedIn() && request.auth.uid == userId;
+      allow update: if signedIn() && (request.auth.uid == userId || hasRole('admin'));
+      allow delete: if hasRole('admin');
+    }
+    match /cards/{cardId} { allow read: if true; allow write: if hasRole('admin'); }
+    match /decks/{deckId} {
+      allow read: if resource.data.isPublic == true || (signedIn() && resource.data.ownerId == request.auth.uid) || hasRole('moderator');
+      allow create: if signedIn();
+      allow update: if signedIn() && (resource.data.ownerId == request.auth.uid || hasRole('moderator'));
+      allow delete: if signedIn() && (resource.data.ownerId == request.auth.uid || hasRole('admin'));
+    }
+    match /tournaments/{tournamentId} { allow read: if true; allow write: if hasRole('admin'); }
+    match /metaSnapshots/{snapshotId} { allow read: if true; allow write: if hasRole('admin'); }
+    match /players/{playerId} { allow read: if true; allow write: if hasRole('moderator'); }
+    match /matchups/{matchupId} { allow read: if true; allow write: if hasRole('admin'); }
+    match /submissions/{submissionId} {
+      allow create: if signedIn();
+      allow read, update: if signedIn() && (resource.data.ownerId == request.auth.uid || hasRole('moderator'));
+      allow delete: if hasRole('admin');
+    }
+  }
+}
