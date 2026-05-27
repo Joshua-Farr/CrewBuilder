@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { DeckCard } from "@/components/decks/deck-card";
 import { HeroSection } from "@/components/home/hero-section";
 import { MetaSnapshotChart } from "@/components/home/meta-snapshot-chart";
@@ -9,4 +10,80 @@ import { TournamentList } from "@/components/tournaments/tournament-list";
 import { jsonLd, siteConfig } from "@/lib/seo";
 import { decks, metaSnapshot, tournaments } from "@/lib/mock-data";
 export const revalidate = 3600;
-export default function Home() { return <div className="space-y-10"><script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ "@context": "https://schema.org", "@type": "WebSite", name: siteConfig.name, url: siteConfig.url, potentialAction: { "@type": "SearchAction", target: `${siteConfig.url}/cards?q={search_term_string}`, "query-input": "required name=search_term_string" } })} /><HeroSection /><section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]"><Card><CardHeader><CardTitle>Current top meta leaders</CardTitle></CardHeader><CardContent className="space-y-3">{metaSnapshot.topLeaders.slice(0, 5).map((leader, index) => <div key={leader.leaderId} className="flex items-center justify-between rounded-2xl bg-white/[0.04] p-4"><div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-full bg-sky-300/15 font-black text-sky-100">{index + 1}</span><div><p className="font-bold">{leader.name}</p><p className="text-sm text-muted-foreground">{leader.playRate}% play rate - {leader.games} games</p></div></div><Badge variant={leader.tier === "S" ? "accent" : "default"}>{leader.winRate}% WR</Badge></div>)}</CardContent></Card><Card><CardHeader><CardTitle>Meta snapshot chart</CardTitle></CardHeader><CardContent><MetaSnapshotChart points={metaSnapshot.trendPoints} /></CardContent></Card></section><section><div className="mb-5 flex items-center justify-between gap-4"><div><h2 className="text-3xl font-black">Trending decklists</h2><p className="text-muted-foreground">Tournament-proven lists with matchup notes and export tools.</p></div><Button asChild variant="outline"><Link href="/decks">View all</Link></Button></div><div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">{decks.slice(0, 3).map((deck) => <DeckCard key={deck.id} deck={deck} />)}</div></section><TournamentList tournaments={tournaments.slice(0, 3)} /></div>; }
+
+export default function Home() {
+  return (
+    <div className="space-y-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: siteConfig.name,
+          url: siteConfig.url,
+          potentialAction: {
+            "@type": "SearchAction",
+            target: `${siteConfig.url}/cards?q={search_term_string}`,
+            "query-input": "required name=search_term_string",
+          },
+        })}
+      />
+      <HeroSection />
+
+      <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <Card>
+          <CardHeader>
+            <CardTitle>Current top meta leaders</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {metaSnapshot.topLeaders.slice(0, 5).map((leader, index) => (
+              <div key={leader.leaderId} className="flex items-center justify-between rounded-2xl border border-border bg-neutral-50/70 p-4">
+                <div className="flex items-center gap-3">
+                  <span className="flex size-9 items-center justify-center rounded-full bg-white text-sm font-semibold text-foreground shadow-sm">
+                    {index + 1}
+                  </span>
+                  <div>
+                    <p className="font-semibold">{leader.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {leader.playRate}% play rate - {leader.games} games
+                    </p>
+                  </div>
+                </div>
+                <Badge variant={leader.tier === "S" ? "accent" : "default"}>{leader.winRate}% WR</Badge>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Meta snapshot chart</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <MetaSnapshotChart points={metaSnapshot.trendPoints} />
+          </CardContent>
+        </Card>
+      </section>
+
+      <section>
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <h2 className="text-3xl font-semibold tracking-tight">Trending decklists</h2>
+            <p className="mt-2 text-muted-foreground">Tournament-proven lists with matchup notes and export tools.</p>
+          </div>
+          <Button asChild variant="outline">
+            <Link href="/decks">
+              View all <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {decks.slice(0, 3).map((deck) => (
+            <DeckCard key={deck.id} deck={deck} />
+          ))}
+        </div>
+      </section>
+
+      <TournamentList tournaments={tournaments.slice(0, 3)} />
+    </div>
+  );
+}

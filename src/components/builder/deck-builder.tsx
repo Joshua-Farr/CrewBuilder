@@ -6,4 +6,69 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { getCards } from "@/lib/services/firestore";
-export function DeckBuilder() { const { data = [] } = useQuery({ queryKey: ["cards"], queryFn: getCards }); const [deck, setDeck] = React.useState<Record<string, number>>({}); const total = Object.values(deck).reduce((sum, qty) => sum + qty, 0); return <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]"><Card><CardHeader><CardTitle>Card pool</CardTitle></CardHeader><CardContent className="space-y-3"><Input placeholder="Search handled in full card database" /><div className="max-h-[580px] space-y-2 overflow-y-auto pr-2">{data.filter((card) => !card.isLeader).map((card) => <button key={card.id} onClick={() => setDeck((current) => ({ ...current, [card.id]: Math.min((current[card.id] ?? 0) + 1, 4) }))} className="flex w-full items-center justify-between rounded-2xl border border-border bg-white/[0.03] p-3 text-left hover:bg-white/[0.08]"><div><p className="font-semibold">{card.name}</p><p className="text-xs text-muted-foreground">{card.code} - {card.type}</p></div><Plus className="size-4" /></button>)}</div></CardContent></Card><Card><CardHeader><CardTitle>Private decklist ({total}/50)</CardTitle></CardHeader><CardContent className="space-y-3">{Object.entries(deck).map(([cardId, quantity]) => { const card = data.find((item) => item.id === cardId); return <div key={cardId} draggable className="flex items-center justify-between rounded-2xl border border-border bg-white/[0.04] p-4"><div className="flex items-center gap-3"><GripVertical className="size-4 text-muted-foreground" /><div><p className="font-bold">{card?.name ?? cardId}</p><p className="text-xs text-muted-foreground">Drag/drop ready deck builder row</p></div></div><span className="font-black">x{quantity}</span></div>; })}{!total ? <p className="rounded-2xl bg-white/5 p-6 text-center text-muted-foreground">Add cards to start a private deck. Persist this list to /decks with ownerId when authenticated.</p> : null}<Button disabled={!total}>Save private deck</Button></CardContent></Card></div>; }
+
+export function DeckBuilder() {
+  const { data = [] } = useQuery({ queryKey: ["cards"], queryFn: getCards });
+  const [deck, setDeck] = React.useState<Record<string, number>>({});
+  const total = Object.values(deck).reduce((sum, qty) => sum + qty, 0);
+
+  return (
+    <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+      <Card>
+        <CardHeader>
+          <CardTitle>Card pool</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <Input placeholder="Search handled in full card database" />
+          <div className="subtle-scrollbar max-h-[580px] space-y-2 overflow-y-auto pr-2">
+            {data
+              .filter((card) => !card.isLeader)
+              .map((card) => (
+                <button
+                  key={card.id}
+                  onClick={() => setDeck((current) => ({ ...current, [card.id]: Math.min((current[card.id] ?? 0) + 1, 4) }))}
+                  className="flex w-full items-center justify-between rounded-2xl border border-border bg-white p-3 text-left shadow-sm transition hover:bg-neutral-50"
+                >
+                  <div>
+                    <p className="font-semibold">{card.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {card.code} - {card.type}
+                    </p>
+                  </div>
+                  <Plus className="size-4 text-muted-foreground" />
+                </button>
+              ))}
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Private decklist ({total}/50)</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          {Object.entries(deck).map(([cardId, quantity]) => {
+            const card = data.find((item) => item.id === cardId);
+            return (
+              <div key={cardId} draggable className="flex items-center justify-between rounded-2xl border border-border bg-neutral-50/70 p-4">
+                <div className="flex items-center gap-3">
+                  <GripVertical className="size-4 text-muted-foreground" />
+                  <div>
+                    <p className="font-semibold">{card?.name ?? cardId}</p>
+                    <p className="text-xs text-muted-foreground">Drag/drop ready deck builder row</p>
+                  </div>
+                </div>
+                <span className="font-semibold">x{quantity}</span>
+              </div>
+            );
+          })}
+          {!total ? (
+            <p className="rounded-2xl border border-dashed border-border bg-neutral-50 p-6 text-center text-muted-foreground">
+              Add cards to start a private deck. Persist this list to /decks with ownerId when authenticated.
+            </p>
+          ) : null}
+          <Button disabled={!total}>Save private deck</Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

@@ -11,6 +11,106 @@ import { Select } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCards } from "@/lib/services/firestore";
 import type { CardColor, CardType, TcgCard } from "@/lib/types";
-export function CardDatabase() { const [search, setSearch] = React.useState(""); const [type, setType] = React.useState<CardType | "all">("all"); const [color, setColor] = React.useState<CardColor | "all">("all"); const { data, isLoading } = useQuery({ queryKey: ["cards"], queryFn: getCards }); const allCards = React.useMemo(() => data ?? [], [data]); const fuse = React.useMemo(() => new Fuse(allCards, { keys: ["name", "code", "effect", "set", "searchTokens"], threshold: 0.32 }), [allCards]); const filtered = React.useMemo(() => { const base = search ? fuse.search(search).map((result) => result.item) : allCards; return base.filter((card) => (type === "all" || card.type === type) && (color === "all" || card.colors.includes(color))); }, [allCards, color, fuse, search, type]); return <div className="space-y-6"><div className="grid gap-3 rounded-3xl border border-border bg-white/[0.03] p-4 md:grid-cols-[1.4fr_1fr_1fr]"><Input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Fuzzy search by name, effect, code..." /><Select value={type} onChange={(event) => setType(event.target.value as CardType | "all")}>{['all', 'Leader', 'Character', 'Event', 'Stage'].map((item) => <option key={item} value={item}>{item === 'all' ? 'All types' : item}</option>)}</Select><Select value={color} onChange={(event) => setColor(event.target.value as CardColor | "all")}>{['all', 'Red', 'Green', 'Blue', 'Purple', 'Black', 'Yellow'].map((item) => <option key={item} value={item}>{item === 'all' ? 'All colors' : item}</option>)}</Select></div>{isLoading ? <Skeleton className="h-96" /> : <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">{filtered.map((card) => <CardTile key={card.id} card={card} />)}</div>}</div>; }
-function CardTile({ card }: { card: TcgCard }) { return <Dialog><DialogTrigger asChild><button className="group text-left"><Card className="overflow-hidden transition group-hover:-translate-y-1 group-hover:border-sky-300/50"><CardContent className="p-3"><div className="relative aspect-[5/7] overflow-hidden rounded-2xl bg-slate-900"><Image src={card.imageUrl ?? "/card-back.svg"} alt={card.name} fill sizes="180px" className="object-cover" loading="lazy" /></div><p className="mt-3 line-clamp-2 font-bold">{card.name}</p><p className="text-xs text-muted-foreground">{card.code}</p></CardContent></Card></button></DialogTrigger><DialogContent><DialogHeader><DialogTitle>{card.name}</DialogTitle><DialogDescription>{card.code} - {card.set} - {card.rarity}</DialogDescription></DialogHeader><div className="grid gap-5 sm:grid-cols-[180px_1fr]"><div className="relative aspect-[5/7] overflow-hidden rounded-2xl bg-slate-900"><Image src={card.imageUrl ?? "/card-back.svg"} alt={card.name} fill sizes="180px" className="object-cover" /></div><div className="space-y-4"><div className="flex flex-wrap gap-2"><Badge>{card.type}</Badge>{card.colors.map((item) => <Badge key={item} variant="outline">{item}</Badge>)}</div><div className="grid grid-cols-2 gap-3 text-sm"><Info label="Cost" value={card.cost ?? "-"} /><Info label="Power" value={card.power ?? "-"} /><Info label="Counter" value={card.counter ?? "-"} /><Info label="Attribute" value={card.attribute ?? "-"} /></div><p className="rounded-2xl bg-white/5 p-4 text-sm text-slate-300">{card.effect}</p></div></div></DialogContent></Dialog>; }
-function Info({ label, value }: { label: string; value: string | number }) { return <div className="rounded-2xl bg-white/5 p-3"><p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{label}</p><p className="font-bold">{value}</p></div>; }
+
+export function CardDatabase() {
+  const [search, setSearch] = React.useState("");
+  const [type, setType] = React.useState<CardType | "all">("all");
+  const [color, setColor] = React.useState<CardColor | "all">("all");
+  const { data, isLoading } = useQuery({ queryKey: ["cards"], queryFn: getCards });
+  const allCards = React.useMemo(() => data ?? [], [data]);
+  const fuse = React.useMemo(() => new Fuse(allCards, { keys: ["name", "code", "effect", "set", "searchTokens"], threshold: 0.32 }), [allCards]);
+  const filtered = React.useMemo(() => {
+    const base = search ? fuse.search(search).map((result) => result.item) : allCards;
+    return base.filter((card) => (type === "all" || card.type === type) && (color === "all" || card.colors.includes(color)));
+  }, [allCards, color, fuse, search, type]);
+
+  return (
+    <div className="space-y-6">
+      <div className="grid gap-3 rounded-2xl border border-border bg-white p-4 shadow-sm md:grid-cols-[1.4fr_1fr_1fr]">
+        <Input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Fuzzy search by name, effect, code..." />
+        <Select value={type} onChange={(event) => setType(event.target.value as CardType | "all")}>
+          {["all", "Leader", "Character", "Event", "Stage"].map((item) => (
+            <option key={item} value={item}>
+              {item === "all" ? "All types" : item}
+            </option>
+          ))}
+        </Select>
+        <Select value={color} onChange={(event) => setColor(event.target.value as CardColor | "all")}>
+          {["all", "Red", "Green", "Blue", "Purple", "Black", "Yellow"].map((item) => (
+            <option key={item} value={item}>
+              {item === "all" ? "All colors" : item}
+            </option>
+          ))}
+        </Select>
+      </div>
+      {isLoading ? (
+        <Skeleton className="h-96" />
+      ) : (
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+          {filtered.map((card) => (
+            <CardTile key={card.id} card={card} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CardTile({ card }: { card: TcgCard }) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className="group text-left">
+          <Card className="overflow-hidden transition duration-200 group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:shadow-neutral-200/70">
+            <CardContent className="p-3">
+              <div className="relative aspect-[5/7] overflow-hidden rounded-xl bg-neutral-100">
+                <Image src={card.imageUrl ?? "/card-back.svg"} alt={card.name} fill sizes="180px" className="object-cover" loading="lazy" />
+              </div>
+              <p className="mt-3 line-clamp-2 font-semibold">{card.name}</p>
+              <p className="text-xs text-muted-foreground">{card.code}</p>
+            </CardContent>
+          </Card>
+        </button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{card.name}</DialogTitle>
+          <DialogDescription>
+            {card.code} - {card.set} - {card.rarity}
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-5 sm:grid-cols-[180px_1fr]">
+          <div className="relative aspect-[5/7] overflow-hidden rounded-xl bg-neutral-100">
+            <Image src={card.imageUrl ?? "/card-back.svg"} alt={card.name} fill sizes="180px" className="object-cover" />
+          </div>
+          <div className="space-y-4">
+            <div className="flex flex-wrap gap-2">
+              <Badge>{card.type}</Badge>
+              {card.colors.map((item) => (
+                <Badge key={item} variant="outline">
+                  {item}
+                </Badge>
+              ))}
+            </div>
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              <Info label="Cost" value={card.cost ?? "-"} />
+              <Info label="Power" value={card.power ?? "-"} />
+              <Info label="Counter" value={card.counter ?? "-"} />
+              <Info label="Attribute" value={card.attribute ?? "-"} />
+            </div>
+            <p className="rounded-2xl border border-border bg-neutral-50 p-4 text-sm leading-6 text-muted-foreground">{card.effect}</p>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function Info({ label, value }: { label: string; value: string | number }) {
+  return (
+    <div className="rounded-2xl border border-border bg-neutral-50 p-3">
+      <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">{label}</p>
+      <p className="font-semibold">{value}</p>
+    </div>
+  );
+}
