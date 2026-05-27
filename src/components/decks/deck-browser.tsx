@@ -20,6 +20,7 @@ export function DeckBrowser() {
   const [placement, setPlacement] = React.useState("all");
   const { data, isLoading } = useQuery({ queryKey: ["decks"], queryFn: () => getDecks() });
   const decks = React.useMemo(() => data ?? [], [data]);
+  const opSetOptions = React.useMemo(() => ["all", ...Array.from(new Set(decks.map((deck) => deck.opSet))).sort().reverse()], [decks]);
   const fuse = React.useMemo(
     () => new Fuse(decks, { keys: ["name", "leaderName", "player", "tournamentName", "tags", "techChoices"], threshold: 0.35 }),
     [decks],
@@ -59,7 +60,7 @@ export function DeckBrowser() {
           ))}
         </Select>
         <Select value={opSet} onChange={(event) => setOpSet(event.target.value)}>
-          {["all", "OP08", "OP07", "OP06", "OP05"].map((item) => (
+          {opSetOptions.map((item) => (
             <option key={item} value={item}>
               {item === "all" ? "All sets" : item}
             </option>

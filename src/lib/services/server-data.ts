@@ -44,7 +44,7 @@ function parseLimitlessPlayerRankings(html: string): Player[] {
 export async function getServerDecks(filters?: { opSet?: string }) {
   return decks
     .filter((deck) => !filters?.opSet || deck.opSet === filters.opSet)
-    .sort((a, b) => new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime());
+    .sort((a, b) => new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime() || a.placement - b.placement);
 }
 
 export async function getServerDeckById(id: string) {
@@ -52,7 +52,7 @@ export async function getServerDeckById(id: string) {
 }
 
 export async function getServerTournaments() {
-  return tournaments;
+  return [...tournaments].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export async function getServerTournamentById(id: string) {
