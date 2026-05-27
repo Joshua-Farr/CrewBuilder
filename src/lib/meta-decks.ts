@@ -1,4 +1,4 @@
-import type { CardType, Deck, TcgCard } from "@/lib/types";
+import type { CardType, Deck, TcgCard, Tournament } from "@/lib/types";
 import { getWinRate } from "@/lib/utils";
 
 export interface MetaDeckSummary {
@@ -25,6 +25,13 @@ export interface PopularMetaCard {
   quantity: number;
   deckCount: number;
   categories: Array<CardType | "Sideboard">;
+}
+
+export interface EventWinnerBreakdownRow {
+  leaderId: string;
+  leaderName: string;
+  wins: number;
+  percentage: number;
 }
 
 export function getMetaSlug(opSet: string) {
@@ -94,6 +101,33 @@ export function getLeaderBreakdown(decks: Deck[]): LeaderBreakdownRow[] {
       };
     })
     .sort((a, b) => a.bestPlacement - b.bestPlacement || b.decks - a.decks || b.averageWinRate - a.averageWinRate);
+}
+
+export function getEventWinnerBreakdown(decks: Deck[], tournaments: Tournament[], opSet: string): EventWinnerBreakdownRow[] {
+  const deckLookup = new Map(decks.map((deck) => [deck.id, deck]));
+  const winnerCounts = tournaments
+    .filter((event) => event.opSet === opSet)
+    .reduce<Map<string, { leaderName: string; wins: number }>>((acc, event) => {
+      const winningDeck = deckLookup.get(event.winnerDeckId);
+      if (!winningDeck) return acc;
+
+      const existing = acc.get(winningDeck.leaderId) ?? { leaderName: winningDeck.leaderName, wins: 0 };
+      existing.wins += 1;
+      acc.set(winningDeck.leaderId, existing);
+      return acc;
+    }, new Map());
+
+  const totalWins = [...winnerCounts.values()].reduce((total, leader) => total + leader.wins, 0);
+  if (totalWins === 0) return [];
+
+  return [...winnerCounts.entries()]
+    .map(([leaderId, leader]) => ({
+      leaderId,
+      leaderName: leader.leaderName,
+      wins: leader.wins,
+      percentage: (leader.wins / totalWins) * 100,
+    }))
+    .sort((a, b) => b.wins - a.wins || a.leaderName.localeCompare(b.leaderName));
 }
 
 export function getPopularMetaCards(decks: Deck[], cards: TcgCard[], limit = 8): PopularMetaCard[] {
