@@ -1,32 +1,24 @@
 "use client";
-import { Download, FileJson, Share2, Copy } from "lucide-react";
+import { Copy, Download, FileText, Gamepad2 } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { compactStatCard } from "@/lib/design";
+import { formatDecklistForSim, formatDecklistText, getDeckExportFileName, resolveDeckCards } from "@/lib/deck-export";
 import { cards } from "@/lib/mock-data";
 import type { Deck } from "@/lib/types";
 import { cn, formatCurrency, getWinRate } from "@/lib/utils";
 
 export function DeckDetail({ deck }: { deck: Deck }) {
   const leader = cards.find((card) => card.id === deck.leaderId);
-  const resolvedCards = deck.cards.map((entry) => ({ ...entry, card: cards.find((card) => card.id === entry.cardId) }));
-  const resolvedSideboard = deck.sideboard.map((entry) => ({ ...entry, card: cards.find((card) => card.id === entry.cardId) }));
+  const resolvedCards = resolveDeckCards(deck.cards, cards);
+  const resolvedSideboard = resolveDeckCards(deck.sideboard, cards);
   const mainDeckTotal = deck.cards.reduce((total, entry) => total + entry.quantity, 0);
   const sideboardTotal = deck.sideboard.reduce((total, entry) => total + entry.quantity, 0);
-  const exportText = [
-    `Leader: ${deck.leaderName}`,
-    "",
-    `Main deck (${mainDeckTotal})`,
-    ...resolvedCards.map((entry) => `${entry.quantity}x ${entry.card?.name ?? entry.cardId}`),
-    sideboardTotal ? "" : null,
-    sideboardTotal ? `Sideboard (${sideboardTotal})` : null,
-    ...resolvedSideboard.map((entry) => `${entry.quantity}x ${entry.card?.name ?? entry.cardId}`),
-  ]
-    .filter(Boolean)
-    .join("\n");
+  const exportText = formatDecklistText(deck, cards);
+  const simExportText = formatDecklistForSim(deck, cards);
 
   return (
     <div className="space-y-8">
@@ -65,16 +57,16 @@ export function DeckDetail({ deck }: { deck: Deck }) {
             <p className="max-w-3xl leading-7 text-muted-foreground">{deck.notes}</p>
             <div className="flex flex-wrap gap-3">
               <Button onClick={() => navigator.clipboard.writeText(exportText)}>
-                <Copy className="size-4" /> Copy decklist
+                <Copy className="size-4" /> Copy text
               </Button>
-              <Button variant="outline" onClick={() => navigator.clipboard.writeText(JSON.stringify(deck, null, 2))}>
-                <FileJson className="size-4" /> Export JSON
+              <Button variant="outline" onClick={() => downloadTextFile(getDeckExportFileName(deck, "decklist"), exportText)}>
+                <FileText className="size-4" /> Export text
               </Button>
-              <Button variant="outline">
-                <Download className="size-4" /> Download image
+              <Button variant="outline" onClick={() => navigator.clipboard.writeText(simExportText)}>
+                <Gamepad2 className="size-4" /> Copy for sim
               </Button>
-              <Button variant="ghost">
-                <Share2 className="size-4" /> Share public link
+              <Button variant="outline" onClick={() => downloadTextFile(getDeckExportFileName(deck, "sim"), simExportText)}>
+                <Download className="size-4" /> Export sim
               </Button>
             </div>
           </CardContent>
@@ -117,29 +109,37 @@ export function DeckDetail({ deck }: { deck: Deck }) {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Matchup notes</CardTitle>
+              <CardTitle>Tournament matchup notes</CardTitle>
             </CardHeader>
             <CardContent className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Opponent</TableHead>
-                    <TableHead>Record</TableHead>
-                    <TableHead>WR</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {deck.matchups.map((matchup) => (
-                    <TableRow key={matchup.opponentLeaderId}>
-                      <TableCell>{matchup.opponentLeaderName}</TableCell>
-                      <TableCell>
-                        {matchup.wins}-{matchup.losses}-{matchup.draws}
-                      </TableCell>
-                      <TableCell>{getWinRate(matchup.wins, matchup.losses, matchup.draws).toFixed(0)}%</TableCell>
+              {deck.matchups.length ? (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Opponent</TableHead>
+                      <TableHead>Record</TableHead>
+                      <TableHead>WR</TableHead>
+                      <TableHead>Notes</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {deck.matchups.map((matchup) => (
+                      <TableRow key={matchup.opponentLeaderId}>
+                        <TableCell>{matchup.opponentLeaderName}</TableCell>
+                        <TableCell>
+                          {matchup.wins}-{matchup.losses}-{matchup.draws}
+                        </TableCell>
+                        <TableCell>{getWinRate(matchup.wins, matchup.losses, matchup.draws).toFixed(0)}%</TableCell>
+                        <TableCell className="min-w-48 text-muted-foreground">{matchup.notes ?? "No notes reported."}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              ) : (
+                <div className="rounded-2xl border border-dashed border-border bg-neutral-50 p-6 text-sm leading-6 text-muted-foreground">
+                  No matchup records were reported for this tournament decklist.
+                </div>
+              )}
             </CardContent>
           </Card>
           <Card>
@@ -169,7 +169,19 @@ function Stat({ label, value }: { label: string; value: string }) {
   );
 }
 
-type ResolvedCardEntry = Deck["cards"][number] & { card?: (typeof cards)[number] };
+type ResolvedCardEntry = ReturnType<typeof resolveDeckCards>[number];
+
+function downloadTextFile(fileName: string, contents: string) {
+  const blob = new Blob([contents], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
 
 function CardTile({ entry }: { entry: ResolvedCardEntry }) {
   return (
