@@ -37,7 +37,7 @@ export function HeroSection() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/meta">View meta dashboard</Link>
+              <Link href="/meta">Checkout the current meta</Link>
             </Button>
           </div>
           <div className="mt-8 grid gap-3 text-sm text-muted-foreground sm:grid-cols-3">
