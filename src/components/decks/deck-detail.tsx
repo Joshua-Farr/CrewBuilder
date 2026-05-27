@@ -13,7 +13,20 @@ import { cn, formatCurrency, getWinRate } from "@/lib/utils";
 export function DeckDetail({ deck }: { deck: Deck }) {
   const leader = cards.find((card) => card.id === deck.leaderId);
   const resolvedCards = deck.cards.map((entry) => ({ ...entry, card: cards.find((card) => card.id === entry.cardId) }));
-  const exportText = `${deck.leaderName}\n${resolvedCards.map((entry) => `${entry.quantity}x ${entry.card?.name ?? entry.cardId}`).join("\n")}`;
+  const resolvedSideboard = deck.sideboard.map((entry) => ({ ...entry, card: cards.find((card) => card.id === entry.cardId) }));
+  const mainDeckTotal = deck.cards.reduce((total, entry) => total + entry.quantity, 0);
+  const sideboardTotal = deck.sideboard.reduce((total, entry) => total + entry.quantity, 0);
+  const exportText = [
+    `Leader: ${deck.leaderName}`,
+    "",
+    `Main deck (${mainDeckTotal})`,
+    ...resolvedCards.map((entry) => `${entry.quantity}x ${entry.card?.name ?? entry.cardId}`),
+    sideboardTotal ? "" : null,
+    sideboardTotal ? `Sideboard (${sideboardTotal})` : null,
+    ...resolvedSideboard.map((entry) => `${entry.quantity}x ${entry.card?.name ?? entry.cardId}`),
+  ]
+    .filter(Boolean)
+    .join("\n");
 
   return (
     <div className="space-y-8">
@@ -69,34 +82,38 @@ export function DeckDetail({ deck }: { deck: Deck }) {
       </section>
 
       <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <Card>
-          <CardHeader>
-            <CardTitle>Deck grid and card counts</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
-              {resolvedCards.map((entry) => (
-                <div key={entry.cardId} className="rounded-2xl border border-border bg-white p-3 shadow-sm">
-                  <div className="relative aspect-[5/7] overflow-hidden rounded-xl bg-neutral-100">
-                    <Image
-                      src={entry.card?.imageUrl ?? "/card-back.svg"}
-                      alt={entry.card?.name ?? entry.cardId}
-                      fill
-                      sizes="180px"
-                      className="object-cover"
-                      loading="lazy"
-                    />
-                    <span className="absolute right-2 top-2 rounded-full bg-neutral-950 px-2 py-1 text-xs font-semibold text-white">x{entry.quantity}</span>
-                  </div>
-                  <p className="mt-3 font-semibold">{entry.card?.name ?? entry.cardId}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {entry.card?.code} - {entry.category}
-                  </p>
+        <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Main deck card counts ({mainDeckTotal})</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
+                {resolvedCards.map((entry) => (
+                  <CardTile key={entry.cardId} entry={entry} />
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Sideboard ({sideboardTotal})</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {resolvedSideboard.length ? (
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
+                  {resolvedSideboard.map((entry) => (
+                    <CardTile key={entry.cardId} entry={entry} />
+                  ))}
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+              ) : (
+                <div className="rounded-2xl border border-dashed border-border bg-neutral-50 p-6 text-sm leading-6 text-muted-foreground">
+                  No sideboard cards were reported for this topping list.
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
         <div className="space-y-6">
           <Card>
             <CardHeader>
@@ -148,6 +165,23 @@ function Stat({ label, value }: { label: string; value: string }) {
     <div className={cn(compactStatCard, "bg-white")}>
       <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">{label}</p>
       <p className="mt-2 text-2xl font-semibold">{value}</p>
+    </div>
+  );
+}
+
+type ResolvedCardEntry = Deck["cards"][number] & { card?: (typeof cards)[number] };
+
+function CardTile({ entry }: { entry: ResolvedCardEntry }) {
+  return (
+    <div className="rounded-2xl border border-border bg-white p-3 shadow-sm">
+      <div className="relative aspect-[5/7] overflow-hidden rounded-xl bg-neutral-100">
+        <Image src={entry.card?.imageUrl ?? "/card-back.svg"} alt={entry.card?.name ?? entry.cardId} fill sizes="180px" className="object-cover" loading="lazy" />
+        <span className="absolute right-2 top-2 rounded-full bg-neutral-950 px-2 py-1 text-xs font-semibold text-white">x{entry.quantity}</span>
+      </div>
+      <p className="mt-3 font-semibold">{entry.card?.name ?? entry.cardId}</p>
+      <p className="text-xs text-muted-foreground">
+        {entry.card?.code} - {entry.category}
+      </p>
     </div>
   );
 }

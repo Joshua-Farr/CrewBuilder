@@ -45,7 +45,7 @@ export function DeckCard({ deck }: { deck: Deck }) {
           </Button>
           <Button size="sm" asChild>
             <Link href={`/decks/${deck.id}`}>
-              Analyze <ArrowUpRight className="size-4" />
+              View list <ArrowUpRight className="size-4" />
             </Link>
           </Button>
         </div>
