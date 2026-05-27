@@ -45,22 +45,25 @@ export default function Home() {
               const leaderCard = leaderCardsById.get(leader.leaderId);
 
               return (
-                <div key={leader.leaderId} className="flex items-center justify-between gap-4 rounded-2xl border border-border bg-neutral-50/70 p-4">
-                  <div className="flex min-w-0 items-center gap-3">
+                <div
+                  key={leader.leaderId}
+                  className="flex flex-col gap-3 rounded-2xl border border-border bg-neutral-50/70 p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                >
+                  <div className="flex w-full min-w-0 items-center gap-3 sm:flex-1">
                     <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-sm font-semibold text-foreground shadow-sm">
                       {index + 1}
                     </span>
                     <div className="relative h-16 w-11 shrink-0 overflow-hidden rounded-lg border border-border bg-neutral-100 shadow-sm">
                       <Image src={leaderCard?.imageUrl ?? "/card-back.svg"} alt={`${leader.name} leader card`} fill sizes="44px" className="object-cover" />
                     </div>
-                    <div className="min-w-0">
-                      <p className="truncate font-semibold">{leader.name}</p>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-semibold leading-snug">{leader.name}</p>
                       <p className="text-sm text-muted-foreground">
                         {leader.playRate}% play rate - {leader.games} games
                       </p>
                     </div>
                   </div>
-                  <Badge className="shrink-0" variant={leader.tier === "S" ? "accent" : "default"}>
+                  <Badge className="w-fit shrink-0 self-end sm:self-auto" variant={leader.tier === "S" ? "accent" : "default"}>
                     {leader.winRate}% WR
                   </Badge>
                 </div>
