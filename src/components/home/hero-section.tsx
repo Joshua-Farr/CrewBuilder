@@ -24,7 +24,7 @@ export function HeroSection() {
             transition={{ duration: 0.45 }}
             className="max-w-4xl text-5xl font-semibold tracking-[-0.055em] text-foreground sm:text-6xl lg:text-7xl"
           >
-            The competitive One Piece TCG platform built for winning teams.
+            The competitive One Piece TCG platform built for winning players.
           </motion.h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
             Browse winning lists, compare leaders, track matchup spreads, submit tournament reports, and build decks with
