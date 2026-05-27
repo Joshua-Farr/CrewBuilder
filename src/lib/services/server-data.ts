@@ -1,4 +1,5 @@
 import { decks, metaSnapshot, players, tournaments } from "@/lib/mock-data";
+import { getTournamentTopDecklists } from "@/lib/tournament-decklists";
 
 export async function getServerDecks(filters?: { opSet?: string }) {
   return decks
@@ -16,6 +17,16 @@ export async function getServerTournaments() {
 
 export async function getServerTournamentById(id: string) {
   return tournaments.find((event) => event.id === id || event.slug === id) ?? null;
+}
+
+export async function getServerTournamentDecklists(id: string, limit = 33) {
+  const event = await getServerTournamentById(id);
+  return event ? getTournamentTopDecklists(event, decks, limit) : [];
+}
+
+export async function getServerTournamentDecklist(id: string, deckId: string) {
+  const eventDecklists = await getServerTournamentDecklists(id);
+  return eventDecklists.find((deck) => deck.id === deckId || deck.slug === deckId) ?? null;
 }
 
 export async function getServerMetaSnapshot() {
