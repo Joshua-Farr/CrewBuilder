@@ -19,13 +19,21 @@ export function DeckDetail({ deck }: { deck: Deck }) {
   const decklistText = formatDecklistText(deck, cards);
   const simExportText = formatDecklistForSim(deck, cards);
   const tcgPlayerUrl = getTcgPlayerMassEntryUrl(deck, cards);
+  const notes = deck.notes.trim();
 
   return (
     <div className="space-y-8">
       <section className="grid gap-6 lg:grid-cols-[320px_1fr]">
-        <Card className="p-5">
+        <Card className="mx-auto w-full max-w-[200px] p-3 sm:max-w-[240px] lg:mx-0 lg:max-w-none lg:p-5">
           <div className="relative aspect-[5/7] overflow-hidden rounded-2xl border border-border bg-neutral-100">
-            <Image src={leader?.imageUrl ?? "/card-back.svg"} alt={leader?.name ?? deck.leaderName} fill sizes="320px" className="object-cover" priority />
+            <Image
+              src={leader?.imageUrl ?? "/card-back.svg"}
+              alt={leader?.name ?? deck.leaderName}
+              fill
+              sizes="(min-width: 1024px) 320px, (min-width: 640px) 240px, 200px"
+              className="object-cover"
+              priority
+            />
           </div>
         </Card>
         <Card>
@@ -54,7 +62,7 @@ export function DeckDetail({ deck }: { deck: Deck }) {
               <Stat label="Region" value={deck.region} />
               <Stat label="Cost" value={formatCurrency(deck.estimatedCost)} />
             </div>
-            <p className="max-w-3xl leading-7 text-muted-foreground">{deck.notes}</p>
+            {notes ? <p className="max-w-3xl leading-7 text-muted-foreground">{notes}</p> : null}
             <div className="flex flex-wrap gap-3">
               <SaveDeckButton deckId={deck.id} />
               <Button onClick={() => navigator.clipboard.writeText(decklistText)}>

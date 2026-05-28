@@ -3,7 +3,6 @@ import type { CardColor, Deck, DeckCard, Region, TcgCard, Tournament } from "@/l
 
 type ScrapedDeck = (typeof scrapedOp15Data.decks)[number];
 
-const SCRAPE_SOURCE_URL = scrapedOp15Data.source.url;
 const SCRAPE_IMPORT_TIMESTAMP = scrapedOp15Data.scrapedAt;
 
 function slugify(value: string) {
@@ -83,14 +82,7 @@ function toDeck(deck: ScrapedDeck): Deck {
     losses: record.losses,
     cards: getDeckCards(deck),
     matchups: [],
-    notes: [
-      `Imported from ${scrapedOp15Data.source.name}'s ${scrapedOp15Data.source.title}.`,
-      `Original placement: ${deck.placement}.`,
-      deck.deckCardTotal != null ? `Reported deck total: ${deck.deckCardTotal} cards including leader.` : null,
-      `Source: ${SCRAPE_SOURCE_URL}`,
-    ]
-      .filter(Boolean)
-      .join(" "),
+    notes: "",
     techChoices: [
       `Source profile: ${deck.deckProfile}`,
       `Tournament type: ${deck.tournamentType || deck.tournament}`,
