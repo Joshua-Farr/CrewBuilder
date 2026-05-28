@@ -12,4 +12,7 @@ export interface TrendPoint { date: string; leader: string; playRate: number; wi
 export interface RegionStat { region: Region; topLeader: string; winRate: number; decks: number; }
 export interface MetaSnapshot { id: string; weekStart: string; format: TournamentFormat; opSet: string; topLeaders: MetaLeaderStat[]; matchupMatrix: Record<string, Record<string, number>>; regionStats: RegionStat[]; trendPoints: TrendPoint[]; bestDeckId: string; mostImprovedLeaderId: string; generatedAt: string; }
 export interface Player { id: string; name: string; rank: number; points: number; profileUrl?: string; source: "Limitless"; rankingPeriod: string; }
+export interface LimitlessPlayerPerformance { id: string; date: string; eventName: string; eventId: string; eventUrl: string; placement: string; deckName: string; deckId?: string; deckUrl?: string; listId?: string; listUrl?: string; points: number; }
+export interface LimitlessEventDeck { id: string; placement: string; playerName: string; playerId?: string; playerUrl?: string; deckName: string; deckId?: string; deckUrl?: string; listId?: string; listUrl?: string; leaderImageUrl?: string; }
+export interface LimitlessEventDecks { eventId: string; name: string; sourceUrl: string; decks: LimitlessEventDeck[]; }
 export interface UserProfile { uid: string; displayName: string; email: string; photoURL?: string; roles: Array<"user" | "moderator" | "admin">; favoriteDeckIds: string[]; bookmarkedLeaderIds: string[]; followedPlayerIds: string[]; }
