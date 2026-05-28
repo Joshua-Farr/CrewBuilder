@@ -149,3 +149,41 @@
   updatedAt: Timestamp;
 }
 ```
+
+## Ingestion collections
+
+### `/sources/{sourceId}`
+
+Provider config: `name`, `baseUrl`, `trustRank`, `enabled`, `rateLimitMs`, `lastScrapedAt`.
+
+### `/scrapeJobs/{jobId}`
+
+Job queue: `source`, `jobType`, `status`, `attempts`, `maxAttempts`, `nextRetryAt`, `error`, timestamps.
+
+### `/rawSnapshots/{snapshotId}`
+
+Cached HTML: `scrapeJobId`, `source`, `url`, `body`, `contentHash`, `etag`, `fetchedAt`.
+
+### `/sourceMappings/{mappingId}`
+
+Maps `source` + `externalId` → `canonicalId` for tournaments and decks.
+
+### `/canonicalTournaments/{id}`
+
+Deduplicated tournament: `tournamentHash`, `primarySource`, `mirroredSources`, `sourceUrls`, `confidence`.
+
+### `/canonicalDecks/{id}`
+
+Deduplicated deck: `deckHash`, `placements[]`, `sourceRefs[]`, `archetype`, `confidence`.
+
+### `/canonicalPlayers/{id}`
+
+Normalized player identity for fuzzy matching across sources.
+
+### `/decklists/{decklistId}`
+
+Public denormalized decklist (ingestion writes; UI reads).
+
+### `/leaders/{leaderId}`
+
+Leader index for meta and search.

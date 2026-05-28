@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { TournamentUploadForm } from "@/components/admin/tournament-upload-form";
 import { AuthPanel } from "@/components/auth/auth-panel";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,6 +25,9 @@ export default function AdminPage() {
               <p>Upload tournaments and attach decklists.</p>
               <p>Edit cards, moderate submissions, and regenerate meta snapshots.</p>
               <p>Manage users with admin, moderator, and player roles.</p>
+              <Link href="/admin/ingestion" className="inline-block font-medium text-foreground underline">
+                Ingestion dashboard →
+              </Link>
             </CardContent>
           </Card>
         </div>

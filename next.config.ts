@@ -4,7 +4,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   experimental: {
-    optimizePackageImports: ["lucide-react", "recharts", "framer-motion"],
+    // recharts/framer-motion break under optimizePackageImports (webpack "reading 'call'" on /)
+    optimizePackageImports: ["lucide-react"],
   },
   images: {
     formats: ["image/avif", "image/webp"],

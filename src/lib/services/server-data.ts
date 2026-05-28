@@ -1,6 +1,21 @@
 import { decks, metaSnapshot, players as fallbackPlayers, tournaments } from "@/lib/mock-data";
+import { op15Decks } from "@/lib/op-top-decks-data";
+import { CURRENT_META_OP_SET } from "@/lib/meta/constants";
+import { getMetaPlayRateBreakdownFromDecks } from "@/lib/meta-decks";
 import { getTournamentTopDecklists } from "@/lib/tournament-decklists";
-import type { Player } from "@/lib/types";
+import type { Deck, MetaSnapshot, Player, Tournament } from "@/lib/types";
+
+const API_BASE = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+
+async function fetchApi<T>(path: string): Promise<T | null> {
+  try {
+    const res = await fetch(`${API_BASE}${path}`, { next: { revalidate: 60 } });
+    if (!res.ok) return null;
+    return (await res.json()) as T;
+  } catch {
+    return null;
+  }
+}
 
 const LIMITLESS_BASE_URL = "https://onepiece.limitlesstcg.com";
 const LIMITLESS_PLAYER_RANKINGS_URL = `${LIMITLESS_BASE_URL}/players?rank=points&time=12months&show=100`;
@@ -42,20 +57,33 @@ function parseLimitlessPlayerRankings(html: string): Player[] {
 }
 
 export async function getServerDecks(filters?: { opSet?: string }) {
+  const qs = filters?.opSet ? `?opSet=${filters.opSet}&limit=100` : "?limit=100";
+  const api = await fetchApi<{ items: Deck[] }>(`/api/decks${qs}`);
+  if (api?.items?.length) return api.items as Deck[];
+
   return decks
     .filter((deck) => !filters?.opSet || deck.opSet === filters.opSet)
     .sort((a, b) => new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime() || a.placement - b.placement);
 }
 
 export async function getServerDeckById(id: string) {
+  const api = await fetchApi<{ decklist: Deck }>(`/api/decklists/${id}`);
+  if (api?.decklist) return api.decklist as Deck;
+
   return decks.find((deck) => deck.id === id || deck.slug === id) ?? null;
 }
 
 export async function getServerTournaments() {
+  const api = await fetchApi<{ items: Tournament[] }>("/api/tournaments?limit=100");
+  if (api?.items?.length) return api.items as Tournament[];
+
   return [...tournaments].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export async function getServerTournamentById(id: string) {
+  const api = await fetchApi<{ tournament: Tournament }>(`/api/tournaments/${id}`);
+  if (api?.tournament) return api.tournament as Tournament;
+
   return tournaments.find((event) => event.id === id || event.slug === id) ?? null;
 }
 
@@ -69,8 +97,34 @@ export async function getServerTournamentDecklist(id: string, deckId: string) {
   return eventDecklists.find((deck) => deck.id === deckId || deck.slug === deckId) ?? null;
 }
 
-export async function getServerMetaSnapshot() {
-  return metaSnapshot;
+export async function getServerMetaSnapshot(options?: { opSet?: string }) {
+  const opSet = options?.opSet ?? CURRENT_META_OP_SET;
+  const api = await fetchApi<{ items: MetaSnapshot[] }>(`/api/meta?limit=5&opSet=${encodeURIComponent(opSet)}`);
+  const snapshot = api?.items?.find((item) => item.opSet === opSet) ?? api?.items?.[0];
+  if (snapshot && snapshot.opSet === opSet) return snapshot as MetaSnapshot;
+
+  if (metaSnapshot.opSet === opSet) return metaSnapshot;
+
+  const metaDecks = decks.filter((deck) => deck.opSet === opSet);
+  const sourceDecks = metaDecks.length > 0 ? metaDecks : op15Decks;
+  const chartRows = getMetaPlayRateBreakdownFromDecks(sourceDecks, 8);
+
+  return {
+    ...metaSnapshot,
+    id: `meta-${opSet}-fallback`,
+    opSet,
+    topLeaders: chartRows.map((row, index) => ({
+      leaderId: row.leaderId,
+      name: row.leaderName,
+      colors: metaDecks.find((deck) => deck.leaderId === row.leaderId)?.colors ?? [],
+      playRate: Number(row.percentage.toFixed(1)),
+      winRate: 0,
+      games: row.share,
+      tier: index === 0 ? "S" : index < 3 ? "A" : "B",
+      delta: 0,
+    })),
+    generatedAt: new Date().toISOString(),
+  } satisfies MetaSnapshot;
 }
 
 export async function getServerPlayers() {

@@ -12,20 +12,30 @@ service cloud.firestore {
       allow delete: if hasRole('admin');
     }
     match /cards/{cardId} { allow read: if true; allow write: if hasRole('admin'); }
+    match /leaders/{leaderId} { allow read: if true; allow write: if hasRole('admin'); }
     match /decks/{deckId} {
       allow read: if resource.data.isPublic == true || (signedIn() && resource.data.ownerId == request.auth.uid) || hasRole('moderator');
       allow create: if signedIn();
       allow update: if signedIn() && (resource.data.ownerId == request.auth.uid || hasRole('moderator'));
       allow delete: if signedIn() && (resource.data.ownerId == request.auth.uid || hasRole('admin'));
     }
-    match /tournaments/{tournamentId} { allow read: if true; allow write: if hasRole('admin'); }
-    match /metaSnapshots/{snapshotId} { allow read: if true; allow write: if hasRole('admin'); }
-    match /players/{playerId} { allow read: if true; allow write: if hasRole('moderator'); }
+    match /decklists/{decklistId} { allow read: if true; allow write: if false; }
+    match /tournaments/{tournamentId} { allow read: if true; allow write: if false; }
+    match /metaSnapshots/{snapshotId} { allow read: if true; allow write: if false; }
+    match /players/{playerId} { allow read: if true; allow write: if false; }
     match /matchups/{matchupId} { allow read: if true; allow write: if hasRole('admin'); }
     match /submissions/{submissionId} {
       allow create: if signedIn();
       allow read, update: if signedIn() && (resource.data.ownerId == request.auth.uid || hasRole('moderator'));
       allow delete: if hasRole('admin');
     }
+    // Ingestion collections — admin/service only writes
+    match /sources/{sourceId} { allow read: if hasRole('admin'); allow write: if false; }
+    match /scrapeJobs/{jobId} { allow read: if hasRole('admin'); allow write: if false; }
+    match /rawSnapshots/{snapshotId} { allow read: if hasRole('admin'); allow write: if false; }
+    match /sourceMappings/{mappingId} { allow read: if hasRole('admin'); allow write: if false; }
+    match /canonicalTournaments/{id} { allow read: if true; allow write: if false; }
+    match /canonicalDecks/{id} { allow read: if true; allow write: if false; }
+    match /canonicalPlayers/{id} { allow read: if true; allow write: if false; }
   }
 }

@@ -19,7 +19,7 @@ export const viewport: Viewport = { themeColor: "#ffffff", colorScheme: "light" 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={geist.variable}>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <QueryProvider>
           <AuthProvider>
             <div className="pointer-events-none fixed inset-0 noise-overlay" />

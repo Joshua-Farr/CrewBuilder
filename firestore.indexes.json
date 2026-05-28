@@ -1,24 +1,97 @@
 {
   "indexes": [
-    { "collectionGroup": "decks", "queryScope": "COLLECTION", "fields": [
-      { "fieldPath": "isPublic", "order": "ASCENDING" },
-      { "fieldPath": "format", "order": "ASCENDING" },
-      { "fieldPath": "tournamentDate", "order": "DESCENDING" }
-    ]},
-    { "collectionGroup": "decks", "queryScope": "COLLECTION", "fields": [
-      { "fieldPath": "leaderId", "order": "ASCENDING" },
-      { "fieldPath": "region", "order": "ASCENDING" },
-      { "fieldPath": "placement", "order": "ASCENDING" }
-    ]},
-    { "collectionGroup": "cards", "queryScope": "COLLECTION", "fields": [
-      { "fieldPath": "set", "order": "ASCENDING" },
-      { "fieldPath": "type", "order": "ASCENDING" },
-      { "fieldPath": "name", "order": "ASCENDING" }
-    ]},
-    { "collectionGroup": "metaSnapshots", "queryScope": "COLLECTION", "fields": [
-      { "fieldPath": "format", "order": "ASCENDING" },
-      { "fieldPath": "weekStart", "order": "DESCENDING" }
-    ]}
+    {
+      "collectionGroup": "decks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "isPublic", "order": "ASCENDING" },
+        { "fieldPath": "format", "order": "ASCENDING" },
+        { "fieldPath": "tournamentDate", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "decks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "leaderId", "order": "ASCENDING" },
+        { "fieldPath": "region", "order": "ASCENDING" },
+        { "fieldPath": "placement", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "cards",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "set", "order": "ASCENDING" },
+        { "fieldPath": "type", "order": "ASCENDING" },
+        { "fieldPath": "name", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "metaSnapshots",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "format", "order": "ASCENDING" },
+        { "fieldPath": "weekStart", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "metaSnapshots",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "format", "order": "ASCENDING" },
+        { "fieldPath": "date", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "decklists",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "tournamentId", "order": "ASCENDING" },
+        { "fieldPath": "placement", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "decklists",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "hash", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "tournaments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "region", "order": "ASCENDING" },
+        { "fieldPath": "date", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "scrapeJobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "nextRetryAt", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "scrapeJobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "updatedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "rawSnapshots",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "source", "order": "ASCENDING" },
+        { "fieldPath": "url", "order": "ASCENDING" },
+        { "fieldPath": "fetchedAt", "order": "DESCENDING" }
+      ]
+    }
   ],
   "fieldOverrides": []
 }

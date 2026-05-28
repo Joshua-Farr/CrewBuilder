@@ -1,12 +1,13 @@
 "use client";
-import { Copy, Download, FileText, Gamepad2 } from "lucide-react";
+import { Copy, ExternalLink, Gamepad2 } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { SaveDeckButton } from "@/components/decks/save-deck-button";
 import { compactStatCard } from "@/lib/design";
-import { formatDecklistForSim, formatDecklistText, getDeckExportFileName, resolveDeckCards } from "@/lib/deck-export";
+import { formatDecklistForSim, formatDecklistText, getTcgPlayerMassEntryUrl, resolveDeckCards } from "@/lib/deck-export";
 import { cards } from "@/lib/mock-data";
 import type { Deck } from "@/lib/types";
 import { cn, formatCurrency, getWinRate } from "@/lib/utils";
@@ -15,8 +16,9 @@ export function DeckDetail({ deck }: { deck: Deck }) {
   const leader = cards.find((card) => card.id === deck.leaderId);
   const resolvedCards = resolveDeckCards(deck.cards, cards);
   const mainDeckTotal = deck.cards.reduce((total, entry) => total + entry.quantity, 0);
-  const exportText = formatDecklistText(deck, cards);
+  const decklistText = formatDecklistText(deck, cards);
   const simExportText = formatDecklistForSim(deck, cards);
+  const tcgPlayerUrl = getTcgPlayerMassEntryUrl(deck, cards);
 
   return (
     <div className="space-y-8">
@@ -54,17 +56,17 @@ export function DeckDetail({ deck }: { deck: Deck }) {
             </div>
             <p className="max-w-3xl leading-7 text-muted-foreground">{deck.notes}</p>
             <div className="flex flex-wrap gap-3">
-              <Button onClick={() => navigator.clipboard.writeText(exportText)}>
-                <Copy className="size-4" /> Copy text
-              </Button>
-              <Button variant="outline" onClick={() => downloadTextFile(getDeckExportFileName(deck, "decklist"), exportText)}>
-                <FileText className="size-4" /> Export text
+              <SaveDeckButton deckId={deck.id} />
+              <Button onClick={() => navigator.clipboard.writeText(decklistText)}>
+                <Copy className="size-4" /> Copy decklist
               </Button>
               <Button variant="outline" onClick={() => navigator.clipboard.writeText(simExportText)}>
                 <Gamepad2 className="size-4" /> Copy for sim
               </Button>
-              <Button variant="outline" onClick={() => downloadTextFile(getDeckExportFileName(deck, "sim"), simExportText)}>
-                <Download className="size-4" /> Export sim
+              <Button variant="outline" asChild>
+                <a href={tcgPlayerUrl} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="size-4" /> Buy deck on TCG Player
+                </a>
               </Button>
             </div>
           </CardContent>
@@ -122,18 +124,6 @@ export function DeckDetail({ deck }: { deck: Deck }) {
               )}
             </CardContent>
           </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Tech choices</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {deck.techChoices.map((choice) => (
-                <div key={choice} className="rounded-2xl border border-border bg-neutral-50 p-4 text-sm leading-6 text-muted-foreground">
-                  {choice}
-                </div>
-              ))}
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>
@@ -150,18 +140,6 @@ function Stat({ label, value }: { label: string; value: string }) {
 }
 
 type ResolvedCardEntry = ReturnType<typeof resolveDeckCards>[number];
-
-function downloadTextFile(fileName: string, contents: string) {
-  const blob = new Blob([contents], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = fileName;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
-}
 
 function CardTile({ entry }: { entry: ResolvedCardEntry }) {
   return (

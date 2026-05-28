@@ -2,20 +2,41 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { DeckCard } from "@/components/decks/deck-card";
+import { buildHeroSnapshotRows } from "@/components/home/hero-snapshot-rows";
 import { HeroSection } from "@/components/home/hero-section";
 import { MetaSnapshotChart } from "@/components/home/meta-snapshot-chart";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TournamentList } from "@/components/tournaments/tournament-list";
-import { getEventWinnerBreakdown } from "@/lib/meta-decks";
+import { CURRENT_META_OP_SET, formatOpSetLabel } from "@/lib/meta/constants";
+import { metaLeadersToChartRows } from "@/lib/meta-decks";
 import { jsonLd, siteConfig } from "@/lib/seo";
-import { cards, decks, metaSnapshot, tournaments } from "@/lib/mock-data";
+import { getServerDecks, getServerMetaSnapshot, getServerTournaments } from "@/lib/services/server-data";
+import { cards, decks } from "@/lib/mock-data";
+
 export const revalidate = 3600;
 
-export default function Home() {
-  const eventWinnerBreakdown = getEventWinnerBreakdown(decks, tournaments, metaSnapshot.opSet);
+export default async function Home() {
+  const [metaSnapshot, tournaments] = await Promise.all([
+    getServerMetaSnapshot({ opSet: CURRENT_META_OP_SET }),
+    getServerTournaments(),
+  ]);
+  const snapshotDecks = await getServerDecks({ opSet: metaSnapshot.opSet });
+  const metaDecks = snapshotDecks.length > 0 ? snapshotDecks : decks.filter((deck) => deck.opSet === "OP15");
+  const chartLeaders = metaLeadersToChartRows(metaSnapshot.topLeaders, 5);
   const leaderCardsById = new Map(cards.filter((card) => card.isLeader).map((card) => [card.id, card]));
+  const leaderImages = Object.fromEntries(
+    [...leaderCardsById.entries()].map(([id, card]) => [id, card.imageUrl ?? "/card-back.svg"]),
+  );
+  const opSetLabel = formatOpSetLabel(metaSnapshot.opSet);
+  const latestEvent =
+    tournaments.find((event) => event.opSet === metaSnapshot.opSet) ?? tournaments[0] ?? null;
+  const heroSnapshotRows = buildHeroSnapshotRows(metaSnapshot.topLeaders, {
+    mostImprovedLeaderId: metaSnapshot.mostImprovedLeaderId,
+    opSet: metaSnapshot.opSet,
+    leaderImages,
+  });
 
   return (
     <div className="space-y-12">
@@ -33,21 +54,30 @@ export default function Home() {
           },
         })}
       />
-      <HeroSection />
+      <HeroSection
+        snapshotRows={heroSnapshotRows}
+        opSetLabel={opSetLabel}
+        eventLabel={latestEvent?.name}
+        eventHref={latestEvent ? `/tournaments/${latestEvent.id}` : undefined}
+      />
 
       <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <Card>
           <CardHeader>
             <CardTitle>Current top meta leaders</CardTitle>
+            <p className="text-sm text-muted-foreground">{opSetLabel} meta</p>
           </CardHeader>
           <CardContent className="space-y-3">
             {metaSnapshot.topLeaders.slice(0, 5).map((leader, index) => {
               const leaderCard = leaderCardsById.get(leader.leaderId);
 
+              const decksHref = `/decks?leader=${encodeURIComponent(leader.leaderId)}&opSet=${encodeURIComponent(metaSnapshot.opSet)}`;
+
               return (
-                <div
+                <Link
                   key={leader.leaderId}
-                  className="flex flex-col gap-3 rounded-2xl border border-border bg-neutral-50/70 p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                  href={decksHref}
+                  className="flex flex-col gap-3 rounded-2xl border border-border bg-neutral-50/70 p-4 transition-colors hover:border-primary/30 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:flex-row sm:items-center sm:justify-between sm:gap-4"
                 >
                   <div className="flex w-full min-w-0 items-center gap-3 sm:flex-1">
                     <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-sm font-semibold text-foreground shadow-sm">
@@ -59,14 +89,14 @@ export default function Home() {
                     <div className="min-w-0 flex-1">
                       <p className="font-semibold leading-snug">{leader.name}</p>
                       <p className="text-sm text-muted-foreground">
-                        {leader.playRate}% play rate - {leader.games} games
+                        {leader.playRate}% meta share - {leader.games} topping decks
                       </p>
                     </div>
                   </div>
                   <Badge className="w-fit shrink-0 self-end sm:self-auto" variant={leader.tier === "S" ? "accent" : "default"}>
-                    {leader.winRate}% WR
+                    #{index + 1}
                   </Badge>
-                </div>
+                </Link>
               );
             })}
           </CardContent>
@@ -74,9 +104,19 @@ export default function Home() {
         <Card>
           <CardHeader>
             <CardTitle>Meta snapshot chart</CardTitle>
+            <p className="text-sm text-muted-foreground">{opSetLabel} leader distribution</p>
           </CardHeader>
           <CardContent>
-            <MetaSnapshotChart leaders={eventWinnerBreakdown} opSet={metaSnapshot.opSet} />
+            <MetaSnapshotChart
+              leaders={chartLeaders}
+              opSet={metaSnapshot.opSet}
+              leaderImages={Object.fromEntries(
+                [...leaderCardsById.entries()].map(([id, card]) => [id, card.imageUrl ?? "/card-back.svg"]),
+              )}
+              leaderColors={Object.fromEntries(
+                [...leaderCardsById.entries()].map(([id, card]) => [id, card.colors]),
+              )}
+            />
           </CardContent>
         </Card>
       </section>
@@ -85,7 +125,7 @@ export default function Home() {
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight">Trending decklists</h2>
-            <p className="mt-2 text-muted-foreground">Tournament-proven lists with matchup notes and export tools.</p>
+            <p className="mt-2 text-muted-foreground">Tournament-proven lists with stats and export tools.</p>
           </div>
           <Button asChild variant="outline">
             <Link href="/decks">
@@ -94,7 +134,7 @@ export default function Home() {
           </Button>
         </div>
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {decks.slice(0, 3).map((deck) => (
+          {(metaDecks.length > 0 ? metaDecks : decks).slice(0, 3).map((deck) => (
             <DeckCard key={deck.id} deck={deck} />
           ))}
         </div>

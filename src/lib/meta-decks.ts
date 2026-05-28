@@ -1,4 +1,4 @@
-import type { CardType, Deck, TcgCard, Tournament } from "@/lib/types";
+import type { CardType, Deck, MetaLeaderStat, TcgCard, Tournament } from "@/lib/types";
 import { getWinRate } from "@/lib/utils";
 
 export interface MetaDeckSummary {
@@ -32,6 +32,44 @@ export interface EventWinnerBreakdownRow {
   leaderName: string;
   wins: number;
   percentage: number;
+}
+
+export interface MetaSnapshotChartRow {
+  leaderId: string;
+  leaderName: string;
+  share: number;
+  percentage: number;
+}
+
+export function metaLeadersToChartRows(leaders: MetaLeaderStat[], limit = 5): MetaSnapshotChartRow[] {
+  return leaders.slice(0, limit).map((leader) => ({
+    leaderId: leader.leaderId,
+    leaderName: leader.name,
+    share: leader.playRate,
+    percentage: leader.playRate,
+  }));
+}
+
+export function getMetaPlayRateBreakdownFromDecks(decks: Deck[], limit = 5): MetaSnapshotChartRow[] {
+  const groups = decks.reduce<Map<string, { leaderName: string; count: number }>>((acc, deck) => {
+    const existing = acc.get(deck.leaderId) ?? { leaderName: deck.leaderName, count: 0 };
+    existing.count += 1;
+    acc.set(deck.leaderId, existing);
+    return acc;
+  }, new Map());
+
+  const total = decks.length;
+  if (total === 0) return [];
+
+  return [...groups.entries()]
+    .map(([leaderId, leader]) => ({
+      leaderId,
+      leaderName: leader.leaderName,
+      share: leader.count,
+      percentage: (leader.count / total) * 100,
+    }))
+    .sort((a, b) => b.share - a.share || a.leaderName.localeCompare(b.leaderName))
+    .slice(0, limit);
 }
 
 export function getMetaSlug(opSet: string) {

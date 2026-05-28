@@ -1,5 +1,7 @@
-import type { Deck, MetaSnapshot, Player, TcgCard, Tournament } from "@/lib/types";
+import type { Deck, MetaLeaderStat, MetaSnapshot, Player, TcgCard, Tournament } from "@/lib/types";
 import { op15Cards, op15Decks, op15Tournaments } from "@/lib/op-top-decks-data";
+import { CURRENT_META_OP_SET } from "@/lib/meta/constants";
+import { getMetaPlayRateBreakdownFromDecks } from "@/lib/meta-decks";
 const sampleCards: TcgCard[] = [
  { id: "op05-060", code: "OP05-060", name: "Monkey D. Luffy", type: "Leader", colors: ["Purple"], set: "OP05", rarity: "L", power: 5000, attribute: "Strike", effect: "Once per turn, ramp DON!! and pressure late game with Gear 5 tempo swings.", imageUrl: "https://image.optcg.gg/images/en/OP05-060.png", isLeader: true, searchTokens: ["luffy", "purple", "leader", "op05"] },
  { id: "op06-001", code: "OP06-001", name: "Roronoa Zoro", type: "Leader", colors: ["Red", "Green"], set: "OP06", rarity: "L", power: 5000, attribute: "Slash", effect: "Aggressive leader that converts board presence into multi-attack pressure.", imageUrl: "https://image.optcg.gg/images/en/OP06-001.png", isLeader: true, searchTokens: ["zoro", "red", "green", "leader", "op06"] },
@@ -41,5 +43,36 @@ const sampleTournaments: Tournament[] = [
  { id: "t-latam-regional-2026", name: "LATAM Regional Qualifier", slug: "latam-regional-qualifier-2026", region: "LATAM", format: "Constructed", opSet: "OP08", date: "2026-05-09", players: 256, location: "Sao Paulo, BR", winnerDeckId: "deck-zoro-regional", topCutDeckIds: ["deck-zoro-regional", "deck-purple-luffy-nationals"], bracketSummary: "Zoro tempo converted the best top-cut rate by pressuring slower ramp decks.", deckDistribution: [{ leaderId: "op06-001", leaderName: "Roronoa Zoro", count: 51 }, { leaderId: "op05-060", leaderName: "Monkey D. Luffy", count: 42 }, { leaderId: "op08-058", leaderName: "Charlotte Katakuri", count: 33 }], stats: { totalMatches: 739, conversionRate: 20.1, rogueShare: 28.5 } }
 ];
 export const tournaments: Tournament[] = [...sampleTournaments, ...op15Tournaments];
-export const metaSnapshot: MetaSnapshot = { id: "meta-2026-05-18-op08", weekStart: "2026-05-18", format: "Constructed", opSet: "OP08", bestDeckId: "deck-purple-luffy-nationals", mostImprovedLeaderId: "op06-001", generatedAt: "2026-05-19T10:00:00.000Z", topLeaders: [{ leaderId: "op05-060", name: "Monkey D. Luffy", colors: ["Purple"], playRate: 18.9, winRate: 56.7, games: 1384, tier: "S", delta: 2.8 }, { leaderId: "op07-079", name: "Rob Lucci", colors: ["Black"], playRate: 17.4, winRate: 54.1, games: 1260, tier: "S", delta: 0.9 }, { leaderId: "op06-001", name: "Roronoa Zoro", colors: ["Red", "Green"], playRate: 12.7, winRate: 55.2, games: 912, tier: "A", delta: 4.3 }, { leaderId: "op08-058", name: "Charlotte Katakuri", colors: ["Yellow"], playRate: 10.8, winRate: 51.8, games: 801, tier: "A", delta: -1.2 }, { leaderId: "st13-001", name: "Sabo", colors: ["Red", "Yellow"], playRate: 7.6, winRate: 49.9, games: 544, tier: "B", delta: 1.1 }], matchupMatrix: { "Monkey D. Luffy": { "Rob Lucci": 52, "Roronoa Zoro": 48, "Charlotte Katakuri": 58, Sabo: 55 }, "Rob Lucci": { "Monkey D. Luffy": 48, "Roronoa Zoro": 57, "Charlotte Katakuri": 53, Sabo: 56 }, "Roronoa Zoro": { "Monkey D. Luffy": 52, "Rob Lucci": 43, "Charlotte Katakuri": 59, Sabo: 51 }, "Charlotte Katakuri": { "Monkey D. Luffy": 42, "Rob Lucci": 47, "Roronoa Zoro": 41, Sabo: 54 }, Sabo: { "Monkey D. Luffy": 45, "Rob Lucci": 44, "Roronoa Zoro": 49, "Charlotte Katakuri": 46 } }, regionStats: [{ region: "NA", topLeader: "Monkey D. Luffy", winRate: 57.2, decks: 286 }, { region: "EU", topLeader: "Rob Lucci", winRate: 55.6, decks: 241 }, { region: "LATAM", topLeader: "Roronoa Zoro", winRate: 56.1, decks: 173 }, { region: "ASIA", topLeader: "Charlotte Katakuri", winRate: 53.4, decks: 312 }], trendPoints: [{ date: "Apr 22", leader: "Monkey D. Luffy", playRate: 13.8, winRate: 53.4 }, { date: "Apr 29", leader: "Monkey D. Luffy", playRate: 15.2, winRate: 54.8 }, { date: "May 06", leader: "Monkey D. Luffy", playRate: 16.1, winRate: 55.9 }, { date: "May 13", leader: "Monkey D. Luffy", playRate: 18.9, winRate: 56.7 }, { date: "Apr 22", leader: "Rob Lucci", playRate: 16.6, winRate: 53.2 }, { date: "Apr 29", leader: "Rob Lucci", playRate: 17.2, winRate: 54.0 }, { date: "May 06", leader: "Rob Lucci", playRate: 17.8, winRate: 54.5 }, { date: "May 13", leader: "Rob Lucci", playRate: 17.4, winRate: 54.1 }, { date: "Apr 22", leader: "Roronoa Zoro", playRate: 8.4, winRate: 51.2 }, { date: "Apr 29", leader: "Roronoa Zoro", playRate: 9.6, winRate: 52.6 }, { date: "May 06", leader: "Roronoa Zoro", playRate: 10.7, winRate: 54.0 }, { date: "May 13", leader: "Roronoa Zoro", playRate: 12.7, winRate: 55.2 }] };
+
+function buildTopLeadersFromDecks(metaDecks: Deck[], limit = 8): MetaLeaderStat[] {
+  return getMetaPlayRateBreakdownFromDecks(metaDecks, limit).map((row, index) => ({
+    leaderId: row.leaderId,
+    name: row.leaderName,
+    colors: metaDecks.find((deck) => deck.leaderId === row.leaderId)?.colors ?? [],
+    playRate: Number(row.percentage.toFixed(1)),
+    winRate: 0,
+    games: row.share,
+    tier: index === 0 ? "S" : index < 3 ? "A" : "B",
+    delta: 0,
+  }));
+}
+
+const currentMetaDecks = op15Decks;
+const currentMetaTopLeaders = buildTopLeadersFromDecks(currentMetaDecks);
+
+export const metaSnapshot: MetaSnapshot = {
+  id: `meta-2026-05-27-${CURRENT_META_OP_SET.toLowerCase()}`,
+  weekStart: "2026-05-27",
+  format: "Constructed",
+  opSet: CURRENT_META_OP_SET,
+  bestDeckId: currentMetaDecks[0]?.id ?? "",
+  mostImprovedLeaderId: currentMetaTopLeaders[0]?.leaderId ?? "",
+  generatedAt: "2026-05-27T23:17:41.165Z",
+  topLeaders: currentMetaTopLeaders,
+  matchupMatrix: Object.fromEntries(
+    currentMetaTopLeaders.slice(0, 5).map((leader) => [leader.name, {}]),
+  ),
+  regionStats: [{ region: "ASIA", topLeader: currentMetaTopLeaders[0]?.name ?? "Unknown", winRate: 0, decks: currentMetaDecks.length }],
+  trendPoints: [],
+};
 export const seedData = { cards, decks, tournaments, players, metaSnapshots: [metaSnapshot] };

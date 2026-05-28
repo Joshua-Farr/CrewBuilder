@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { SavedDecksSection } from "@/components/auth/saved-decks-section";
 import { useAuth } from "@/components/providers/auth-provider";
 
 export function AuthPanel() {
@@ -22,15 +23,18 @@ export function AuthPanel() {
 
   if (user) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Signed in</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p className="text-muted-foreground">{user.email}</p>
-          <Button onClick={() => run(logout)}>Sign out</Button>
-        </CardContent>
-      </Card>
+      <div className="mx-auto max-w-4xl space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Signed in</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-muted-foreground">{user.email}</p>
+            <Button onClick={() => run(logout)}>Sign out</Button>
+          </CardContent>
+        </Card>
+        <SavedDecksSection />
+      </div>
     );
   }
 

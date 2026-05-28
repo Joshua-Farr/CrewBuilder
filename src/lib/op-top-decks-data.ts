@@ -86,9 +86,11 @@ function toDeck(deck: ScrapedDeck): Deck {
     notes: [
       `Imported from ${scrapedOp15Data.source.name}'s ${scrapedOp15Data.source.title}.`,
       `Original placement: ${deck.placement}.`,
-      `Reported deck total: ${deck.deckCardTotal} cards including leader.`,
+      deck.deckCardTotal != null ? `Reported deck total: ${deck.deckCardTotal} cards including leader.` : null,
       `Source: ${SCRAPE_SOURCE_URL}`,
-    ].join(" "),
+    ]
+      .filter(Boolean)
+      .join(" "),
     techChoices: [
       `Source profile: ${deck.deckProfile}`,
       `Tournament type: ${deck.tournamentType || deck.tournament}`,
