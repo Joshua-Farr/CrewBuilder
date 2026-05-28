@@ -130,7 +130,7 @@ export async function getServerMetaSnapshot(options?: { opSet?: string }) {
 export async function getServerPlayers() {
   try {
     const response = await fetch(LIMITLESS_PLAYER_RANKINGS_URL, {
-      headers: { "User-Agent": "Grand Line Meta player rankings (https://onepiece.limitlesstcg.com/players)" },
+      headers: { "User-Agent": "All Blue player rankings (https://allblue.gg)" },
       next: { revalidate: 60 * 60 },
     });
 

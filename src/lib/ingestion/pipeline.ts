@@ -15,7 +15,7 @@ import { markJobCompleted, markJobFailed, markJobRunning, markJobSkipped } from 
 import { runMetaEngine } from "@/lib/meta/meta-engine";
 
 const DEFAULT_USER_AGENT =
-  process.env.SCRAPE_USER_AGENT ?? "GrandLineMetaBot/1.0 (+https://grandlinemeta.com/bot)";
+  process.env.SCRAPE_USER_AGENT ?? "AllBlueBot/1.0 (+https://allblue.gg/bot)";
 
 export async function processScrapeJob(db: Firestore, jobId: string, job: ScrapeJob): Promise<void> {
   const start = Date.now();

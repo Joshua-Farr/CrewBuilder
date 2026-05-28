@@ -86,7 +86,7 @@ function toDeck(deck: ScrapedDeck): Deck {
     techChoices: [
       `Source profile: ${deck.deckProfile}`,
       `Tournament type: ${deck.tournamentType || deck.tournament}`,
-      `Host: ${deck.host}`,
+      `Host: ${deck.hostName}`,
     ],
     estimatedCost: 0,
     tags: [scrapedOp15Data.opSet, deck.tournamentType, deck.country, deck.placement].filter(Boolean),

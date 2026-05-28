@@ -16,7 +16,7 @@ import {
 
 const DEFAULT_OUTPUT_PATH = "data/egman-op15-tournaments.json";
 const USER_AGENT =
-  process.env.SCRAPE_USER_AGENT ?? "GrandLineMetaBot/1.0 (+http://localhost:3000/bot)";
+  process.env.SCRAPE_USER_AGENT ?? "AllBlueBot/1.0 (+https://allblue.gg/bot)";
 
 function getArg(flag: string) {
   const idx = process.argv.indexOf(flag);

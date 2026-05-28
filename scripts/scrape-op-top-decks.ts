@@ -8,7 +8,7 @@ async function main() {
   const outputPath = process.argv[3] ?? DEFAULT_OUTPUT_PATH;
 
   const response = await fetch(sourceUrl, {
-    headers: { "user-agent": "GrandLineMetaBot/1.0 (+https://grandlinemeta.com/bot)" },
+    headers: { "user-agent": "AllBlueBot/1.0 (+https://allblue.gg/bot)" },
   });
 
   if (!response.ok) {

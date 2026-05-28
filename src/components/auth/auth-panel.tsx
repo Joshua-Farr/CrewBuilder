@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { SavedDecksSection } from "@/components/auth/saved-decks-section";
 import { useAuth } from "@/components/providers/auth-provider";
+import { siteConfig } from "@/lib/seo";
 
 export function AuthPanel() {
   const { signInWithGoogle, signInWithEmail, registerWithEmail, signInWithDiscord, user, logout } = useAuth();
@@ -41,7 +42,7 @@ export function AuthPanel() {
   return (
     <Card className="mx-auto max-w-xl">
       <CardHeader>
-        <CardTitle>Join Grand Line Meta</CardTitle>
+        <CardTitle>Join {siteConfig.name}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <Button className="w-full" onClick={() => run(signInWithGoogle)}>

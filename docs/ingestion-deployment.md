@@ -1,4 +1,4 @@
-# Grand Line Ingestion — Deployment Guide
+# All Blue Ingestion — Deployment Guide
 
 ## Overview
 
@@ -18,8 +18,8 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 FIREBASE_SERVICE_ACCOUNT_KEY={"type":"service_account",...}
-NEXT_PUBLIC_APP_URL=https://your-domain.com
-SCRAPE_USER_AGENT=GrandLineMetaBot/1.0 (+https://your-domain.com/bot)
+NEXT_PUBLIC_APP_URL=https://allblue.gg
+SCRAPE_USER_AGENT=AllBlueBot/1.0 (+https://allblue.gg/bot)
 INGESTION_ENABLED=true
 # Optional: comma-separated sources to disable
 # INGESTION_DISABLED_SOURCES=gumgum,egman

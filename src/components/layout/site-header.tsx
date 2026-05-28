@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { siteConfig } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 const nav = [
@@ -11,7 +12,6 @@ const nav = [
   { href: "/meta", label: "Meta" },
   { href: "/cards", label: "Cards" },
   { href: "/tournaments", label: "Tournaments" },
-  { href: "/players", label: "Players" },
   { href: "/builder", label: "Builder" },
 ];
 
@@ -23,9 +23,9 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3 tracking-tight">
           <span className="flex size-10 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-950 text-sm font-semibold text-white shadow-sm">
-            GL
+            AB
           </span>
-          <span className="hidden text-lg font-semibold sm:inline">Grand Line Meta</span>
+          <span className="hidden text-lg font-semibold sm:inline">{siteConfig.name}</span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">

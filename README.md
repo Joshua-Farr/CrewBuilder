@@ -1,4 +1,4 @@
-# Grand Line Meta
+# All Blue
 
 A production-oriented Next.js 15 application for competitive One Piece Card Game decklists, tournament results, matchup stats, and meta analytics.
 
