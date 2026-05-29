@@ -1,3 +1,4 @@
+import { compareDecksByRecentEvent } from "@/lib/decks/sort";
 import { decksQuerySchema } from "@/lib/schemas/api";
 import { getDbOrNull, getMockDecks } from "@/lib/api/firestore-query";
 import { jsonError, jsonOk } from "@/lib/api/response";
@@ -24,11 +25,7 @@ export async function GET(request: Request) {
     if (opSet) items = items.filter((d) => d.opSet === opSet);
     if (region) items = items.filter((d) => d.region === region);
     if (tournamentId) items = items.filter((d) => d.tournamentId === tournamentId);
-    items = items.sort((a, b) =>
-      sort === "placement"
-        ? a.placement - b.placement
-        : new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime(),
-    );
+    items = items.sort((a, b) => (sort === "placement" ? a.placement - b.placement : compareDecksByRecentEvent(a, b)));
     if (cursor) {
       const idx = items.findIndex((d) => d.id === cursor);
       items = idx >= 0 ? items.slice(idx + 1) : items;
@@ -74,11 +71,7 @@ export async function GET(request: Request) {
     );
   }
 
-  normalized = normalized.sort((a, b) =>
-    sort === "placement"
-      ? a.placement - b.placement
-      : new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime(),
-  );
+  normalized = normalized.sort((a, b) => (sort === "placement" ? a.placement - b.placement : compareDecksByRecentEvent(a, b)));
 
   const hasMore = normalized.length > limit;
   if (hasMore) normalized = normalized.slice(0, limit);

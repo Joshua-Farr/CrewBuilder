@@ -9,20 +9,14 @@ import { LeaderSelect } from "@/components/decks/leader-select";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { fetchDecks } from "@/lib/api/client";
-import {
-  buildDeckApiParams,
-  DECKS_PAGE_SIZE,
-  fetchAllDecks,
-  filterDecks,
-  hasClientOnlyDeckFilters,
-} from "@/lib/decks/pagination";
+import { DECKS_PAGE_SIZE, fetchAllDecks, filterDecks } from "@/lib/decks/pagination";
 import type { CardColor, Deck, Region } from "@/lib/types";
 
 const regions: Array<Region | "all"> = ["all", "NA", "EU", "LATAM", "OCE", "ASIA", "JP"];
 const colors: Array<CardColor | "all"> = ["all", "Red", "Green", "Blue", "Purple", "Black", "Yellow"];
 
 export type DeckBrowserInitialFilters = {
+  initialDecks?: Deck[];
   initialLeaderId?: string;
   initialOpSet?: string;
   initialRegion?: Region | "all";
@@ -31,6 +25,7 @@ export type DeckBrowserInitialFilters = {
 };
 
 export function DeckBrowser({
+  initialDecks = [],
   initialLeaderId = "all",
   initialOpSet = "all",
   initialRegion = "all",
@@ -44,37 +39,21 @@ export function DeckBrowser({
   const [opSet, setOpSet] = React.useState(initialOpSet);
   const [placement, setPlacement] = React.useState(initialPlacement);
   const [page, setPage] = React.useState(0);
-  const [pageCursors, setPageCursors] = React.useState<Record<number, string>>({});
-
-  const usesClientPagination = hasClientOnlyDeckFilters(search, color, placement);
 
   React.useEffect(() => {
     setPage(0);
-    setPageCursors({});
-  }, [leaderId, region, opSet, color, placement, search, usesClientPagination]);
+  }, [leaderId, region, opSet, color, placement, search]);
 
-  const { data: catalog = [], isLoading: isCatalogLoading } = useQuery({
+  const {
+    data: catalog = initialDecks,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["decks-catalog"],
     queryFn: () => fetchAllDecks(),
+    initialData: initialDecks.length > 0 ? initialDecks : undefined,
     staleTime: 300_000,
   });
-
-  const cursorForPage = page > 0 ? pageCursors[page] : undefined;
-  const {
-    data: pageData,
-    isLoading: isPageLoading,
-    isError: isPageError,
-  } = useQuery({
-    queryKey: ["decks-page", page, leaderId, opSet, region, cursorForPage],
-    queryFn: () => fetchDecks(buildDeckApiParams({ leaderId, opSet, region, cursor: cursorForPage })),
-    enabled: !usesClientPagination && (page === 0 || Boolean(cursorForPage)),
-  });
-
-  React.useEffect(() => {
-    if (!usesClientPagination && pageData?.nextCursor) {
-      setPageCursors((current) => ({ ...current, [page + 1]: pageData.nextCursor! }));
-    }
-  }, [page, pageData?.nextCursor, usesClientPagination]);
 
   const opSetOptions = React.useMemo(
     () => ["all", ...Array.from(new Set(catalog.map((deck) => deck.opSet))).sort().reverse()],
@@ -111,17 +90,11 @@ export function DeckBrowser({
     [catalog, color, fuse, leaderId, opSet, placement, region, search],
   );
 
-  const displayDecks = usesClientPagination
-    ? filtered.slice(page * DECKS_PAGE_SIZE, (page + 1) * DECKS_PAGE_SIZE)
-    : ((pageData?.items ?? []) as Deck[]);
-
-  const isLoading = usesClientPagination ? isCatalogLoading : isPageLoading;
-  const isError = isPageError;
-  const totalCount = usesClientPagination ? filtered.length : undefined;
-  const pageCount = usesClientPagination ? Math.ceil(filtered.length / DECKS_PAGE_SIZE) : undefined;
-  const hasNext = usesClientPagination
-    ? (page + 1) * DECKS_PAGE_SIZE < filtered.length
-    : Boolean(pageData?.nextCursor);
+  const displayDecks = filtered.slice(page * DECKS_PAGE_SIZE, (page + 1) * DECKS_PAGE_SIZE);
+  const showInitialLoading = isLoading && catalog.length === 0;
+  const totalCount = filtered.length;
+  const pageCount = Math.ceil(filtered.length / DECKS_PAGE_SIZE);
+  const hasNext = (page + 1) * DECKS_PAGE_SIZE < filtered.length;
   const hasPrevious = page > 0;
   const rangeStart = displayDecks.length ? page * DECKS_PAGE_SIZE + 1 : 0;
   const rangeEnd = displayDecks.length ? page * DECKS_PAGE_SIZE + displayDecks.length : 0;
@@ -136,32 +109,41 @@ export function DeckBrowser({
             onChange={(event) => setSearch(event.target.value)}
             placeholder="Search leader, card tech, player..."
             className="pl-10"
+            suppressHydrationWarning
           />
         </label>
         <LeaderSelect value={leaderId} onChange={setLeaderId} options={leaderOptions} />
-        <Select value={region} onChange={(event) => setRegion(event.target.value as Region | "all")}>
+        <Select
+          value={region}
+          onChange={(event) => setRegion(event.target.value as Region | "all")}
+          suppressHydrationWarning
+        >
           {regions.map((item) => (
             <option key={item} value={item}>
               {item === "all" ? "All regions" : item}
             </option>
           ))}
         </Select>
-        <Select value={color} onChange={(event) => setColor(event.target.value as CardColor | "all")}>
+        <Select
+          value={color}
+          onChange={(event) => setColor(event.target.value as CardColor | "all")}
+          suppressHydrationWarning
+        >
           {colors.map((item) => (
             <option key={item} value={item}>
               {item === "all" ? "All colors" : item}
             </option>
           ))}
         </Select>
-        <Select value={opSet} onChange={(event) => setOpSet(event.target.value)}>
+        <Select value={opSet} onChange={(event) => setOpSet(event.target.value)} suppressHydrationWarning>
           {opSetOptions.map((item) => (
             <option key={item} value={item}>
               {item === "all" ? "All sets" : item}
             </option>
           ))}
         </Select>
-        <Select value={placement} onChange={(event) => setPlacement(event.target.value)}>
-          <option value="all">All placements</option>
+        <Select value={placement} onChange={(event) => setPlacement(event.target.value)} suppressHydrationWarning>
+          <option value="all">All results</option>
           <option value="winner">Winners</option>
           <option value="top4">Top 4</option>
           <option value="top16">Top 16</option>
@@ -169,11 +151,11 @@ export function DeckBrowser({
       </div>
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <Filter className="size-4" />
-        {usesClientPagination && totalCount !== undefined
-          ? `${totalCount} lists match your filters`
-          : "Sorted by most recent tournament results"}
+        {showInitialLoading
+          ? "Loading tournament decklists..."
+          : `${totalCount} lists match your filters`}
       </div>
-      {isLoading ? (
+      {showInitialLoading ? (
         <div className="space-y-2 rounded-2xl border border-border bg-white p-4 shadow-sm">
           {Array.from({ length: DECKS_PAGE_SIZE }).map((_, index) => (
             <Skeleton key={index} className="h-12 w-full" />

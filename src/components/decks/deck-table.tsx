@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Deck } from "@/lib/types";
-import { formatCurrency, getLeaderImageUrl, getWinRate } from "@/lib/utils";
+import { formatCurrency, formatPlacementChip, getLeaderImageUrl, getWinRate } from "@/lib/utils";
 
 export function DeckTable({ decks }: { decks: Deck[] }) {
   return (
@@ -15,7 +15,7 @@ export function DeckTable({ decks }: { decks: Deck[] }) {
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className="w-14 px-3">#</TableHead>
+              <TableHead className="min-w-[88px] px-3">Result</TableHead>
               <TableHead className="min-w-[200px]">Leader</TableHead>
               <TableHead className="min-w-[120px]">Player</TableHead>
               <TableHead className="hidden min-w-[180px] md:table-cell">Tournament</TableHead>
@@ -30,8 +30,8 @@ export function DeckTable({ decks }: { decks: Deck[] }) {
             {decks.map((deck) => (
               <TableRow key={deck.id} className="group">
                 <TableCell className="px-3 py-2">
-                  <Badge className="tabular-nums" variant={deck.placement === 1 ? "accent" : "default"}>
-                    #{deck.placement}
+                  <Badge variant={deck.placement === 1 ? "accent" : "default"}>
+                    {formatPlacementChip(deck.placement)}
                   </Badge>
                 </TableCell>
                 <TableCell className="py-2">

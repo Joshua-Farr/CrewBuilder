@@ -92,6 +92,7 @@ function toDeck(event: ScrapedEvent, deck: ScrapedDeck): Deck {
     tournamentId: tournamentId(event),
     tournamentName: name,
     tournamentDate: tournament.date,
+    tournamentType: tournament.eventType,
     placement: placementRank(deck),
     wins: 0,
     losses: 0,
@@ -117,6 +118,7 @@ function compareDeckFinish(a: Deck, b: Deck) {
 
 function toTournament(event: ScrapedEvent, eventDecks: Deck[]): Tournament {
   const sortedDecks = [...eventDecks].sort(compareDeckFinish);
+  const winnerDeck = sortedDecks.find((deck) => deck.placement === 1) ?? sortedDecks[0];
   const tournament = event.tournament;
   const name = decodeHtml(tournament.name);
   const region = normalizeRegion(tournament.region, tournament.city);
@@ -143,7 +145,9 @@ function toTournament(event: ScrapedEvent, eventDecks: Deck[]): Tournament {
     date: tournament.date,
     players: tournament.playerCount ?? eventDecks.length,
     location: location || region,
-    winnerDeckId: sortedDecks[0]?.id ?? "",
+    winnerDeckId: winnerDeck?.id ?? "",
+    winningLeaderId: winnerDeck?.leaderId,
+    winningLeaderName: winnerDeck?.leaderName,
     topCutDeckIds: sortedDecks.map((deck) => deck.id),
     bracketSummary: `${name} imported from ${scrapedEgmanData.source.name}. ${eventDecks.length} topping decklist${
       eventDecks.length === 1 ? " was" : "s were"

@@ -77,6 +77,7 @@ function toDeck(deck: ScrapedDeck): Deck {
     tournamentId,
     tournamentName,
     tournamentDate: deck.date,
+    tournamentType: deck.tournamentType || deck.tournament,
     placement: deck.placementRank ?? 999,
     wins: record.wins,
     losses: record.losses,
@@ -102,6 +103,7 @@ function compareDeckFinish(a: Deck, b: Deck) {
 
 function toTournament([id, eventDecks]: [string, Deck[]]): Tournament {
   const sortedDecks = [...eventDecks].sort(compareDeckFinish);
+  const winnerDeck = sortedDecks.find((deck) => deck.placement === 1) ?? sortedDecks[0];
   const firstDeck = sortedDecks[0];
   const sourceDeck = scrapedOp15Data.decks.find((deck) => eventId(deck) === id);
   const distribution = new Map<string, { leaderId: string; leaderName: string; count: number }>();
@@ -127,7 +129,9 @@ function toTournament([id, eventDecks]: [string, Deck[]]): Tournament {
     date: firstDeck.tournamentDate,
     players,
     location: sourceDeck ? `${sourceDeck.hostName}, ${sourceDeck.country}` : firstDeck.region,
-    winnerDeckId: sortedDecks[0].id,
+    winnerDeckId: winnerDeck.id,
+    winningLeaderId: winnerDeck.leaderId,
+    winningLeaderName: winnerDeck.leaderName,
     topCutDeckIds: sortedDecks.map((deck) => deck.id),
     bracketSummary: `${tournamentName} OP15 result imported from ${scrapedOp15Data.source.name}. ${eventDecks.length} topping decklist${
       eventDecks.length === 1 ? " was" : "s were"

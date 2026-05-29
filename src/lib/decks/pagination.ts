@@ -1,34 +1,9 @@
 import type Fuse from "fuse.js";
 import { fetchDecks } from "@/lib/api/client";
+import { sortDecksByRecentEvent } from "@/lib/decks/sort";
 import type { CardColor, Deck, Region } from "@/lib/types";
 
 export const DECKS_PAGE_SIZE = 25;
-
-export function hasClientOnlyDeckFilters(
-  search: string,
-  color: CardColor | "all",
-  placement: string,
-): boolean {
-  return Boolean(search.trim()) || color !== "all" || placement !== "all";
-}
-
-export function buildDeckApiParams(options: {
-  leaderId: string;
-  opSet: string;
-  region: Region | "all";
-  cursor?: string;
-  limit?: number;
-}) {
-  const params: Record<string, string> = {
-    limit: String(options.limit ?? DECKS_PAGE_SIZE),
-    sort: "date",
-  };
-  if (options.leaderId !== "all") params.leader = options.leaderId;
-  if (options.opSet !== "all") params.opSet = options.opSet;
-  if (options.region !== "all") params.region = options.region;
-  if (options.cursor) params.cursor = options.cursor;
-  return params;
-}
 
 export async function fetchAllDecks(params?: Record<string, string>) {
   const all: Deck[] = [];
@@ -45,7 +20,7 @@ export async function fetchAllDecks(params?: Record<string, string>) {
     cursor = response.nextCursor ?? undefined;
   } while (cursor);
 
-  return all;
+  return sortDecksByRecentEvent(all);
 }
 
 export function filterDecks(
@@ -62,7 +37,7 @@ export function filterDecks(
 ) {
   const base = options.search && options.fuse ? options.fuse.search(options.search).map((result) => result.item) : decks;
 
-  return base.filter((deck) => {
+  const filtered = base.filter((deck) => {
     if (options.leaderId !== "all" && deck.leaderId !== options.leaderId) return false;
     if (options.region !== "all" && deck.region !== options.region) return false;
     if (options.color !== "all" && !deck.colors.includes(options.color)) return false;
@@ -72,4 +47,6 @@ export function filterDecks(
     if (options.placement === "top16" && deck.placement > 16) return false;
     return true;
   });
+
+  return options.search ? filtered : sortDecksByRecentEvent(filtered);
 }

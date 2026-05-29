@@ -63,7 +63,7 @@ export default async function Home() {
       <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <Card>
           <CardHeader>
-            <CardTitle>Top leaders this format</CardTitle>
+            <CardTitle>Top performing leaders of this current format</CardTitle>
             <p className="text-sm text-muted-foreground">{opSetLabel} meta</p>
           </CardHeader>
           <CardContent className="space-y-3">

@@ -1,14 +1,12 @@
 import { addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, where } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "@/lib/firebase/client";
+import { sortDecksByRecentEvent } from "@/lib/decks/sort";
 import { cards, decks, metaSnapshot, players, tournaments } from "@/lib/mock-data";
 import type { Deck, MetaSnapshot, Player, TcgCard, Tournament } from "@/lib/types";
 import type { TournamentUploadValues } from "@/lib/validators";
 import { slugify } from "@/lib/utils";
-function sortDecksByDate(items: Deck[]) {
-  return [...items].sort((a, b) => new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime() || a.placement - b.placement);
-}
 function filterMockDecks(filters?: Partial<Pick<Deck, "leaderId" | "region" | "opSet" | "format">> & { player?: string }) {
-  return sortDecksByDate(
+  return sortDecksByRecentEvent(
     decks.filter(
       (deck) =>
         (!filters?.leaderId || deck.leaderId === filters.leaderId) &&

@@ -1,22 +1,33 @@
-import { ArrowUpRight, Crown, Swords } from "lucide-react";
+import { ArrowUpRight, Swords } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Deck, Tournament } from "@/lib/types";
-import { getWinRate } from "@/lib/utils";
+import { getLeaderImageUrl, getWinRate } from "@/lib/utils";
 
-export function TournamentDecklists({ event, decklists }: { event: Tournament; decklists: Deck[] }) {
+export function TournamentDecklists({
+  event,
+  decklists,
+  topCutSize,
+}: {
+  event: Tournament;
+  decklists: Deck[];
+  topCutSize: number;
+}) {
   return (
     <Card>
       <CardHeader>
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <CardTitle>Top 33 decklists</CardTitle>
+            <CardTitle>Top {topCutSize} decklists</CardTitle>
             <CardDescription>Reported lists ordered by final placing, with each player&apos;s leader and tournament record.</CardDescription>
           </div>
-          <Badge variant="outline">{decklists.length}/33 reported</Badge>
+          <Badge variant="outline">
+            {decklists.length}/{topCutSize} reported
+          </Badge>
         </div>
       </CardHeader>
       <CardContent className="overflow-x-auto">
@@ -40,12 +51,16 @@ export function TournamentDecklists({ event, decklists }: { event: Tournament; d
                   </TableCell>
                   <TableCell>
                     <p className="font-semibold">{deck.player}</p>
-                    <p className="text-xs text-muted-foreground">{deck.name}</p>
                   </TableCell>
-                  <TableCell>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Crown className="size-4 text-amber-600" />
-                      <span>{deck.leaderName}</span>
+                  <TableCell className="py-2">
+                    <div className="relative h-16 w-11 shrink-0 overflow-hidden rounded-md border border-border bg-neutral-100">
+                      <Image
+                        src={getLeaderImageUrl(deck.leaderId)}
+                        alt={`${deck.leaderName} leader card`}
+                        fill
+                        sizes="44px"
+                        className="object-cover"
+                      />
                     </div>
                   </TableCell>
                   <TableCell>
@@ -61,7 +76,7 @@ export function TournamentDecklists({ event, decklists }: { event: Tournament; d
                     </div>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button size="sm" variant="outline" asChild>
+                    <Button size="sm" asChild>
                       <Link href={`/tournaments/${event.id}/decklists/${deck.id}`}>
                         View deck <ArrowUpRight className="size-4" />
                       </Link>

@@ -38,6 +38,15 @@ export function formatPlacementLabel(placement: number) {
   return `${placement}${suffix} Place`;
 }
 
+export function formatPlacementChip(placement: number) {
+  if (placement === 1) return "winner";
+  if (placement === 2) return "second";
+  for (const cutoff of [4, 8, 16, 32, 64, 128]) {
+    if (placement <= cutoff) return `top ${cutoff}`;
+  }
+  return `#${placement}`;
+}
+
 export function isPlacementTag(tag: string) {
   return /^\d+(st|nd|rd|th)\s+place$/i.test(tag.trim());
 }

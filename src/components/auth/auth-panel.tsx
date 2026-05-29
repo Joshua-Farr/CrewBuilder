@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -64,6 +65,17 @@ export function AuthPanel() {
           </div>
         </div>
         {message ? <p className="rounded-2xl border border-red-100 bg-red-50 p-3 text-sm text-red-700">{message}</p> : null}
+        <p className="text-center text-xs leading-5 text-muted-foreground">
+          By creating an account, you agree to our{" "}
+          <Link href="/terms" className="text-primary underline-offset-4 hover:underline">
+            Terms of Service
+          </Link>{" "}
+          and{" "}
+          <Link href="/privacy" className="text-primary underline-offset-4 hover:underline">
+            Privacy Policy
+          </Link>
+          .
+        </p>
       </CardContent>
     </Card>
   );

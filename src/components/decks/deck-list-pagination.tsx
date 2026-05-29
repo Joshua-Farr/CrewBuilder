@@ -9,6 +9,7 @@ type DeckListPaginationProps = {
   pageCount?: number;
   hasPrevious: boolean;
   hasNext: boolean;
+  itemLabel?: string;
   onPrevious: () => void;
   onNext: () => void;
 };
@@ -21,6 +22,7 @@ export function DeckListPagination({
   pageCount,
   hasPrevious,
   hasNext,
+  itemLabel = "competitive lists",
   onPrevious,
   onNext,
 }: DeckListPaginationProps) {
@@ -28,8 +30,8 @@ export function DeckListPagination({
 
   const summary =
     total !== undefined
-      ? `Showing ${rangeStart}-${rangeEnd} of ${total} competitive lists`
-      : `Showing ${rangeStart}-${rangeEnd} competitive lists`;
+      ? `Showing ${rangeStart}-${rangeEnd} of ${total} ${itemLabel}`
+      : `Showing ${rangeStart}-${rangeEnd} ${itemLabel}`;
 
   const pageLabel =
     pageCount !== undefined ? `Page ${page + 1} of ${Math.max(pageCount, 1)}` : `Page ${page + 1}`;

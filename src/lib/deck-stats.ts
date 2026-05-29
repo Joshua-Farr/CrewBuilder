@@ -7,6 +7,8 @@ export type DonCurvePoint = {
   count: number;
 };
 
+export type DeckCounterValue = 1000 | 2000;
+
 export type DeckCompositionStats = {
   donCurve: DonCurvePoint[];
   counter1k: number;

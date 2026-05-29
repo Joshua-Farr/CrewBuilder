@@ -68,6 +68,7 @@ export function LeaderSelect({ value, onChange, options, className }: LeaderSele
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((current) => !current)}
+        suppressHydrationWarning
         className="flex h-11 w-full items-center gap-2 rounded-xl border border-input bg-white px-3 text-sm text-foreground shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         {selected ? (

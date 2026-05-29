@@ -22,7 +22,17 @@ export function SiteFooter() {
             Card search
           </Link>
         </div>
-        <p className="leading-6 md:text-right">Community data platform. Not affiliated with Bandai or Toei Animation.</p>
+        <div className="flex flex-col gap-2 md:items-end">
+          <Link href="/privacy" className="transition hover:text-foreground">
+            Privacy Policy
+          </Link>
+          <Link href="/terms" className="transition hover:text-foreground">
+            Terms of Service
+          </Link>
+          <p className="mt-2 max-w-sm leading-6 md:text-right">
+            Community data platform. Not affiliated with Bandai or Toei Animation.
+          </p>
+        </div>
       </div>
     </footer>
   );

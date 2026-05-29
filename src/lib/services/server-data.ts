@@ -2,6 +2,8 @@ import { decks, metaSnapshot, players as fallbackPlayers, tournaments } from "@/
 import { op15Decks } from "@/lib/op-top-decks-data";
 import { CURRENT_META_OP_SET } from "@/lib/meta/constants";
 import { getMetaPlayRateBreakdownFromDecks } from "@/lib/meta-decks";
+import { sortDecksByRecentEvent } from "@/lib/decks/sort";
+import { withLocalDevSocialPostSample } from "@/lib/social-post";
 import { getTournamentTopDecklists } from "@/lib/tournament-decklists";
 import type { Deck, MetaSnapshot, Player, Tournament } from "@/lib/types";
 
@@ -56,33 +58,28 @@ function parseLimitlessPlayerRankings(html: string): Player[] {
   }).filter((player) => player.name && Number.isFinite(player.rank) && Number.isFinite(player.points));
 }
 
-function sortDecks(items: Deck[]) {
-  return items.sort(
-    (a, b) => new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime() || a.placement - b.placement,
-  );
-}
-
 export async function getServerDecks(filters?: { opSet?: string }) {
   const qs = filters?.opSet ? `?opSet=${filters.opSet}&limit=100` : "?limit=100";
   const api = await fetchApi<{ items: Deck[] }>(`/api/decks${qs}`);
-  if (api?.items?.length) return api.items as Deck[];
+  if (api?.items?.length) return sortDecksByRecentEvent(api.items as Deck[]);
 
   const opSetMatches = decks.filter((deck) => !filters?.opSet || deck.opSet === filters.opSet);
-  if (opSetMatches.length) return sortDecks(opSetMatches);
+  if (opSetMatches.length) return sortDecksByRecentEvent(opSetMatches);
 
   if (filters?.opSet) {
-    const fallback = sortDecks(op15Decks);
+    const fallback = sortDecksByRecentEvent(op15Decks);
     if (fallback.length) return fallback;
   }
 
-  return sortDecks(decks);
+  return sortDecksByRecentEvent(decks);
 }
 
 export async function getServerDeckById(id: string) {
   const api = await fetchApi<{ decklist: Deck }>(`/api/decklists/${id}`);
-  if (api?.decklist) return api.decklist as Deck;
+  if (api?.decklist) return withLocalDevSocialPostSample(api.decklist as Deck);
 
-  return decks.find((deck) => deck.id === id || deck.slug === id) ?? null;
+  const deck = decks.find((item) => item.id === id || item.slug === id) ?? null;
+  return deck ? withLocalDevSocialPostSample(deck) : null;
 }
 
 export async function getServerTournaments() {
@@ -99,14 +96,18 @@ export async function getServerTournamentById(id: string) {
   return tournaments.find((event) => event.id === id || event.slug === id) ?? null;
 }
 
-export async function getServerTournamentDecklists(id: string, limit = 33) {
+export async function getServerTournamentDecklists(id: string) {
   const event = await getServerTournamentById(id);
-  return event ? getTournamentTopDecklists(event, decks, limit) : [];
+  return event ? getTournamentTopDecklists(event, decks) : [];
 }
 
 export async function getServerTournamentDecklist(id: string, deckId: string) {
+  const api = await fetchApi<{ decklist: Deck }>(`/api/decklists/${deckId}`);
+  if (api?.decklist) return withLocalDevSocialPostSample(api.decklist as Deck);
+
   const eventDecklists = await getServerTournamentDecklists(id);
-  return eventDecklists.find((deck) => deck.id === deckId || deck.slug === deckId) ?? null;
+  const deck = eventDecklists.find((item) => item.id === deckId || item.slug === deckId) ?? null;
+  return deck ? withLocalDevSocialPostSample(deck) : null;
 }
 
 export async function getServerMetaSnapshot(options?: { opSet?: string }) {

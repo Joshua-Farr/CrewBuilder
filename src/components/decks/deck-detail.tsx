@@ -11,11 +11,12 @@ import { CardImage } from "@/components/cards/card-image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DeckCompositionSummary } from "@/components/decks/deck-composition-summary";
+import { DeckSocialPostEmbed } from "@/components/decks/deck-social-post-embed";
 import { SaveDeckButton } from "@/components/decks/save-deck-button";
 import { ShareDeckButton } from "@/components/decks/share-deck-button";
 import { compactStatCard } from "@/lib/design";
 import { formatDecklistForSim, formatDecklistText, getTcgPlayerMassEntryUrl, resolveDeckCards } from "@/lib/deck-export";
-import { getDeckCompositionStats } from "@/lib/deck-stats";
+import { getDeckCompositionStats, type DeckCounterValue } from "@/lib/deck-stats";
 import { cards as fallbackCards } from "@/lib/mock-data";
 import { getCards } from "@/lib/services/firestore";
 import type { Deck } from "@/lib/types";
@@ -23,6 +24,7 @@ import { cn, formatCurrency, formatLeaderDisplayName, formatPlacementLabel, getC
 
 export function DeckDetail({ deck }: { deck: Deck }) {
   const [hoveredCost, setHoveredCost] = useState<number | null>(null);
+  const [hoveredCounter, setHoveredCounter] = useState<DeckCounterValue | null>(null);
   const { showToast, toast } = useToast();
   const { data: cards = fallbackCards } = useQuery({
     queryKey: ["cards"],
@@ -37,6 +39,7 @@ export function DeckDetail({ deck }: { deck: Deck }) {
   const simExportText = formatDecklistForSim(deck, cards);
   const tcgPlayerUrl = getTcgPlayerMassEntryUrl(deck, cards);
   const notes = deck.notes.trim();
+  const socialPostUrl = deck.socialPostUrl?.trim();
   const leaderDisplayName = formatLeaderDisplayName(deck.leaderName);
   const moreDecklistsHref = `/decks?leader=${encodeURIComponent(deck.leaderId)}&opSet=${encodeURIComponent(deck.opSet)}`;
 
@@ -105,11 +108,6 @@ export function DeckDetail({ deck }: { deck: Deck }) {
               <Button variant="outline" onClick={copyForSim}>
                 <Gamepad2 className="size-4" /> Copy for sim
               </Button>
-              <Button variant="outline" asChild>
-                <a href={tcgPlayerUrl} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="size-4" /> Buy deck on TCG Player
-                </a>
-              </Button>
             </div>
           </CardContent>
         </Card>
@@ -118,24 +116,43 @@ export function DeckDetail({ deck }: { deck: Deck }) {
       <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="space-y-6">
           <Card>
-            <CardHeader>
+            <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-3">
               <CardTitle>Main deck card counts ({mainDeckTotal})</CardTitle>
+              <Button variant="outline" size="sm" asChild>
+                <a href={tcgPlayerUrl} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="size-4" /> Buy deck on TCG Player
+                </a>
+              </Button>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
                 {resolvedCards.map((entry) => (
-                  <CardTile key={entry.cardId} entry={entry} highlightedCost={hoveredCost} />
+                  <CardTile
+                    key={entry.cardId}
+                    entry={entry}
+                    highlightedCost={hoveredCost}
+                    highlightedCounter={hoveredCounter}
+                  />
                 ))}
               </div>
             </CardContent>
           </Card>
+          {socialPostUrl ? <DeckSocialPostEmbed socialPostUrl={socialPostUrl} /> : null}
         </div>
         <div className="space-y-6">
           <DeckCompositionSummary
             stats={compositionStats}
             leaderColors={leader?.colors ?? deck.colors}
             hoveredCost={hoveredCost}
-            onHoverCost={setHoveredCost}
+            onHoverCost={(cost) => {
+              setHoveredCost(cost);
+              if (cost != null) setHoveredCounter(null);
+            }}
+            hoveredCounter={hoveredCounter}
+            onHoverCounter={(counter) => {
+              setHoveredCounter(counter);
+              if (counter != null) setHoveredCost(null);
+            }}
           />
           <Card>
             <CardHeader>
@@ -219,11 +236,23 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 type ResolvedCardEntry = ReturnType<typeof resolveDeckCards>[number];
 
-function CardTile({ entry, highlightedCost }: { entry: ResolvedCardEntry; highlightedCost?: number | null }) {
+function CardTile({
+  entry,
+  highlightedCost,
+  highlightedCounter,
+}: {
+  entry: ResolvedCardEntry;
+  highlightedCost?: number | null;
+  highlightedCounter?: DeckCounterValue | null;
+}) {
   const card = entry.card ?? { code: entry.cardId.toUpperCase(), imageUrl: getLeaderImageUrl(entry.cardId) };
   const cost = entry.card?.cost;
-  const isHighlighted = highlightedCost != null && cost === highlightedCost;
-  const isDimmed = highlightedCost != null && cost !== highlightedCost;
+  const counter = entry.card?.counter;
+  const hasHighlightFilter = highlightedCost != null || highlightedCounter != null;
+  const isHighlighted =
+    (highlightedCost != null && cost === highlightedCost) ||
+    (highlightedCounter != null && counter === highlightedCounter);
+  const isDimmed = hasHighlightFilter && !isHighlighted;
 
   return (
     <CardDetailDialog card={card} quantity={entry.quantity}>
@@ -233,7 +262,7 @@ function CardTile({ entry, highlightedCost }: { entry: ResolvedCardEntry; highli
           "w-full rounded-2xl border border-border bg-white p-1.5 text-left shadow-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
           isHighlighted && "z-10 -translate-y-1 border-primary/50 shadow-lg shadow-primary/15 ring-2 ring-primary/40",
           isDimmed && "opacity-35 saturate-50",
-          !highlightedCost && "hover:-translate-y-0.5 hover:shadow-md",
+          !hasHighlightFilter && "hover:-translate-y-0.5 hover:shadow-md",
         )}
       >
         <div className="relative aspect-[5/7] overflow-hidden rounded-lg bg-neutral-100">

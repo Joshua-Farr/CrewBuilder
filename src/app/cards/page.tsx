@@ -8,8 +8,8 @@ export default function CardsPage() {
     <div className="space-y-8">
       <PageHeader
         eyebrow="Card database"
-        title="Fast fuzzy card search"
-        description="Lazy-loaded card images, modal details, and filters for competitive deckbuilding."
+        title="Explore the One Piece card pool"
+        description="Search by name, effect, or code. Filter by type and color, then open any card for full stats while you build competitive lists."
       />
       <CardDatabase />
     </div>
