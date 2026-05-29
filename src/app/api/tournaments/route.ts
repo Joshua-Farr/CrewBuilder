@@ -1,6 +1,12 @@
-import { tournamentsQuerySchema } from "@/lib/schemas/api";
 import { getDbOrNull, getMockTournaments } from "@/lib/api/firestore-query";
+import { withLocalDevFakeTournaments } from "@/lib/local-dev/fake-event";
 import { jsonError, jsonOk } from "@/lib/api/response";
+import { tournamentsQuerySchema } from "@/lib/schemas/api";
+import type { Tournament } from "@/lib/types";
+
+function sortTournaments(items: Tournament[]) {
+  return items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
 
 export async function GET(request: Request) {
   const params = Object.fromEntries(new URL(request.url).searchParams);
@@ -16,7 +22,7 @@ export async function GET(request: Request) {
     if (format) items = items.filter((t) => t.format === format);
     if (from) items = items.filter((t) => t.date >= from);
     if (to) items = items.filter((t) => t.date <= to);
-    items = items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    items = sortTournaments(items);
     if (cursor) {
       const idx = items.findIndex((t) => t.id === cursor);
       items = idx >= 0 ? items.slice(idx + 1) : items;
@@ -28,11 +34,14 @@ export async function GET(request: Request) {
   if (region) query = db.collection("tournaments").where("region", "==", region).orderBy("date", "desc").limit(limit + 1) as typeof query;
 
   const snap = await query.get();
-  let items = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  let items = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }) as Tournament);
 
   if (format) items = items.filter((t) => (t as { format?: string }).format === format);
   if (from) items = items.filter((t) => String((t as { date?: string }).date) >= from);
   if (to) items = items.filter((t) => String((t as { date?: string }).date) <= to);
+
+  items = withLocalDevFakeTournaments(items as Tournament[]);
+  items = sortTournaments(items);
 
   const hasMore = items.length > limit;
   if (hasMore) items = items.slice(0, limit);

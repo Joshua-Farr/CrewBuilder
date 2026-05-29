@@ -1,7 +1,14 @@
+import { auth } from "@/auth";
 import { getDbOrNull } from "@/lib/api/firestore-query";
-import { jsonOk } from "@/lib/api/response";
+import { jsonError, jsonOk } from "@/lib/api/response";
 
 export async function GET() {
+  const session = await auth();
+  const role = session?.user?.role;
+  if (!session || (role !== "ADMIN" && role !== "MODERATOR")) {
+    return jsonError("Unauthorized", 401);
+  }
+
   const db = getDbOrNull();
 
   if (!db) {
@@ -12,11 +19,17 @@ export async function GET() {
   }
 
   const snap = await db.collection("scrapeJobs").orderBy("updatedAt", "desc").limit(50).get();
-  type JobRow = { id: string; status?: string; completedAt?: string };
-  const jobs: JobRow[] = snap.docs.map((doc) => ({
-    id: doc.id,
-    ...(doc.data() as { status?: string; completedAt?: string }),
-  }));
+  const jobs = snap.docs.map((doc) => {
+    const data = doc.data() as { status?: string; completedAt?: string; updatedAt?: { toDate?: () => Date } | string };
+    return {
+      id: doc.id,
+      ...data,
+      updatedAt:
+        typeof data.updatedAt === "object" && data.updatedAt?.toDate
+          ? data.updatedAt.toDate().toISOString()
+          : data.updatedAt,
+    };
+  });
 
   const summary = {
     queued: jobs.filter((j) => j.status === "queued").length,

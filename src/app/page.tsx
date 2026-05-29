@@ -5,12 +5,11 @@ import { DeckCard } from "@/components/decks/deck-card";
 import { buildHeroSnapshotRows } from "@/components/home/hero-snapshot-rows";
 import { HeroSection } from "@/components/home/hero-section";
 import { MetaSnapshotChart } from "@/components/home/meta-snapshot-chart";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TournamentList } from "@/components/tournaments/tournament-list";
 import { CURRENT_META_OP_SET, formatOpSetLabel } from "@/lib/meta/constants";
-import { metaLeadersToChartRows } from "@/lib/meta-decks";
+import { getRecentWinnerBreakdown, metaLeadersToChartRows } from "@/lib/meta-decks";
 import { createMetadata, jsonLd, siteConfig } from "@/lib/seo";
 import { getServerDecks, getServerMetaSnapshot, getServerTournaments } from "@/lib/services/server-data";
 
@@ -36,8 +35,8 @@ export default async function Home() {
     [...leaderCardsById.entries()].map(([id, card]) => [id, card.imageUrl ?? "/card-back.svg"]),
   );
   const opSetLabel = formatOpSetLabel(metaSnapshot.opSet);
-  const heroSnapshotRows = buildHeroSnapshotRows(metaSnapshot.topLeaders, {
-    mostImprovedLeaderId: metaSnapshot.mostImprovedLeaderId,
+  const weeklyWinners = getRecentWinnerBreakdown(metaDecks, tournaments, metaSnapshot.opSet);
+  const heroSnapshotRows = buildHeroSnapshotRows(weeklyWinners, {
     opSet: metaSnapshot.opSet,
     leaderImages,
   });
@@ -76,25 +75,20 @@ export default async function Home() {
                 <Link
                   key={leader.leaderId}
                   href={decksHref}
-                  className="flex flex-col gap-3 rounded-2xl border border-border bg-neutral-50/70 p-4 transition-colors hover:border-primary/30 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                  className="flex items-center gap-3 rounded-2xl border border-border bg-neutral-50/70 p-4 transition-colors hover:border-primary/30 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  <div className="flex w-full min-w-0 items-center gap-3 sm:flex-1">
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-sm font-semibold text-foreground shadow-sm">
-                      {index + 1}
-                    </span>
-                    <div className="relative h-16 w-11 shrink-0 overflow-hidden rounded-lg border border-border bg-neutral-100 shadow-sm">
-                      <Image src={leaderCard?.imageUrl ?? "/card-back.svg"} alt={`${leader.name} leader card`} fill sizes="44px" className="object-cover" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="font-semibold leading-snug">{leader.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {leader.playRate}% meta share - {leader.games} topping decks
-                      </p>
-                    </div>
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-sm font-semibold text-foreground shadow-sm">
+                    {index + 1}
+                  </span>
+                  <div className="relative h-16 w-11 shrink-0 overflow-hidden rounded-lg border border-border bg-neutral-100 shadow-sm">
+                    <Image src={leaderCard?.imageUrl ?? "/card-back.svg"} alt={`${leader.name} leader card`} fill sizes="44px" className="object-cover" />
                   </div>
-                  <Badge className="w-fit shrink-0 self-end sm:self-auto" variant={leader.tier === "S" ? "accent" : "default"}>
-                    #{index + 1}
-                  </Badge>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-semibold leading-snug">{leader.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {leader.playRate}% meta share - {leader.games} topping decks
+                    </p>
+                  </div>
                 </Link>
               );
             })}

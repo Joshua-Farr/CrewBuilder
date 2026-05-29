@@ -34,6 +34,17 @@ export interface EventWinnerBreakdownRow {
   percentage: number;
 }
 
+export const HERO_WINNER_LOOKBACK_DAYS = 7;
+
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
+
+export function isWithinPastDays(isoDate: string, days: number, now = new Date()) {
+  const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) return false;
+  const cutoff = now.getTime() - days * MS_PER_DAY;
+  return date.getTime() >= cutoff;
+}
+
 export interface MetaSnapshotChartRow {
   leaderId: string;
   leaderName: string;
@@ -141,20 +152,9 @@ export function getLeaderBreakdown(decks: Deck[]): LeaderBreakdownRow[] {
     .sort((a, b) => a.bestPlacement - b.bestPlacement || b.decks - a.decks || b.averageWinRate - a.averageWinRate);
 }
 
-export function getEventWinnerBreakdown(decks: Deck[], tournaments: Tournament[], opSet: string): EventWinnerBreakdownRow[] {
-  const deckLookup = new Map(decks.map((deck) => [deck.id, deck]));
-  const winnerCounts = tournaments
-    .filter((event) => event.opSet === opSet)
-    .reduce<Map<string, { leaderName: string; wins: number }>>((acc, event) => {
-      const winningDeck = deckLookup.get(event.winnerDeckId);
-      if (!winningDeck) return acc;
-
-      const existing = acc.get(winningDeck.leaderId) ?? { leaderName: winningDeck.leaderName, wins: 0 };
-      existing.wins += 1;
-      acc.set(winningDeck.leaderId, existing);
-      return acc;
-    }, new Map());
-
+function toWinnerBreakdownRows(
+  winnerCounts: Map<string, { leaderName: string; wins: number }>,
+): EventWinnerBreakdownRow[] {
   const totalWins = [...winnerCounts.values()].reduce((total, leader) => total + leader.wins, 0);
   if (totalWins === 0) return [];
 
@@ -166,6 +166,73 @@ export function getEventWinnerBreakdown(decks: Deck[], tournaments: Tournament[]
       percentage: (leader.wins / totalWins) * 100,
     }))
     .sort((a, b) => b.wins - a.wins || a.leaderName.localeCompare(b.leaderName));
+}
+
+export function getEventWinnerBreakdown(
+  decks: Deck[],
+  tournaments: Tournament[],
+  opSet: string,
+  options?: { days?: number },
+): EventWinnerBreakdownRow[] {
+  const deckLookup = new Map(decks.map((deck) => [deck.id, deck]));
+  const winnerCounts = tournaments
+    .filter((event) => {
+      if (event.opSet !== opSet) return false;
+      if (options?.days !== undefined && !isWithinPastDays(event.date, options.days)) return false;
+      return true;
+    })
+    .reduce<Map<string, { leaderName: string; wins: number }>>((acc, event) => {
+      const winningDeck = deckLookup.get(event.winnerDeckId);
+      const leaderId = winningDeck?.leaderId ?? event.winningLeaderId;
+      const leaderName = winningDeck?.leaderName ?? event.winningLeaderName;
+      if (!leaderId || !leaderName) return acc;
+
+      const existing = acc.get(leaderId) ?? { leaderName, wins: 0 };
+      existing.wins += 1;
+      acc.set(leaderId, existing);
+      return acc;
+    }, new Map());
+
+  return toWinnerBreakdownRows(winnerCounts);
+}
+
+export function getWinningDecklistBreakdownFromDecks(
+  decks: Deck[],
+  opSet: string,
+  days = HERO_WINNER_LOOKBACK_DAYS,
+): EventWinnerBreakdownRow[] {
+  const winnersByEvent = new Map<string, Deck>();
+
+  for (const deck of decks) {
+    if (deck.opSet !== opSet || deck.placement !== 1) continue;
+    if (!isWithinPastDays(deck.tournamentDate, days)) continue;
+    if (!winnersByEvent.has(deck.tournamentId)) {
+      winnersByEvent.set(deck.tournamentId, deck);
+    }
+  }
+
+  const winnerCounts = [...winnersByEvent.values()].reduce<Map<string, { leaderName: string; wins: number }>>(
+    (acc, deck) => {
+      const existing = acc.get(deck.leaderId) ?? { leaderName: deck.leaderName, wins: 0 };
+      existing.wins += 1;
+      acc.set(deck.leaderId, existing);
+      return acc;
+    },
+    new Map(),
+  );
+
+  return toWinnerBreakdownRows(winnerCounts);
+}
+
+export function getRecentWinnerBreakdown(
+  decks: Deck[],
+  tournaments: Tournament[],
+  opSet: string,
+  days = HERO_WINNER_LOOKBACK_DAYS,
+): EventWinnerBreakdownRow[] {
+  const fromEvents = getEventWinnerBreakdown(decks, tournaments, opSet, { days });
+  if (fromEvents.length > 0) return fromEvents;
+  return getWinningDecklistBreakdownFromDecks(decks, opSet, days);
 }
 
 export function getPopularMetaCards(decks: Deck[], cards: TcgCard[], limit = 8): PopularMetaCard[] {

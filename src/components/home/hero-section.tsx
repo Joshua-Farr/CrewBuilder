@@ -51,7 +51,7 @@ export function HeroSection({ snapshotRows, opSetLabel }: HeroSectionProps) {
               Top-performing decks this week
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              {opSetLabel} · Ranked from recent tournament finishes
+              {opSetLabel} · Share of winning decklists from the past 7 days
             </p>
           </div>
           <div className="grid gap-3">

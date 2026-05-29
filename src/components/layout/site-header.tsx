@@ -1,5 +1,6 @@
 "use client";
-import { Menu, Search, Shield, UserRound } from "lucide-react";
+import { Menu, Search, UserRound } from "lucide-react";
+import { DevAdminToggle } from "@/components/layout/dev-admin-toggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,7 @@ const nav = [
   { href: "/cards", label: "Cards" },
   { href: "/tournaments", label: "Tournaments" },
   { href: "/builder", label: "Builder" },
+  { href: "/submit/result", label: "Submit" },
 ];
 
 export function SiteHeader() {
@@ -47,14 +49,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <DevAdminToggle />
           <Button variant="outline" size="sm" asChild className="hidden sm:inline-flex">
             <Link href="/cards">
               <Search className="size-4" /> Search
-            </Link>
-          </Button>
-          <Button size="sm" asChild>
-            <Link href="/admin">
-              <Shield className="size-4" /> Submit
             </Link>
           </Button>
           <Dialog>
@@ -77,14 +75,12 @@ export function SiteHeader() {
                 ))}
               </div>
               <div className="grid gap-2 border-t border-border pt-4">
+                <div className="flex justify-center px-2">
+                  <DevAdminToggle />
+                </div>
                 <Button variant="outline" asChild>
                   <Link href="/auth">
                     <UserRound className="size-4" /> Account
-                  </Link>
-                </Button>
-                <Button asChild>
-                  <Link href="/admin">
-                    <Shield className="size-4" /> Submit results
                   </Link>
                 </Button>
               </div>

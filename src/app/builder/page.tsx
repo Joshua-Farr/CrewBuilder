@@ -1,7 +1,8 @@
+import { Suspense } from "react";
 import { DeckBuilder } from "@/components/builder/deck-builder";
 import { PageHeader } from "@/components/ui/page-header";
 import { createMetadata } from "@/lib/seo";
-export const metadata = createMetadata({ title: "Deck Builder", description: "Build private One Piece TCG decklists with drag/drop-ready rows and save them to your account.", path: "/builder" });
+export const metadata = createMetadata({ title: "Deck Builder", description: "Build and share One Piece TCG decklists on allblue.gg.", path: "/builder" });
 
 export default function BuilderPage() {
   return (
@@ -9,9 +10,11 @@ export default function BuilderPage() {
       <PageHeader
         eyebrow="Deck builder"
         title="Build, test, share"
-        description="Private decklists, drag/drop rows, and a path for matchup simulator integrations."
+        description="Build your deck, copy a share link, and paste it when submitting tournament results."
       />
-      <DeckBuilder />
+      <Suspense fallback={<p className="text-sm text-muted-foreground">Loading builder…</p>}>
+        <DeckBuilder />
+      </Suspense>
     </div>
   );
 }

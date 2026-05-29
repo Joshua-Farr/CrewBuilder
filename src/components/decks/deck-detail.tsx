@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DeckCompositionSummary } from "@/components/decks/deck-composition-summary";
 import { DeckSocialPostEmbed } from "@/components/decks/deck-social-post-embed";
+import { AdminToolbar } from "@/components/admin/inline/admin-toolbar";
 import { SaveDeckButton } from "@/components/decks/save-deck-button";
 import { ShareDeckButton } from "@/components/decks/share-deck-button";
 import { compactStatCard } from "@/lib/design";
@@ -22,7 +23,7 @@ import { getCards } from "@/lib/services/firestore";
 import type { Deck } from "@/lib/types";
 import { cn, formatCurrency, formatLeaderDisplayName, formatPlacementLabel, getCardImageUrl, getLeaderImageUrl, getWinRate, isPlacementTag } from "@/lib/utils";
 
-export function DeckDetail({ deck }: { deck: Deck }) {
+export function DeckDetail({ deck, isAdmin }: { deck: Deck; isAdmin?: boolean }) {
   const [hoveredCost, setHoveredCost] = useState<number | null>(null);
   const [hoveredCounter, setHoveredCounter] = useState<DeckCounterValue | null>(null);
   const { showToast, toast } = useToast();
@@ -56,6 +57,14 @@ export function DeckDetail({ deck }: { deck: Deck }) {
   return (
     <div className="space-y-8">
       {toast}
+      <AdminToolbar
+        entityType="decklist"
+        entityId={deck.id}
+        editHref={`/admin/decklists/${deck.id}/edit`}
+        initialTitle={deck.name}
+        initialNotes={deck.notes}
+        enabled={isAdmin}
+      />
       <section className="grid gap-6 lg:grid-cols-[320px_1fr]">
         <Card className="mx-auto w-full max-w-[200px] p-3 sm:max-w-[240px] lg:mx-0 lg:max-w-none lg:p-5">
           <div className="relative aspect-[5/7] overflow-hidden rounded-2xl border border-border bg-neutral-100">

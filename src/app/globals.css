@@ -50,22 +50,22 @@
 .dark {
   --background: #0b0d12;
   --foreground: #f4f4f5;
-  --card: #111318;
+  --card: #161a22;
   --card-foreground: #f4f4f5;
-  --popover: #111318;
+  --popover: #161a22;
   --popover-foreground: #f4f4f5;
-  --primary: #8ab4ff;
-  --primary-foreground: #061021;
-  --secondary: #1a1d24;
+  --primary: #6b9fff;
+  --primary-foreground: #0a1020;
+  --secondary: #1e232d;
   --secondary-foreground: #f4f4f5;
-  --muted: #151820;
-  --muted-foreground: #a1a1aa;
-  --accent: #172033;
-  --accent-foreground: #cfe0ff;
+  --muted: #1a1f28;
+  --muted-foreground: #b4b8c4;
+  --accent: #1c2840;
+  --accent-foreground: #dbeafe;
   --destructive: #f87171;
-  --border: #272a33;
-  --input: #303440;
-  --ring: #8ab4ff;
+  --border: #2d3340;
+  --input: #1e232d;
+  --ring: #6b9fff;
 }
 
 * { border-color: var(--border); }
@@ -94,4 +94,35 @@ body {
 .subtle-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #d4d4d4 transparent;
+}
+
+/* Admin CMS — isolated surface, readable forms in light & dark */
+.admin-shell {
+  --admin-sidebar-width: 15rem;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.admin-shell input,
+.admin-shell select,
+.admin-shell textarea {
+  color-scheme: light dark;
+}
+
+.dark .admin-shell input,
+.dark .admin-shell select,
+.dark .admin-shell textarea {
+  background-color: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+.dark .admin-shell input::placeholder,
+.dark .admin-shell textarea::placeholder {
+  color: var(--muted-foreground);
+}
+
+.admin-shell select option {
+  background: var(--card);
+  color: var(--foreground);
 }

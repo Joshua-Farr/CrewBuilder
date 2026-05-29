@@ -1,8 +1,15 @@
 import { getDbOrNull, getMockTournaments } from "@/lib/api/firestore-query";
+import { getLocalDevFakeEvent, localDevFakeEventDecks } from "@/lib/local-dev/fake-event";
 import { jsonError, jsonOk } from "@/lib/api/response";
 
 export async function GET(_request: Request, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
+
+  const localEvent = getLocalDevFakeEvent(id);
+  if (localEvent) {
+    return jsonOk({ tournament: localEvent, decklists: localDevFakeEventDecks });
+  }
+
   const db = getDbOrNull();
 
   if (!db) {

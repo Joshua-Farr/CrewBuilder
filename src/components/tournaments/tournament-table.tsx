@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { EventVodLink } from "@/components/tournaments/event-vod-link";
 import type { Tournament } from "@/lib/types";
 import { getLeaderImageUrl } from "@/lib/utils";
 
@@ -41,8 +40,7 @@ export function TournamentTable({
               <TableRow key={event.id}>
                 <TableCell>
                   <p className="font-semibold">{event.name}</p>
-                  <EventVodLink vodUrl={event.vodUrl} className="mt-2 h-7 px-2.5 text-xs" />
-                  <p className="mt-1 text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     {event.date} - {event.location}
                   </p>
                 </TableCell>

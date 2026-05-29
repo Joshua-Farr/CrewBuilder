@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { isEffectiveAdmin } from "@/lib/auth/is-effective-admin";
+import { TournamentAdminToolbar } from "@/components/admin/inline/tournament-admin-toolbar";
 import { EventVodLink } from "@/components/tournaments/event-vod-link";
 import { TournamentDecklists } from "@/components/tournaments/tournament-decklists";
 import { TopCutBreakdownChart } from "@/components/tournaments/top-cut-breakdown-chart";
@@ -26,8 +28,10 @@ export default async function TournamentPage({ params }: { params: Promise<{ id:
   const topCutBreakdown = getMetaPlayRateBreakdownFromDecks(decklists, decklists.length || 1);
   const leaderColors = Object.fromEntries(decklists.map((deck) => [deck.leaderId, deck.colors]));
   const leaderImages = Object.fromEntries(decklists.map((deck) => [deck.leaderId, getLeaderImageUrl(deck.leaderId)]));
+  const isAdmin = await isEffectiveAdmin();
   return (
     <div className="space-y-8">
+      <TournamentAdminToolbar eventId={event.id} eventName={event.name} notes={event.notes} enabled={isAdmin} />
       <div className="border-b border-border pb-8">
         <Badge variant="outline">
           {event.region} - {event.opSet}

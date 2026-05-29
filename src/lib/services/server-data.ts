@@ -1,4 +1,5 @@
 import { decks, metaSnapshot, players as fallbackPlayers, tournaments } from "@/lib/mock-data";
+import { getLocalDevFakeEvent } from "@/lib/local-dev/fake-event";
 import { op15Decks } from "@/lib/op-top-decks-data";
 import { CURRENT_META_OP_SET } from "@/lib/meta/constants";
 import { getMetaPlayRateBreakdownFromDecks } from "@/lib/meta-decks";
@@ -93,7 +94,7 @@ export async function getServerTournamentById(id: string) {
   const api = await fetchApi<{ tournament: Tournament }>(`/api/tournaments/${id}`);
   if (api?.tournament) return api.tournament as Tournament;
 
-  return tournaments.find((event) => event.id === id || event.slug === id) ?? null;
+  return getLocalDevFakeEvent(id) ?? tournaments.find((event) => event.id === id || event.slug === id) ?? null;
 }
 
 export async function getServerTournamentDecklists(id: string) {

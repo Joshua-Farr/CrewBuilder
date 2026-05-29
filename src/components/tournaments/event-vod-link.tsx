@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function EventVodLink({
@@ -13,9 +13,10 @@ export function EventVodLink({
   if (!vodUrl) return null;
 
   return (
-    <Button asChild variant="outline" size={size} className={className}>
+    <Button asChild variant="secondary" size={size} className={className}>
       <a href={vodUrl} target="_blank" rel="noopener noreferrer">
-        Watch VOD <ExternalLink className="size-3.5" />
+        <Play className="size-3.5 fill-current" />
+        Watch the stream
       </a>
     </Button>
   );

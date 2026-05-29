@@ -22,7 +22,7 @@ function getServiceAccount() {
 async function commitBatch(db: ReturnType<typeof getFirestore>, cards: TcgCard[]) {
   const batch = db.batch();
   for (const card of cards) {
-    batch.set(db.collection("cards").doc(card.id), stripUndefined(card as Record<string, unknown>), { merge: true });
+    batch.set(db.collection("cards").doc(card.id), stripUndefined(card as unknown as Record<string, unknown>), { merge: true });
   }
   await batch.commit();
 }
