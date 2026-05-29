@@ -6,17 +6,9 @@ export type HeroSnapshotRow = {
   leaderId: string;
   leader: string;
   imageUrl: string;
-  tier: string;
   stat: string;
   statNote?: string;
   href: string;
-};
-
-const tierLabels: Record<MetaLeaderStat["tier"], string> = {
-  S: "S Tier",
-  A: "A Tier",
-  B: "B Tier",
-  C: "C Tier",
 };
 
 export function buildHeroSnapshotRows(
@@ -53,7 +45,6 @@ export function buildHeroSnapshotRows(
         leaderId: leader.leaderId,
         leader: leader.name,
         imageUrl: imageFor(leader.leaderId),
-        tier: tierLabels[leader.tier],
         stat: `${leader.winRate.toFixed(1)}% WR`,
         href: decksHref(leader.leaderId),
       })),
@@ -61,7 +52,6 @@ export function buildHeroSnapshotRows(
         leaderId: rising.leaderId,
         leader: rising.name,
         imageUrl: imageFor(rising.leaderId),
-        tier: rising.delta > 0.4 ? "Rising" : tierLabels[rising.tier],
         stat: `${rising.playRate}% play rate`,
         statNote: rising.delta !== 0 ? `${formatShareDelta(rising.delta)} vs last week` : undefined,
         href: decksHref(rising.leaderId),
@@ -77,7 +67,6 @@ export function buildHeroSnapshotRows(
     leaderId: leader.leaderId,
     leader: leader.name,
     imageUrl: imageFor(leader.leaderId),
-    tier: index === 2 && leader.delta > 0.4 ? "Rising" : tierLabels[leader.tier],
     stat: `${leader.playRate}% play rate`,
     statNote:
       index === 2 && leader.delta !== 0 ? `${formatShareDelta(leader.delta)} vs last week` : undefined,

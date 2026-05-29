@@ -2,7 +2,8 @@ export type CardColor = "Red" | "Green" | "Blue" | "Purple" | "Black" | "Yellow"
 export type Region = "NA" | "EU" | "LATAM" | "OCE" | "ASIA" | "JP";
 export type CardType = "Leader" | "Character" | "Event" | "Stage";
 export type TournamentFormat = "Constructed" | "Sealed" | "Teams";
-export interface TcgCard { id: string; code: string; name: string; type: CardType; colors: CardColor[]; set: string; rarity: string; cost?: number; power?: number; counter?: number; attribute?: string; effect: string; imageUrl?: string; isLeader: boolean; searchTokens: string[]; }
+export interface TcgCardVariant { id: string; rarity: string; imageUrl: string; }
+export interface TcgCard { id: string; code: string; name: string; type: CardType; colors: CardColor[]; set: string; rarity: string; cost?: number; life?: number; power?: number; counter?: number; attribute?: string; attributes?: string[]; types?: string[]; trigger?: string; blockIcon?: number | "X"; effect: string; imageUrl?: string; imageUrlFallback?: string; variants?: TcgCardVariant[]; sets?: string[]; sourcePackId?: string; scrapedAt?: string; isLeader: boolean; searchTokens: string[]; }
 export interface DeckCard { cardId: string; quantity: number; category: CardType; }
 export interface DeckMatchup { opponentLeaderId: string; opponentLeaderName: string; wins: number; losses: number; notes?: string; }
 export interface Deck { id: string; name: string; slug: string; ownerId?: string; leaderId: string; leaderName: string; colors: CardColor[]; format: TournamentFormat; opSet: string; region: Region; player: string; playerId: string; tournamentId: string; tournamentName: string; tournamentDate: string; placement: number; wins: number; losses: number; cards: DeckCard[]; matchups: DeckMatchup[]; notes: string; techChoices: string[]; estimatedCost: number; tags: string[]; isPublic: boolean; createdAt: string; updatedAt: string; }

@@ -54,6 +54,24 @@ export function getLeaderChartColor(colors: CardColor[] | undefined, fallbackInd
   return dualChartColors[key] ?? tcgChartColors[colors[0]];
 }
 
+/** Vertical bar fill for the deck DON!! curve — depth scales with cost index */
+export function getDonCurveBarStyles(baseColor: string, index: number, total: number) {
+  const depth = total <= 1 ? 1 : 0.68 + (index / (total - 1)) * 0.32;
+  const solidMix = Math.round(depth * 100);
+  const lightMix = Math.round(depth * 58);
+  const solid = `color-mix(in srgb, ${baseColor} ${solidMix}%, white ${100 - solidMix}%)`;
+  const light = `color-mix(in srgb, ${baseColor} ${lightMix}%, white ${100 - lightMix}%)`;
+
+  return {
+    background: `linear-gradient(to top, ${solid} 0%, ${light} 100%)`,
+    boxShadow: `0 -2px 10px color-mix(in srgb, ${solid} 28%, transparent)`,
+  };
+}
+
+export function getDonCurveTrackColor(baseColor: string): string {
+  return `color-mix(in srgb, ${baseColor} 8%, transparent)`;
+}
+
 export function chartLabelColor(fill: string): string {
   const hex = fill.replace("#", "");
   const r = Number.parseInt(hex.slice(0, 2), 16);

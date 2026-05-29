@@ -10,11 +10,9 @@ import { Card } from "@/components/ui/card";
 type HeroSectionProps = {
   snapshotRows: HeroSnapshotRow[];
   opSetLabel: string;
-  eventLabel?: string;
-  eventHref?: string;
 };
 
-export function HeroSection({ snapshotRows, opSetLabel, eventLabel, eventHref }: HeroSectionProps) {
+export function HeroSection({ snapshotRows, opSetLabel }: HeroSectionProps) {
   return (
     <section className="relative overflow-hidden rounded-[2rem] border border-border bg-white px-6 py-10 shadow-sm sm:px-10 lg:px-14 lg:py-16">
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-blue-50/80 to-transparent" />
@@ -47,26 +45,13 @@ export function HeroSection({ snapshotRows, opSetLabel, eventLabel, eventHref }:
         <Card className="relative overflow-hidden p-5 shadow-xl shadow-neutral-200/70">
           <div className="mb-5">
             <p className="text-sm font-medium uppercase tracking-[0.16em] text-muted-foreground">
-              Meta snapshot
+              Past 7 days
             </p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-              Who&apos;s on top this week?
+              Top-performing decks this week
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              {opSetLabel} meta
-              {eventLabel ? (
-                <>
-                  {" "}
-                  ·{" "}
-                  {eventHref ? (
-                    <Link href={eventHref} className="font-medium text-foreground hover:text-primary">
-                      {eventLabel}
-                    </Link>
-                  ) : (
-                    eventLabel
-                  )}
-                </>
-              ) : null}
+              {opSetLabel} · Ranked from recent tournament finishes
             </p>
           </div>
           <div className="grid gap-3">
@@ -89,7 +74,6 @@ export function HeroSection({ snapshotRows, opSetLabel, eventLabel, eventHref }:
                     </div>
                     <div className="min-w-0">
                       <p className="font-semibold">{row.leader}</p>
-                      <p className="text-sm text-muted-foreground">{row.tier}</p>
                     </div>
                   </div>
                   <div className="text-right">
@@ -102,7 +86,7 @@ export function HeroSection({ snapshotRows, opSetLabel, eventLabel, eventHref }:
               ))
             ) : (
               <p className="rounded-2xl border border-dashed border-border p-4 text-sm text-muted-foreground">
-                Meta data is loading. Check back shortly for this week&apos;s leaders.
+                Weekly deck results are loading. Check back shortly for this week&apos;s top performers.
               </p>
             )}
           </div>

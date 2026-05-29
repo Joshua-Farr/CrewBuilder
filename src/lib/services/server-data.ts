@@ -56,14 +56,26 @@ function parseLimitlessPlayerRankings(html: string): Player[] {
   }).filter((player) => player.name && Number.isFinite(player.rank) && Number.isFinite(player.points));
 }
 
+function sortDecks(items: Deck[]) {
+  return items.sort(
+    (a, b) => new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime() || a.placement - b.placement,
+  );
+}
+
 export async function getServerDecks(filters?: { opSet?: string }) {
   const qs = filters?.opSet ? `?opSet=${filters.opSet}&limit=100` : "?limit=100";
   const api = await fetchApi<{ items: Deck[] }>(`/api/decks${qs}`);
   if (api?.items?.length) return api.items as Deck[];
 
-  return decks
-    .filter((deck) => !filters?.opSet || deck.opSet === filters.opSet)
-    .sort((a, b) => new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime() || a.placement - b.placement);
+  const opSetMatches = decks.filter((deck) => !filters?.opSet || deck.opSet === filters.opSet);
+  if (opSetMatches.length) return sortDecks(opSetMatches);
+
+  if (filters?.opSet) {
+    const fallback = sortDecks(op15Decks);
+    if (fallback.length) return fallback;
+  }
+
+  return sortDecks(decks);
 }
 
 export async function getServerDeckById(id: string) {

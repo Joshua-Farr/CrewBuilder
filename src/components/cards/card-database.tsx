@@ -1,10 +1,9 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import Fuse from "fuse.js";
-import Image from "next/image";
 import * as React from "react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
+import { CardDetailDialog } from "@/components/cards/card-detail-dialog";
+import { CardImage } from "@/components/cards/card-image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
@@ -16,7 +15,11 @@ export function CardDatabase() {
   const [search, setSearch] = React.useState("");
   const [type, setType] = React.useState<CardType | "all">("all");
   const [color, setColor] = React.useState<CardColor | "all">("all");
-  const { data, isLoading } = useQuery({ queryKey: ["cards"], queryFn: getCards });
+  const { data, isLoading } = useQuery({
+    queryKey: ["cards"],
+    queryFn: getCards,
+    staleTime: 1000 * 60 * 60,
+  });
   const allCards = React.useMemo(() => data ?? [], [data]);
   const fuse = React.useMemo(() => new Fuse(allCards, { keys: ["name", "code", "effect", "set", "searchTokens"], threshold: 0.32 }), [allCards]);
   const filtered = React.useMemo(() => {
@@ -58,59 +61,18 @@ export function CardDatabase() {
 
 function CardTile({ card }: { card: TcgCard }) {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button className="group text-left">
-          <Card className="overflow-hidden transition duration-200 group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:shadow-neutral-200/70">
-            <CardContent className="p-3">
-              <div className="relative aspect-[5/7] overflow-hidden rounded-xl bg-neutral-100">
-                <Image src={card.imageUrl ?? "/card-back.svg"} alt={card.name} fill sizes="180px" className="object-cover" loading="lazy" />
-              </div>
-              <p className="mt-3 line-clamp-2 font-semibold">{card.name}</p>
-              <p className="text-xs text-muted-foreground">{card.code}</p>
-            </CardContent>
-          </Card>
-        </button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{card.name}</DialogTitle>
-          <DialogDescription>
-            {card.code} - {card.set} - {card.rarity}
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-5 sm:grid-cols-[180px_1fr]">
-          <div className="relative aspect-[5/7] overflow-hidden rounded-xl bg-neutral-100">
-            <Image src={card.imageUrl ?? "/card-back.svg"} alt={card.name} fill sizes="180px" className="object-cover" />
-          </div>
-          <div className="space-y-4">
-            <div className="flex flex-wrap gap-2">
-              <Badge>{card.type}</Badge>
-              {card.colors.map((item) => (
-                <Badge key={item} variant="outline">
-                  {item}
-                </Badge>
-              ))}
+    <CardDetailDialog card={card}>
+      <button className="group text-left">
+        <Card className="overflow-hidden transition duration-200 group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:shadow-neutral-200/70">
+          <CardContent className="p-3">
+            <div className="relative aspect-[5/7] overflow-hidden rounded-xl bg-neutral-100">
+              <CardImage card={card} alt={card.name} fill sizes="180px" className="object-cover" loading="lazy" />
             </div>
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              <Info label="Cost" value={card.cost ?? "-"} />
-              <Info label="Power" value={card.power ?? "-"} />
-              <Info label="Counter" value={card.counter ?? "-"} />
-              <Info label="Attribute" value={card.attribute ?? "-"} />
-            </div>
-            <p className="rounded-2xl border border-border bg-neutral-50 p-4 text-sm leading-6 text-muted-foreground">{card.effect}</p>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-function Info({ label, value }: { label: string; value: string | number }) {
-  return (
-    <div className="rounded-2xl border border-border bg-neutral-50 p-3">
-      <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">{label}</p>
-      <p className="font-semibold">{value}</p>
-    </div>
+            <p className="mt-3 line-clamp-2 font-semibold">{card.name}</p>
+            <p className="text-xs text-muted-foreground">{card.code}</p>
+          </CardContent>
+        </Card>
+      </button>
+    </CardDetailDialog>
   );
 }

@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "image.optcg.gg" },
+      { protocol: "https", hostname: "en.onepiece-cardgame.com" },
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "static.wikia.nocookie.net" }
     ],

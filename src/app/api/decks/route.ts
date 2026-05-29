@@ -1,6 +1,7 @@
 import { decksQuerySchema } from "@/lib/schemas/api";
 import { getDbOrNull, getMockDecks } from "@/lib/api/firestore-query";
 import { jsonError, jsonOk } from "@/lib/api/response";
+import { normalizeDeckDocuments } from "@/lib/decks/normalize";
 
 export async function GET(request: Request) {
   const params = Object.fromEntries(new URL(request.url).searchParams);
@@ -12,7 +13,13 @@ export async function GET(request: Request) {
 
   if (!db) {
     let items = getMockDecks();
-    if (leader) items = items.filter((d) => d.leaderName.toLowerCase().includes(leader.toLowerCase()));
+    if (leader) {
+      items = items.filter(
+        (d) =>
+          d.leaderId.toLowerCase().includes(leader.toLowerCase()) ||
+          d.leaderName.toLowerCase().includes(leader.toLowerCase()),
+      );
+    }
     if (archetype) items = items.filter((d) => d.tags.some((t) => t.toLowerCase().includes(archetype.toLowerCase())));
     if (opSet) items = items.filter((d) => d.opSet === opSet);
     if (region) items = items.filter((d) => d.region === region);
@@ -26,11 +33,24 @@ export async function GET(request: Request) {
       const idx = items.findIndex((d) => d.id === cursor);
       items = idx >= 0 ? items.slice(idx + 1) : items;
     }
-    return jsonOk({ items: items.slice(0, limit), nextCursor: items.length > limit ? items[limit - 1]?.id : null });
+    const pageItems = items.slice(0, limit);
+    const hasMore = items.length > limit;
+    return jsonOk({
+      items: normalizeDeckDocuments(pageItems),
+      nextCursor: hasMore ? pageItems.at(-1)?.id : null,
+    });
   }
 
   let query = db.collection("decklists").orderBy("createdAt", "desc").limit(limit + 1);
-  if (tournamentId) query = db.collection("decklists").where("tournamentId", "==", tournamentId).limit(limit + 1) as typeof query;
+  if (tournamentId) {
+    query = db.collection("decklists").where("tournamentId", "==", tournamentId).orderBy("createdAt", "desc").limit(limit + 1);
+  }
+  if (cursor) {
+    const cursorDoc = await db.collection("decklists").doc(cursor).get();
+    if (cursorDoc.exists) {
+      query = query.startAfter(cursorDoc) as typeof query;
+    }
+  }
 
   const snap = await query.get();
   let items = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -43,15 +63,28 @@ export async function GET(request: Request) {
   }
   if (archetype) items = items.filter((d) => String((d as { archetype?: string }).archetype ?? "").toLowerCase().includes(archetype.toLowerCase()));
 
-  const hasMore = items.length > limit;
-  if (hasMore) items = items.slice(0, limit);
-
-  if (sort === "placement") {
-    items.sort((a, b) => ((a as { placement?: number }).placement ?? 99) - ((b as { placement?: number }).placement ?? 99));
+  let normalized = normalizeDeckDocuments(items);
+  if (opSet) normalized = normalized.filter((deck) => deck.opSet === opSet);
+  if (region) normalized = normalized.filter((deck) => deck.region === region);
+  if (leader) {
+    normalized = normalized.filter(
+      (deck) =>
+        deck.leaderId.toLowerCase().includes(leader.toLowerCase()) ||
+        deck.leaderName.toLowerCase().includes(leader.toLowerCase()),
+    );
   }
 
+  normalized = normalized.sort((a, b) =>
+    sort === "placement"
+      ? a.placement - b.placement
+      : new Date(b.tournamentDate).getTime() - new Date(a.tournamentDate).getTime(),
+  );
+
+  const hasMore = normalized.length > limit;
+  if (hasMore) normalized = normalized.slice(0, limit);
+
   return jsonOk({
-    items,
-    nextCursor: hasMore ? items.at(-1)?.id : null,
+    items: normalized,
+    nextCursor: hasMore ? normalized.at(-1)?.id : null,
   });
 }

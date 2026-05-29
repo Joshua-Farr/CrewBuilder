@@ -11,8 +11,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TournamentList } from "@/components/tournaments/tournament-list";
 import { CURRENT_META_OP_SET, formatOpSetLabel } from "@/lib/meta/constants";
 import { metaLeadersToChartRows } from "@/lib/meta-decks";
-import { jsonLd, siteConfig } from "@/lib/seo";
+import { createMetadata, jsonLd, siteConfig } from "@/lib/seo";
 import { getServerDecks, getServerMetaSnapshot, getServerTournaments } from "@/lib/services/server-data";
+
+export const metadata = createMetadata({
+  title: `Best One Piece TCG Decklists ${CURRENT_META_OP_SET}`,
+  description: `Browse the best One Piece TCG decklists for ${CURRENT_META_OP_SET}. Tournament-winning lists, meta analytics, and matchup stats for serious players.`,
+  path: "/",
+});
 import { cards, decks } from "@/lib/mock-data";
 
 export const revalidate = 3600;
@@ -30,8 +36,6 @@ export default async function Home() {
     [...leaderCardsById.entries()].map(([id, card]) => [id, card.imageUrl ?? "/card-back.svg"]),
   );
   const opSetLabel = formatOpSetLabel(metaSnapshot.opSet);
-  const latestEvent =
-    tournaments.find((event) => event.opSet === metaSnapshot.opSet) ?? tournaments[0] ?? null;
   const heroSnapshotRows = buildHeroSnapshotRows(metaSnapshot.topLeaders, {
     mostImprovedLeaderId: metaSnapshot.mostImprovedLeaderId,
     opSet: metaSnapshot.opSet,
@@ -54,17 +58,12 @@ export default async function Home() {
           },
         })}
       />
-      <HeroSection
-        snapshotRows={heroSnapshotRows}
-        opSetLabel={opSetLabel}
-        eventLabel={latestEvent?.name}
-        eventHref={latestEvent ? `/tournaments/${latestEvent.id}` : undefined}
-      />
+      <HeroSection snapshotRows={heroSnapshotRows} opSetLabel={opSetLabel} />
 
       <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <Card>
           <CardHeader>
-            <CardTitle>Current top meta leaders</CardTitle>
+            <CardTitle>Top leaders this format</CardTitle>
             <p className="text-sm text-muted-foreground">{opSetLabel} meta</p>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -103,8 +102,8 @@ export default async function Home() {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Meta snapshot chart</CardTitle>
-            <p className="text-sm text-muted-foreground">{opSetLabel} leader distribution</p>
+            <CardTitle>Meta share</CardTitle>
+            <p className="text-sm text-muted-foreground">{opSetLabel} leader distribution by topping decks</p>
           </CardHeader>
           <CardContent>
             <MetaSnapshotChart
@@ -121,11 +120,15 @@ export default async function Home() {
         </Card>
       </section>
 
-      <section>
+      <section aria-labelledby="best-decklists-heading">
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight">Trending decklists</h2>
-            <p className="mt-2 text-muted-foreground">Tournament-proven lists with stats and export tools.</p>
+            <h2 id="best-decklists-heading" className="text-3xl font-semibold tracking-tight">
+              Best One Piece TCG Decklists {metaSnapshot.opSet}
+            </h2>
+            <p className="mt-2 text-muted-foreground">
+              Recent tournament-winning lists designed to take you through top cut.
+            </p>
           </div>
           <Button asChild variant="outline">
             <Link href="/decks">

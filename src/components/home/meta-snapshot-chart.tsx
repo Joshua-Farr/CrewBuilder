@@ -228,7 +228,7 @@ export function MetaSnapshotChart({
 
           <div className="flex aspect-square w-[44%] flex-col items-center justify-center rounded-full border border-border/80 bg-gradient-to-b from-white to-muted/40 text-center shadow-inner">
 
-            <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground lg:text-xs">Current meta</p>
+            <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground lg:text-xs">Meta share</p>
 
             <p className="mt-0.5 text-2xl font-semibold tracking-tight text-foreground lg:text-3xl xl:text-4xl">{opSetLabel}</p>
 

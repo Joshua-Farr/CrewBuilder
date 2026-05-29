@@ -9,8 +9,11 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "seed": "tsx scripts/seed.ts",
+    "scrape:bandai": "tsx scripts/scrape-bandai-cards.ts",
+    "import:cards": "tsx scripts/import-bandai-cards.ts",
     "scrape:op15": "tsx scripts/scrape-op-top-decks.ts",
     "scrape:egman": "tsx scripts/scrape-egman.ts",
+    "import:egman": "tsx --env-file=.env.local scripts/import-egman-json.ts",
     "scrape:enqueue": "tsx scripts/run-scrape.ts",
     "scrape:local": "tsx scripts/run-scrape.ts --local"
   },
