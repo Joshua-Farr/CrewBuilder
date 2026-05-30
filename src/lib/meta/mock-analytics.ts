@@ -13,7 +13,7 @@ import type {
   TrendHighlight,
 } from "@/lib/meta/types";
 import type { CardColor, Region } from "@/lib/types";
-import { getWinRate } from "@/lib/utils";
+import { getWinRate, formatDeckRecord } from "@/lib/utils";
 
 const LEADERS: MetaLeaderStatExtended[] = [
   { leaderId: "op07-079", name: "Rob Lucci", colors: ["Black"], playRate: 22.4, winRate: 54.2, topCutRate: 28.1, conversionRate: 125.4, tournamentCount: 17, sampleSize: 412, games: 824, tier: "S", delta: 3.2, winRateDelta: 1.1 },
@@ -219,7 +219,7 @@ function buildPlayerProfiles(): PlayerProfileAnalytics[] {
         date: d.tournamentDate,
         placement: d.placement,
         leaderName: d.leaderName,
-        record: `${d.wins}-${d.losses}`,
+        record: formatDeckRecord(d.wins, d.losses, d.draws),
       })),
     });
     idx += 1;

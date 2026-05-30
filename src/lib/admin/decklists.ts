@@ -39,8 +39,10 @@ function toFirestoreDecklist(data: CmsDecklistForm, id: string, slug: string): R
     deckImage: data.deckImage ?? "",
     notes: data.notes ?? "",
     matchupInfo: data.matchupInfo ?? "",
+    roundMatchups: data.roundMatchups ?? [],
     tournamentReportLink: data.tournamentReportLink ?? "",
     twitterLink: data.twitterLink ?? "",
+    socialPostUrl: data.twitterLink ?? "",
     status: data.status,
     featured: data.featured,
     source: "cms",
@@ -84,6 +86,7 @@ function toDeck(doc: DocumentSnapshot): Deck {
     twitterLink: d.twitterLink as string | undefined,
     socialPostUrl: (d.twitterLink ?? d.socialPostUrl) as string | undefined,
     matchupInfo: d.matchupInfo as string | undefined,
+    roundMatchups: Array.isArray(d.roundMatchups) ? (d.roundMatchups as Deck["roundMatchups"]) : [],
     status: d.status as Deck["status"],
     featured: Boolean(d.featured),
     isPublic: d.status === "published",
@@ -168,11 +171,14 @@ export async function updateDecklist(
   const existing = await ref.get();
   if (!existing.exists) throw new Error("Decklist not found");
 
+  const twitterLink = input.twitterLink ?? existing.data()?.twitterLink ?? "";
   const updated = {
     ...existing.data(),
     ...input,
     title: input.title ?? existing.data()?.title,
     tournamentId: input.eventId ?? existing.data()?.tournamentId,
+    twitterLink,
+    socialPostUrl: twitterLink,
     updatedAt: new Date().toISOString(),
   };
   await ref.set(updated, { merge: true });
@@ -234,6 +240,7 @@ export async function duplicateDecklist(decklistId: string, actor: { id: string;
       })),
       matchups: [],
       notes: existing.notes,
+      roundMatchups: existing.roundMatchups ?? [],
       status: "draft",
       featured: false,
     },
@@ -258,6 +265,7 @@ async function syncDeckMirror(id: string, payload: Record<string, unknown>) {
       losses: payload.losses ?? 0,
       cards: payload.cards,
       notes: payload.notes ?? "",
+      roundMatchups: payload.roundMatchups ?? [],
       twitterLink: payload.twitterLink ?? "",
       socialPostUrl: payload.twitterLink ?? "",
       isPublic: payload.status === "published",

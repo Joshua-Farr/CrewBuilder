@@ -37,6 +37,7 @@ export async function updateDecklistAction(
     revalidatePath("/admin/decklists");
     revalidatePath(`/admin/decklists/${decklistId}`);
     revalidatePath(`/decks/${data.slug}`);
+    revalidatePath(`/decks/${data.id}`);
     return { success: true, data };
   } catch (e) {
     return { success: false, error: e instanceof Error ? e.message : "Failed to update decklist" };
@@ -81,7 +82,7 @@ export async function getDecklistAction(id: string) {
 
 export async function quickUpdateDecklistAction(
   decklistId: string,
-  fields: { title?: string; notes?: string },
+  fields: { title?: string; notes?: string; roundMatchups?: CmsDecklistForm["roundMatchups"] },
 ): Promise<ActionResult> {
   return updateDecklistAction(decklistId, fields);
 }

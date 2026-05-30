@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Deck } from "@/lib/types";
-import { formatCurrency, formatPlacementChip, getLeaderImageUrl, getWinRate } from "@/lib/utils";
+import { formatCurrency, formatDeckRecord, formatDeckWinRate, formatPlacementChip, getLeaderImageUrl, hasDeckRecord, getWinRate } from "@/lib/utils";
 
 export function DeckTable({ decks }: { decks: Deck[] }) {
   return (
@@ -61,15 +61,15 @@ export function DeckTable({ decks }: { decks: Deck[] }) {
                   <Badge variant="outline">{deck.opSet}</Badge>
                 </TableCell>
                 <TableCell className="hidden py-2 text-right tabular-nums sm:table-cell">
-                  {getWinRate(deck.wins, deck.losses).toFixed(1)}%
+                  {formatDeckWinRate(deck.wins, deck.losses)}
                 </TableCell>
                 <TableCell className="py-2 text-right">
-                  <p className="font-medium tabular-nums">
-                    {deck.wins}-{deck.losses}
-                  </p>
-                  <p className="text-xs text-muted-foreground sm:hidden">
-                    {getWinRate(deck.wins, deck.losses).toFixed(1)}% WR
-                  </p>
+                  <p className="font-medium tabular-nums">{formatDeckRecord(deck.wins, deck.losses)}</p>
+                  {hasDeckRecord(deck.wins, deck.losses) ? (
+                    <p className="text-xs text-muted-foreground sm:hidden">
+                      {getWinRate(deck.wins, deck.losses).toFixed(1)}% WR
+                    </p>
+                  ) : null}
                 </TableCell>
                 <TableCell className="hidden py-2 text-right tabular-nums xl:table-cell">
                   {formatCurrency(deck.estimatedCost)}

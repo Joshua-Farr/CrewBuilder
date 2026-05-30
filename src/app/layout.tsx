@@ -3,7 +3,6 @@ import { Geist } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { AuthProvider } from "@/components/providers/auth-provider";
-import { AdminSessionProvider } from "@/components/providers/session-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { createMetadata } from "@/lib/seo";
 import "./globals.css";
@@ -22,7 +21,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={geist.variable}>
       <body className="font-sans antialiased" suppressHydrationWarning>
         <QueryProvider>
-          <AdminSessionProvider>
           <AuthProvider>
             <div className="pointer-events-none fixed inset-0 noise-overlay" />
             <SiteHeader />
@@ -31,7 +29,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </main>
             <SiteFooter />
           </AuthProvider>
-          </AdminSessionProvider>
         </QueryProvider>
       </body>
     </html>

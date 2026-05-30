@@ -1,6 +1,6 @@
 import type { Deck } from "@/lib/types";
 import type { PlayerProfileAnalytics } from "@/lib/meta/types";
-import { getWinRate } from "@/lib/utils";
+import { getWinRate, formatDeckRecord } from "@/lib/utils";
 
 function slugify(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -57,7 +57,7 @@ export function computePlayerProfiles(decks: Deck[]): PlayerProfileAnalytics[] {
             date: d.tournamentDate,
             placement: d.placement,
             leaderName: d.leaderName,
-            record: `${d.wins}-${d.losses}`,
+            record: formatDeckRecord(d.wins, d.losses, d.draws),
           })),
       };
     })

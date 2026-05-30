@@ -6,6 +6,16 @@ export interface TcgCardVariant { id: string; rarity: string; imageUrl: string; 
 export interface TcgCard { id: string; code: string; name: string; type: CardType; colors: CardColor[]; set: string; rarity: string; cost?: number; life?: number; power?: number; counter?: number; attribute?: string; attributes?: string[]; types?: string[]; trigger?: string; blockIcon?: number | "X"; effect: string; imageUrl?: string; imageUrlFallback?: string; variants?: TcgCardVariant[]; sets?: string[]; sourcePackId?: string; scrapedAt?: string; isLeader: boolean; searchTokens: string[]; }
 export interface DeckCard { cardId: string; quantity: number; category: CardType; }
 export interface DeckMatchup { opponentLeaderId: string; opponentLeaderName: string; wins: number; losses: number; notes?: string; }
+export type DieRollResult = "won" | "lost" | "none";
+export type RoundMatchResult = "win" | "loss" | "draw";
+export interface RoundMatchup {
+  round: number;
+  opponentName: string;
+  opponentLeaderId?: string;
+  dieRoll: DieRollResult;
+  result: RoundMatchResult;
+  notes?: string;
+}
 export type PublishStatus = "draft" | "published";
 
 export interface DeckCardExtended extends DeckCard {
@@ -49,6 +59,7 @@ export interface Deck {
   tournamentReportLink?: string;
   twitterLink?: string;
   matchupInfo?: string;
+  roundMatchups?: RoundMatchup[];
   status?: PublishStatus;
   featured?: boolean;
   isPublic: boolean;

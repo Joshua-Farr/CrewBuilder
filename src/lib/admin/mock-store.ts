@@ -144,6 +144,7 @@ export function mockCreateDecklist(data: CmsDecklist, actor: { id: string; email
     tournamentReportLink: data.tournamentReportLink,
     twitterLink: data.twitterLink,
     matchupInfo: data.matchupInfo,
+    roundMatchups: data.roundMatchups ?? [],
     status: data.status,
     featured: data.featured,
     isPublic: data.status === "published",
@@ -167,6 +168,9 @@ export function mockUpdateDecklist(deckId: string, data: Partial<CmsDecklist>, a
     placement: data.placement ?? prev.placement,
     status: data.status ?? prev.status,
     featured: data.featured ?? prev.featured,
+    twitterLink: data.twitterLink ?? prev.twitterLink,
+    socialPostUrl: data.twitterLink ?? prev.socialPostUrl ?? prev.twitterLink,
+    roundMatchups: data.roundMatchups ?? prev.roundMatchups,
     isPublic: (data.status ?? prev.status) === "published",
     updatedAt: new Date().toISOString(),
   };

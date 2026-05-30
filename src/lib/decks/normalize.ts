@@ -1,4 +1,5 @@
 import type { CardColor, CardType, Deck, Region } from "@/lib/types";
+import { resolveSocialPostUrl } from "@/lib/social-post";
 import { slugify } from "@/lib/utils";
 
 const REGIONS: Region[] = ["NA", "EU", "LATAM", "OCE", "ASIA", "JP"];
@@ -78,11 +79,12 @@ export function normalizeDeckDocument(raw: unknown): Deck | null {
     losses: Number(doc.losses ?? 0),
     cards,
     matchups: Array.isArray(doc.matchups) ? (doc.matchups as Deck["matchups"]) : [],
+    roundMatchups: Array.isArray(doc.roundMatchups) ? (doc.roundMatchups as Deck["roundMatchups"]) : [],
     notes: String(doc.notes ?? ""),
     techChoices: Array.isArray(doc.techChoices) ? (doc.techChoices as string[]) : [],
     estimatedCost: Number(doc.estimatedCost ?? doc.totalPrice ?? 0),
     tags: Array.isArray(doc.tags) ? (doc.tags as string[]) : doc.archetype ? [String(doc.archetype)] : [],
-    socialPostUrl: typeof doc.socialPostUrl === "string" && doc.socialPostUrl.trim() ? doc.socialPostUrl.trim() : undefined,
+    socialPostUrl: resolveSocialPostUrl(doc as { socialPostUrl?: string; twitterLink?: string }),
     isPublic: doc.isPublic !== false,
     createdAt,
     updatedAt: String(doc.updatedAt ?? createdAt),

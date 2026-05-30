@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { RoundMatchupsEditor } from "@/components/decks/round-matchups-editor";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { deleteDecklistAction, quickUpdateDecklistAction } from "@/lib/admin/actions/decklists";
 import { deleteEventAction } from "@/lib/admin/actions/events";
+import type { RoundMatchup } from "@/lib/types";
 
 type EntityType = "decklist" | "event";
 
@@ -17,6 +19,7 @@ export function AdminToolbar({
   editHref,
   initialTitle,
   initialNotes,
+  initialRoundMatchups,
   enabled = false,
 }: {
   entityType: EntityType;
@@ -24,17 +27,23 @@ export function AdminToolbar({
   editHref: string;
   initialTitle?: string;
   initialNotes?: string;
+  initialRoundMatchups?: RoundMatchup[];
   enabled?: boolean;
 }) {
   const [title, setTitle] = useState(initialTitle ?? "");
   const [notes, setNotes] = useState(initialNotes ?? "");
+  const [roundMatchups, setRoundMatchups] = useState<RoundMatchup[]>(initialRoundMatchups ?? []);
   const [editing, setEditing] = useState(false);
 
   if (!enabled) return null;
 
   async function quickSave() {
     if (entityType === "decklist") {
-      const result = await quickUpdateDecklistAction(entityId, { title, notes });
+      const result = await quickUpdateDecklistAction(entityId, {
+        title,
+        notes,
+        roundMatchups: roundMatchups.filter((m) => m.opponentName.trim()),
+      });
       if (!result.success) toast.error(result.error);
       else {
         toast.success("Saved");
@@ -73,9 +82,10 @@ export function AdminToolbar({
         </Button>
       </div>
       {editing && entityType === "decklist" ? (
-        <div className="mt-4 space-y-3">
+        <div className="mt-4 space-y-4">
           <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
           <Input value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Notes" />
+          <RoundMatchupsEditor value={roundMatchups} onChange={setRoundMatchups} compact />
           <Button size="sm" onClick={quickSave}>
             Save changes
           </Button>

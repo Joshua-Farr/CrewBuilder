@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Deck, Tournament } from "@/lib/types";
-import { getLeaderImageUrl, getWinRate } from "@/lib/utils";
+import { getLeaderImageUrl, formatDeckRecord, hasDeckRecord, getWinRate } from "@/lib/utils";
 
 export function TournamentDecklists({
   event,
@@ -64,10 +64,10 @@ export function TournamentDecklists({
                     </div>
                   </TableCell>
                   <TableCell>
-                    <p className="font-medium">
-                      {deck.wins}-{deck.losses}
-                    </p>
-                    <p className="text-xs text-muted-foreground">{getWinRate(deck.wins, deck.losses).toFixed(1)}% WR</p>
+                    <p className="font-medium">{formatDeckRecord(deck.wins, deck.losses)}</p>
+                    {hasDeckRecord(deck.wins, deck.losses) ? (
+                      <p className="text-xs text-muted-foreground">{getWinRate(deck.wins, deck.losses).toFixed(1)}% WR</p>
+                    ) : null}
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2 text-muted-foreground">

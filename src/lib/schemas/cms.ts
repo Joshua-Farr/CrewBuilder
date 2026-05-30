@@ -28,6 +28,20 @@ export const matchupSchema = z.object({
 
 export type CmsMatchup = z.infer<typeof matchupSchema>;
 
+export const dieRollResultSchema = z.enum(["won", "lost", "none"]);
+export const roundMatchResultSchema = z.enum(["win", "loss", "draw"]);
+
+export const roundMatchupSchema = z.object({
+  round: z.number().int().positive(),
+  opponentName: z.string().min(1),
+  opponentLeaderId: z.string().optional(),
+  dieRoll: dieRollResultSchema.default("none"),
+  result: roundMatchResultSchema,
+  notes: z.string().optional(),
+});
+
+export type CmsRoundMatchup = z.infer<typeof roundMatchupSchema>;
+
 export const cmsEventSchema = z.object({
   id: z.string().optional(),
   name: z.string().min(1),
@@ -77,6 +91,7 @@ export const cmsDecklistSchema = z.object({
   deckImage: z.string().url().optional().or(z.literal("")),
   notes: z.string().optional(),
   matchupInfo: z.string().optional(),
+  roundMatchups: z.array(roundMatchupSchema).default([]),
   tournamentReportLink: z.string().url().optional().or(z.literal("")),
   twitterLink: z.string().url().optional().or(z.literal("")),
   eventId: z.string().min(1),

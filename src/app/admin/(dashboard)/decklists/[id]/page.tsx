@@ -6,6 +6,7 @@ import { StatusBadge } from "@/components/admin/status-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getDecklistById } from "@/lib/admin/decklists";
+import { formatDeckRecord } from "@/lib/utils";
 
 export default async function AdminDecklistDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -33,7 +34,7 @@ export default async function AdminDecklistDetailPage({ params }: { params: Prom
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
               <p>
-                Placement: {deck.placement ? `#${deck.placement}` : "—"} · Record {deck.wins}-{deck.losses}
+                Placement: {deck.placement ? `#${deck.placement}` : "—"} · Record {formatDeckRecord(deck.wins, deck.losses, deck.draws)}
               </p>
               <p className="text-muted-foreground">{deck.notes || "No notes"}</p>
             </CardContent>

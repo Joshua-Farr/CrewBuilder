@@ -1,6 +1,6 @@
 import type Fuse from "fuse.js";
 import { fetchTournaments } from "@/lib/api/client";
-import type { Region, Tournament, TournamentFormat } from "@/lib/types";
+import type { Region, Tournament } from "@/lib/types";
 
 export const TOURNAMENTS_PAGE_SIZE = 25;
 
@@ -26,7 +26,6 @@ export function filterTournaments(
   options: {
     search: string;
     region: Region | "all";
-    format: TournamentFormat | "all";
     opSet: string;
     fuse: Fuse<Tournament> | null;
   },
@@ -36,7 +35,6 @@ export function filterTournaments(
 
   return base.filter((event) => {
     if (options.region !== "all" && event.region !== options.region) return false;
-    if (options.format !== "all" && event.format !== options.format) return false;
     if (options.opSet !== "all" && event.opSet !== options.opSet) return false;
     return true;
   });

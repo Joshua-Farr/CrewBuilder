@@ -11,6 +11,7 @@ import { CardImage } from "@/components/cards/card-image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DeckCompositionSummary } from "@/components/decks/deck-composition-summary";
+import { RoundMatchupsDisplay } from "@/components/decks/round-matchups-display";
 import { DeckSocialPostEmbed } from "@/components/decks/deck-social-post-embed";
 import { AdminToolbar } from "@/components/admin/inline/admin-toolbar";
 import { SaveDeckButton } from "@/components/decks/save-deck-button";
@@ -21,7 +22,8 @@ import { getDeckCompositionStats, type DeckCounterValue } from "@/lib/deck-stats
 import { cards as fallbackCards } from "@/lib/mock-data";
 import { getCards } from "@/lib/services/firestore";
 import type { Deck } from "@/lib/types";
-import { cn, formatCurrency, formatLeaderDisplayName, formatPlacementLabel, getCardImageUrl, getLeaderImageUrl, getWinRate, isPlacementTag } from "@/lib/utils";
+import { resolveSocialPostUrl } from "@/lib/social-post";
+import { cn, formatCurrency, formatDeckRecord, formatDeckWinRate, formatLeaderDisplayName, formatPlacementLabel, getCardImageUrl, getLeaderImageUrl, getWinRate, isPlacementTag } from "@/lib/utils";
 
 export function DeckDetail({ deck, isAdmin }: { deck: Deck; isAdmin?: boolean }) {
   const [hoveredCost, setHoveredCost] = useState<number | null>(null);
@@ -40,7 +42,7 @@ export function DeckDetail({ deck, isAdmin }: { deck: Deck; isAdmin?: boolean })
   const simExportText = formatDecklistForSim(deck, cards);
   const tcgPlayerUrl = getTcgPlayerMassEntryUrl(deck, cards);
   const notes = deck.notes.trim();
-  const socialPostUrl = deck.socialPostUrl?.trim();
+  const socialPostUrl = resolveSocialPostUrl(deck);
   const leaderDisplayName = formatLeaderDisplayName(deck.leaderName);
   const moreDecklistsHref = `/decks?leader=${encodeURIComponent(deck.leaderId)}&opSet=${encodeURIComponent(deck.opSet)}`;
 
@@ -63,6 +65,7 @@ export function DeckDetail({ deck, isAdmin }: { deck: Deck; isAdmin?: boolean })
         editHref={`/admin/decklists/${deck.id}/edit`}
         initialTitle={deck.name}
         initialNotes={deck.notes}
+        initialRoundMatchups={deck.roundMatchups ?? []}
         enabled={isAdmin}
       />
       <section className="grid gap-6 lg:grid-cols-[320px_1fr]">
@@ -99,8 +102,8 @@ export function DeckDetail({ deck, isAdmin }: { deck: Deck; isAdmin?: boolean })
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid gap-3 sm:grid-cols-4">
-              <Stat label="Record" value={`${deck.wins}-${deck.losses}`} />
-              <Stat label="Win rate" value={`${getWinRate(deck.wins, deck.losses).toFixed(1)}%`} />
+              <Stat label="Record" value={formatDeckRecord(deck.wins, deck.losses, deck.draws)} />
+              <Stat label="Win rate" value={formatDeckWinRate(deck.wins, deck.losses)} />
               <Stat label="Region" value={deck.region} />
               <Stat label="Cost" value={formatCurrency(deck.estimatedCost)} />
             </div>
@@ -168,7 +171,9 @@ export function DeckDetail({ deck, isAdmin }: { deck: Deck; isAdmin?: boolean })
               <CardTitle>Tournament matchup notes</CardTitle>
             </CardHeader>
             <CardContent className="overflow-x-auto">
-              {deck.matchups.length ? (
+              {deck.roundMatchups?.length ? (
+                <RoundMatchupsDisplay matchups={deck.roundMatchups} />
+              ) : deck.matchups.length ? (
                 <Table>
                   <TableHeader>
                     <TableRow>

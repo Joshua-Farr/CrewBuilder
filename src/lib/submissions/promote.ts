@@ -62,6 +62,7 @@ export function payloadToDecklistForm(
     deckImage: "",
     notes: payload.notes?.trim() ?? "",
     matchupInfo: "",
+    roundMatchups: [],
     tournamentReportLink: "",
     twitterLink: payload.socialPostUrl?.trim() ?? "",
     cards: resolved.cards,

@@ -86,7 +86,7 @@ export function HeroSection({ snapshotRows, opSetLabel }: HeroSectionProps) {
               ))
             ) : (
               <p className="rounded-2xl border border-dashed border-border p-4 text-sm text-muted-foreground">
-                Weekly deck results are loading. Check back shortly for this week&apos;s top performers.
+                No winning decklists were reported for {opSetLabel} in the past 7 days yet.
               </p>
             )}
           </div>

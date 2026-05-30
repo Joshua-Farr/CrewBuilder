@@ -16,6 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { createDecklistAction, updateDecklistAction } from "@/lib/admin/actions/decklists";
 import { listEventsAction } from "@/lib/admin/actions/events";
 import { resolveDecklistPaste } from "@/lib/parse-decklist-paste";
+import { RoundMatchupsEditor } from "@/components/decks/round-matchups-editor";
 import { cmsDecklistFormSchema, DECK_CARD_TOTAL, validateDeckCardTotal, type CardEntry, type CmsDecklistForm } from "@/lib/schemas/cms";
 import { cards as mockCards } from "@/lib/mock-data";
 import type { Deck, Tournament } from "@/lib/types";
@@ -35,6 +36,7 @@ export function DecklistForm({ deck, defaultEventId }: { deck?: Deck; defaultEve
       category: c.category,
     })) ?? [],
   );
+  const [roundMatchups, setRoundMatchups] = useState(deck?.roundMatchups ?? []);
 
   useEffect(() => {
     listEventsAction().then(setEvents);
@@ -59,6 +61,7 @@ export function DecklistForm({ deck, defaultEventId }: { deck?: Deck; defaultEve
       deckImage: deck?.deckImage ?? "",
       notes: deck?.notes ?? "",
       matchupInfo: deck?.matchupInfo ?? "",
+      roundMatchups: deck?.roundMatchups ?? [],
       tournamentReportLink: deck?.tournamentReportLink ?? "",
       twitterLink: deck?.twitterLink ?? deck?.socialPostUrl ?? "",
       cards: lineCards,
@@ -119,7 +122,11 @@ export function DecklistForm({ deck, defaultEventId }: { deck?: Deck; defaultEve
   }
 
   async function onSubmit(values: CmsDecklistForm) {
-    const payload = { ...values, cards: lineCards };
+    const payload = {
+      ...values,
+      cards: lineCards,
+      roundMatchups: roundMatchups.filter((m) => m.opponentName.trim()),
+    };
     setSaving(true);
     const result = deck ? await updateDecklistAction(deck.id, payload) : await createDecklistAction(payload);
     setSaving(false);
@@ -143,6 +150,7 @@ export function DecklistForm({ deck, defaultEventId }: { deck?: Deck; defaultEve
           <TabsTrigger value="basics">Basics</TabsTrigger>
           <TabsTrigger value="cards">Cards ({total}/{DECK_CARD_TOTAL})</TabsTrigger>
           <TabsTrigger value="links">Media & links</TabsTrigger>
+          <TabsTrigger value="matchups">Matchups</TabsTrigger>
         </TabsList>
 
         <TabsContent value="basics" className="mt-6 space-y-4">
@@ -294,10 +302,10 @@ export function DecklistForm({ deck, defaultEventId }: { deck?: Deck; defaultEve
             <Label>Social post URL (X/Twitter)</Label>
             <Input {...register("twitterLink")} placeholder="https://" />
           </div>
-          <div className="space-y-2">
-            <Label>Matchup notes</Label>
-            <Textarea {...register("matchupInfo")} rows={3} />
-          </div>
+        </TabsContent>
+
+        <TabsContent value="matchups" className="mt-6 space-y-4">
+          <RoundMatchupsEditor value={roundMatchups} onChange={setRoundMatchups} />
         </TabsContent>
       </Tabs>
 

@@ -15,6 +15,13 @@ const LOCAL_DEV_SOCIAL_POST_SAMPLES: Record<string, string> = {
   "deck-purple-luffy-nationals": "https://x.com/Y0stwiththeMost/status/2058647522466226429",
 };
 
+export function resolveSocialPostUrl(
+  raw: { socialPostUrl?: string | null; twitterLink?: string | null } | undefined | null,
+): string | undefined {
+  const url = raw?.socialPostUrl?.trim() || raw?.twitterLink?.trim();
+  return url || undefined;
+}
+
 export function parseSocialPostUrl(raw: string | undefined | null): ParsedSocialPost | null {
   const url = raw?.trim();
   if (!url) return null;

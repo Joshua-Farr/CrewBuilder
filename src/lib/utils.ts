@@ -23,6 +23,20 @@ export function getWinRate(wins: number, losses: number) {
   return games ? (wins / games) * 100 : 0;
 }
 
+export function hasDeckRecord(wins: number, losses: number, draws = 0) {
+  return wins + losses + draws > 0;
+}
+
+export function formatDeckRecord(wins: number, losses: number, draws = 0) {
+  if (!hasDeckRecord(wins, losses, draws)) return "—";
+  return draws > 0 ? `${wins}-${losses}-${draws}` : `${wins}-${losses}`;
+}
+
+export function formatDeckWinRate(wins: number, losses: number, digits = 1) {
+  if (!hasDeckRecord(wins, losses)) return "—";
+  return `${getWinRate(wins, losses).toFixed(digits)}%`;
+}
+
 export function formatPlacementLabel(placement: number) {
   const mod100 = placement % 100;
   const suffix =

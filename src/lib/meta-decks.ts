@@ -224,15 +224,34 @@ export function getWinningDecklistBreakdownFromDecks(
   return toWinnerBreakdownRows(winnerCounts);
 }
 
+function getWinnerBreakdownForOpSet(
+  decks: Deck[],
+  tournaments: Tournament[],
+  opSet: string,
+  days: number,
+): EventWinnerBreakdownRow[] {
+  const fromEvents = getEventWinnerBreakdown(decks, tournaments, opSet, { days });
+  if (fromEvents.length > 0) return fromEvents;
+  return getWinningDecklistBreakdownFromDecks(decks, opSet, days);
+}
+
 export function getRecentWinnerBreakdown(
   decks: Deck[],
   tournaments: Tournament[],
   opSet: string,
   days = HERO_WINNER_LOOKBACK_DAYS,
 ): EventWinnerBreakdownRow[] {
-  const fromEvents = getEventWinnerBreakdown(decks, tournaments, opSet, { days });
-  if (fromEvents.length > 0) return fromEvents;
-  return getWinningDecklistBreakdownFromDecks(decks, opSet, days);
+  const primary = getWinnerBreakdownForOpSet(decks, tournaments, opSet, days);
+  if (primary.length > 0) return primary;
+
+  // Meta snapshot may be labeled for the current format (e.g. OP16) while imported
+  // decklists and tournaments are still tagged with the source set (e.g. OP15).
+  const deckOpSets = [...new Set(decks.map((deck) => deck.opSet).filter(Boolean))];
+  const tournamentOpSets = [...new Set(tournaments.map((event) => event.opSet).filter(Boolean))];
+  const fallbackOpSet = deckOpSets.find((set) => set !== opSet) ?? tournamentOpSets.find((set) => set !== opSet);
+  if (!fallbackOpSet) return [];
+
+  return getWinnerBreakdownForOpSet(decks, tournaments, fallbackOpSet, days);
 }
 
 export function getPopularMetaCards(decks: Deck[], cards: TcgCard[], limit = 8): PopularMetaCard[] {

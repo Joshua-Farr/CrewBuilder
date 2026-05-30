@@ -11,7 +11,7 @@ import { cards, decks } from "@/lib/mock-data";
 import { getLeaderBreakdown, getMetaDeckSummaries, getMetaSlug, getPopularMetaCards, normalizeMetaParam, sortToppingDecks } from "@/lib/meta-decks";
 import { createMetadata } from "@/lib/seo";
 import { getServerDecks } from "@/lib/services/server-data";
-import { cn, getWinRate } from "@/lib/utils";
+import { cn, formatDeckRecord, hasDeckRecord, getWinRate } from "@/lib/utils";
 
 export const revalidate = 1800;
 
@@ -114,10 +114,10 @@ export default async function MetaDecksPage({ params }: { params: Promise<{ opSe
                       </div>
                     </TableCell>
                     <TableCell>
-                      <p className="font-medium">
-                        {deck.wins}-{deck.losses}
-                      </p>
-                      <p className="text-xs text-muted-foreground">{getWinRate(deck.wins, deck.losses).toFixed(1)}% WR</p>
+                      <p className="font-medium">{formatDeckRecord(deck.wins, deck.losses)}</p>
+                      {hasDeckRecord(deck.wins, deck.losses) ? (
+                        <p className="text-xs text-muted-foreground">{getWinRate(deck.wins, deck.losses).toFixed(1)}% WR</p>
+                      ) : null}
                     </TableCell>
                     <TableCell className="min-w-64">
                       <p className="font-medium">{deck.tournamentName}</p>

@@ -2,7 +2,7 @@ import { TournamentBrowser } from "@/components/tournaments/tournament-browser";
 import { PageHeader } from "@/components/ui/page-header";
 import { createMetadata } from "@/lib/seo";
 import { getServerTournaments } from "@/lib/services/server-data";
-import type { Region, TournamentFormat } from "@/lib/types";
+import type { Region } from "@/lib/types";
 
 export const revalidate = 1800;
 export const metadata = createMetadata({
@@ -13,12 +13,10 @@ export const metadata = createMetadata({
 });
 
 const regions: Region[] = ["NA", "EU", "LATAM", "OCE", "ASIA", "JP"];
-const formats: TournamentFormat[] = ["Constructed", "Sealed", "Teams"];
 
 type TournamentsPageProps = {
   searchParams: Promise<{
     region?: string;
-    format?: string;
     opSet?: string;
   }>;
 };
@@ -33,10 +31,6 @@ export default async function TournamentsPage({ searchParams }: TournamentsPageP
         ? (params.region as Region)
         : "NA";
 
-  const initialFormat: TournamentFormat | "all" = formats.includes(params.format as TournamentFormat)
-    ? (params.format as TournamentFormat)
-    : "all";
-
   return (
     <div className="space-y-8">
       <PageHeader
@@ -47,7 +41,6 @@ export default async function TournamentsPage({ searchParams }: TournamentsPageP
       <TournamentBrowser
         initialTournaments={initialTournaments}
         initialRegion={initialRegion}
-        initialFormat={initialFormat}
         initialOpSet={params.opSet ?? "all"}
       />
     </div>

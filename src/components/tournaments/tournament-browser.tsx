@@ -14,7 +14,7 @@ import {
   filterTournaments,
   TOURNAMENTS_PAGE_SIZE,
 } from "@/lib/tournaments/pagination";
-import type { Region, Tournament, TournamentFormat } from "@/lib/types";
+import type { Region, Tournament } from "@/lib/types";
 
 const regions: Array<Region | "all"> = ["all", "NA", "EU", "LATAM", "OCE", "ASIA", "JP"];
 const regionLabels: Record<Region, string> = {
@@ -25,30 +25,25 @@ const regionLabels: Record<Region, string> = {
   ASIA: "Asia",
   JP: "Japan",
 };
-const formats: Array<TournamentFormat | "all"> = ["all", "Constructed", "Sealed", "Teams"];
-
 export type TournamentBrowserInitialFilters = {
   initialTournaments?: Tournament[];
   initialRegion?: Region | "all";
-  initialFormat?: TournamentFormat | "all";
   initialOpSet?: string;
 };
 
 export function TournamentBrowser({
   initialTournaments = [],
   initialRegion = "NA",
-  initialFormat = "all",
   initialOpSet = "all",
 }: TournamentBrowserInitialFilters = {}) {
   const [search, setSearch] = React.useState("");
   const [region, setRegion] = React.useState<Region | "all">(initialRegion);
-  const [format, setFormat] = React.useState<TournamentFormat | "all">(initialFormat);
   const [opSet, setOpSet] = React.useState(initialOpSet);
   const [page, setPage] = React.useState(0);
 
   React.useEffect(() => {
     setPage(0);
-  }, [region, format, opSet, search]);
+  }, [region, opSet, search]);
 
   const {
     data: catalog = initialTournaments,
@@ -80,11 +75,10 @@ export function TournamentBrowser({
       filterTournaments(catalog, {
         search,
         region,
-        format,
         opSet,
         fuse,
       }),
-    [catalog, format, fuse, opSet, region, search],
+    [catalog, fuse, opSet, region, search],
   );
 
   const displayEvents = filtered.slice(page * TOURNAMENTS_PAGE_SIZE, (page + 1) * TOURNAMENTS_PAGE_SIZE);
@@ -98,7 +92,7 @@ export function TournamentBrowser({
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-3 rounded-2xl border border-border bg-white p-4 shadow-sm md:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
+      <div className="grid gap-3 rounded-2xl border border-border bg-white p-4 shadow-sm md:grid-cols-2 lg:grid-cols-[1.4fr_repeat(2,1fr)]">
         <label className="relative md:col-span-2 lg:col-span-1">
           <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -117,17 +111,6 @@ export function TournamentBrowser({
           {regions.map((item) => (
             <option key={item} value={item}>
               {item === "all" ? "All regions" : regionLabels[item]}
-            </option>
-          ))}
-        </Select>
-        <Select
-          value={format}
-          onChange={(event) => setFormat(event.target.value as TournamentFormat | "all")}
-          suppressHydrationWarning
-        >
-          {formats.map((item) => (
-            <option key={item} value={item}>
-              {item === "all" ? "All formats" : item}
             </option>
           ))}
         </Select>

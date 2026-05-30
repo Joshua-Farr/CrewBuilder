@@ -1,4 +1,5 @@
 import type { Deck, DeckCard, TcgCard } from "@/lib/types";
+import { formatDeckRecord } from "@/lib/utils";
 
 type ResolvedDeckCard = DeckCard & { card?: TcgCard };
 
@@ -21,7 +22,7 @@ export function formatDecklistText(deck: Deck, cardPool: TcgCard[]) {
   return [
     `${deck.player} - ${deck.tournamentName}`,
     `Placement: #${deck.placement}`,
-    `Record: ${deck.wins}-${deck.losses}`,
+    `Record: ${formatDeckRecord(deck.wins, deck.losses, deck.draws)}`,
     "",
     `Leader: ${deck.leaderName}`,
     "",
