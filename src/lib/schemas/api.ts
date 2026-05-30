@@ -6,12 +6,25 @@ export const paginationSchema = z.object({
   cursor: z.string().optional(),
 });
 
+export const metaWindowSchema = z.enum(["7", "30", "90"]).default("30");
+export const metaVenueSchema = z.enum(["online", "offline", "all"]).default("all");
+
 export const metaQuerySchema = paginationSchema.extend({
   format: formatSchema.optional(),
   opSet: z.string().optional(),
   from: z.string().optional(),
   to: z.string().optional(),
   region: regionSchema.optional(),
+  window: metaWindowSchema.optional(),
+  venue: metaVenueSchema.optional(),
+  eventType: z.string().optional(),
+  leaderId: z.string().optional(),
+});
+
+export const metaPrepSchema = z.object({
+  opSet: z.string().optional(),
+  format: formatSchema.optional(),
+  metaShares: z.record(z.string(), z.coerce.number().min(0).max(100)),
 });
 
 export const decksQuerySchema = paginationSchema.extend({

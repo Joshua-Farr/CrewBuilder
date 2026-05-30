@@ -27,7 +27,7 @@ export const ourFileRouter = {
       return { userId: session.user.id };
     })
     .onUploadComplete(async ({ file }) => ({ url: file.ufsUrl })),
-  submissionProof: f({ image: { maxFileSize: "10MB", maxFileCount: 5 } })
+  submissionProof: f({ image: { maxFileSize: "8MB", maxFileCount: 5 } })
     .middleware(async () => ({}))
     .onUploadComplete(async ({ file }) => ({ url: file.ufsUrl, name: file.name })),
 } satisfies FileRouter;

@@ -85,10 +85,43 @@ export interface Tournament {
   createdAt?: string;
   updatedAt?: string;
 }
-export interface MetaLeaderStat { leaderId: string; name: string; colors: CardColor[]; playRate: number; winRate: number; games: number; tier: "S" | "A" | "B" | "C"; delta: number; }
+export interface MetaLeaderStat {
+  leaderId: string;
+  name: string;
+  colors: CardColor[];
+  playRate: number;
+  winRate: number;
+  games: number;
+  tier: "S" | "A" | "B" | "C";
+  delta: number;
+  topCutRate?: number;
+  conversionRate?: number;
+  tournamentCount?: number;
+  sampleSize?: number;
+}
 export interface TrendPoint { date: string; leader: string; playRate: number; winRate: number; }
-export interface RegionStat { region: Region; topLeader: string; winRate: number; decks: number; }
-export interface MetaSnapshot { id: string; weekStart: string; format: TournamentFormat; opSet: string; topLeaders: MetaLeaderStat[]; matchupMatrix: Record<string, Record<string, number>>; regionStats: RegionStat[]; trendPoints: TrendPoint[]; bestDeckId: string; mostImprovedLeaderId: string; generatedAt: string; }
+export interface RegionStat { region: Region; topLeader: string; winRate: number; decks: number; playRate?: number; }
+export interface MetaDataQuality {
+  matchCount: number;
+  eventCount: number;
+  deckCount: number;
+  confidence: "high" | "medium" | "low";
+  weightedEventCount: number;
+}
+export interface MetaSnapshot {
+  id: string;
+  weekStart: string;
+  format: TournamentFormat;
+  opSet: string;
+  topLeaders: MetaLeaderStat[];
+  matchupMatrix: Record<string, Record<string, number>>;
+  regionStats: RegionStat[];
+  trendPoints: TrendPoint[];
+  bestDeckId: string;
+  mostImprovedLeaderId: string;
+  generatedAt: string;
+  dataQuality?: MetaDataQuality;
+}
 export interface Player {
   id: string;
   name: string;

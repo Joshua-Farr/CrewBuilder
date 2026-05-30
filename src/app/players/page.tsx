@@ -1,13 +1,18 @@
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PageHeader } from "@/components/ui/page-header";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { createMetadata } from "@/lib/seo";
 import { getServerPlayers } from "@/lib/services/server-data";
+import { getMockPlayerProfiles } from "@/lib/meta/mock-analytics";
+import { slugify } from "@/lib/utils";
 export const metadata = createMetadata({ title: "Player Rankings", description: "Limitless player rankings for One Piece TCG events.", path: "/players" });
 export const revalidate = 3600;
 
 export default async function PlayersPage() {
   const players = await getServerPlayers();
+  const analyticsProfiles = getMockPlayerProfiles();
+  const profileByName = new Map(analyticsProfiles.map((p) => [p.name.toLowerCase(), p.slug]));
   const rankingPeriod = players[0]?.rankingPeriod ?? "Past 12 months";
 
   return (
@@ -38,7 +43,11 @@ export default async function PlayersPage() {
                     <span className="tabular-nums">{player.rank}</span>
                   </TableCell>
                   <TableCell className="font-semibold">
-                    {player.profileUrl ? (
+                    {profileByName.get(player.name.toLowerCase()) ? (
+                      <Link className="transition hover:text-primary" href={`/players/${profileByName.get(player.name.toLowerCase())}`}>
+                        {player.name}
+                      </Link>
+                    ) : player.profileUrl ? (
                       <a className="transition hover:text-primary" href={player.profileUrl} rel="noreferrer" target="_blank">
                         {player.name}
                       </a>

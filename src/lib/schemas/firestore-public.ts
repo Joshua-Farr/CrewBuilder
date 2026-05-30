@@ -60,7 +60,18 @@ export const metaSnapshotLeaderSchema = z.object({
   winRate: z.number(),
   conversionRate: z.number().optional(),
   topCutRate: z.number().optional(),
-  tournamentCount: z.number().int().nonnegative(),
+  tournamentCount: z.number().int().nonnegative().optional(),
+  sampleSize: z.number().int().nonnegative().optional(),
+  delta: z.number().optional(),
+  tier: z.enum(["S", "A", "B", "C"]).optional(),
+});
+
+export const metaDataQualitySchema = z.object({
+  matchCount: z.number().int().nonnegative(),
+  eventCount: z.number().int().nonnegative(),
+  deckCount: z.number().int().nonnegative(),
+  confidence: confidenceSchema,
+  weightedEventCount: z.number().nonnegative(),
 });
 
 export const metaSnapshotSchema = z.object({
@@ -70,6 +81,47 @@ export const metaSnapshotSchema = z.object({
   region: regionSchema.optional(),
   date: z.string(),
   leaders: z.array(metaSnapshotLeaderSchema),
+  generatedAt: z.string(),
+  dataQuality: metaDataQualitySchema.optional(),
+});
+
+export const matchupCellSchema = z.object({
+  winRate: z.number(),
+  sampleSize: z.number().int().nonnegative(),
+  matchCount: z.number().int().nonnegative(),
+  trendDelta: z.number(),
+  tournamentOnlyWinRate: z.number().optional(),
+});
+
+export const matchupStatsSchema = z.object({
+  id: z.string(),
+  format: formatSchema,
+  opSet: z.string(),
+  window: z.string(),
+  region: regionSchema.optional(),
+  matrix: z.record(z.string(), z.record(z.string(), matchupCellSchema)),
+  generatedAt: z.string(),
+});
+
+export const cardUsageStatSchema = z.object({
+  cardId: z.string(),
+  cardName: z.string(),
+  cardCode: z.string().optional(),
+  leaderId: z.string(),
+  inclusionRate: z.number(),
+  avgCopies: z.number(),
+  weeklyDelta: z.number(),
+  winRateContribution: z.number(),
+  isCore: z.boolean(),
+  deckCount: z.number().int().nonnegative(),
+});
+
+export const cardUsageStatsSchema = z.object({
+  id: z.string(),
+  leaderId: z.string(),
+  opSet: z.string(),
+  window: z.string(),
+  cards: z.array(cardUsageStatSchema),
   generatedAt: z.string(),
 });
 
