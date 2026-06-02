@@ -10,10 +10,8 @@ import { cn } from "@/lib/utils";
 
 const nav = [
   { href: "/decks", label: "Decks" },
-  { href: "/meta", label: "Meta" },
   { href: "/cards", label: "Cards" },
   { href: "/tournaments", label: "Tournaments" },
-  { href: "/builder", label: "Builder" },
   { href: "/submit/result", label: "Submit" },
 ];
 
